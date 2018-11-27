@@ -1,5 +1,6 @@
 # Object_Collection_Robotic_Arm
 [![Build Status](https://travis-ci.org/Ghost1995/Object_Collection_Robotic_Arm.svg?branch=trial)](https://travis-ci.org/Ghost1995/Object_Collection_Robotic_Arm)
+[![Coverage Status](https://coveralls.io/repos/github/Ghost1995/Object_Collection_Robotic_Arm/badge.svg)](https://coveralls.io/github/Ghost1995/Object_Collection_Robotic_Arm)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 ---
 
