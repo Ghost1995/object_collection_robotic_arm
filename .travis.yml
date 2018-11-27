@@ -5,23 +5,35 @@ dist: xenial
 # Modern cpp settings from
 #  http://genbattle.bitbucket.org/blog/2016/01/17/c++-travis-ci/
 language: cpp
-matrix:
-  include:
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - george-edison55-precise-backports
-          packages:
-            - g++-5
-            - cmake
-            - cmake-data
-      env: COMPILER=g++-5
+services:
+  - docker
+env:
+  global:
+    - toolset_branch: master
+    - server_type: travis
+    - ros_release_name: kinetic
+    - ubuntu_version_name: xenial
+    - used_modules: check_cache, check_build, software_tests, code_style_check, check_deb_make, codecov_tool
+    - remote_shell_script: 'https://raw.githubusercontent.com/shadow-robot/sr-build-tools/$toolset_branch/bin/sr-run-ci-build.sh'
 
-# services:
-#   - docker
+script:
+  - curl -s "$( echo "$remote_shell_script" | sed 's/#/%23/g' )" | bash -x /dev/stdin "$toolset_branch" $server_type
+
+# matrix:
+#   include:
+#     - os: linux
+#       compiler: gcc
+#       addons:
+#         apt:
+#           sources:
+#             - ubuntu-toolchain-r-test
+#             - george-edison55-precise-backports
+#           packages:
+#             - g++-5
+#             - cmake
+#             - cmake-data
+#       env: COMPILER=g++-5
+
 
 # env:
 #   global:
@@ -31,5 +43,8 @@ matrix:
 #     - used_modules: check_cache,build
 #     - remote_shell_script: 'https://raw.githubusercontent.com/shadow-robot/sr-build-tools/$toolset_branch/bin/sr-run-ci-build.sh'
 
-script:
-  - curl -s "$( echo "$remote_shell_script" | sed 's/#/%23/g' )" | bash -x /dev/stdin "$toolset_branch" $server_type $used_modules
+# script:
+#   - curl -s "$( echo "$remote_shell_script" | sed 's/#/%23/g' )" | bash -x /dev/stdin "$toolset_branch" $server_type $used_modules
+
+after_success:
+- coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cc.*"
