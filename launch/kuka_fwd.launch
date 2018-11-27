@@ -1,0 +1,23 @@
+<launch>
+	<arg 
+      name="record" 
+      default="disable"
+    />
+
+	<include file="$(find iiwa_moveit)/launch/moveit_planning_execution.launch"></include>
+
+	<node
+        pkg="object_collection_robotic_arm"
+        name="objSeg"
+        type="objSeg"
+        output = "screen"
+    />
+
+ 	<node
+        pkg="rosbag"
+        name="record"
+        type="record"
+        args="-a -O $(find object_collection_robotic_arm)/results/kuka.bag"
+        if="$(eval record == 'enable')"
+    />
+</launch>
