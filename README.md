@@ -50,189 +50,214 @@ To run this program you need to have the following installed on your system:
 * iiwa-stack
 * openCV
 
+#### ROS Kinetic
+
+To install ROS Kinetic in Ubuntu 16.04, follow the steps in this [link](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+
+#### Gazebo 7.x
 
 
 
+#### iiwa-stack
 
 
 
+#### openCV
 
+Install OpenCV 3.3.0 using the following commands:
 
-
-To install ROS, use this [link](http://wiki.ros.org/kinetic/Installation)
-
-To install turtlebot simulation stack. In a terminal:
+Install OpenCV Dependencies
 ```
-sudo apt-get install ros-kinetic-turtlebot-gazebo ros-kinetic-turtlebot-apps ros-kinetic-turtlebot-rviz-launchers
-source /opt/ros/kinetic/setup.bash
+sudo apt-get install build-essential checkinstall cmake pkg-config yasm gfortran git
+sudo apt-get install libjpeg8-dev libjasper-dev libpng12-dev
+## If you are using Ubuntu 14.04
+sudo apt-get install libtiff4-dev
+## If you are using Ubuntu 16.04
+sudo apt-get install libtiff5-dev
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev
+sudo apt-get install libxine2-dev libv4l-dev
+sudo apt-get install libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
+sudo apt-get install libqt4-dev libgtk2.0-dev libtbb-dev
+sudo apt-get install libatlas-base-dev
+sudo apt-get install libfaac-dev libmp3lame-dev libtheora-dev
+sudo apt-get install libvorbis-dev libxvidcore-dev
+sudo apt-get install libopencore-amrnb-dev libopencore-amrwb-dev
+sudo apt-get install x264 v4l-utils
 ```
-To install gmapping, In a terminal:
+Download and Compile OpenCV
 ```
-sudo apt-get install ros-kinetic-slam-gmapping
+git clone https://github.com/opencv/opencv.git
+cd opencv 
+git checkout 3.3.0 
+cd ..
+git clone https://github.com/opencv/opencv_contrib.git
+cd opencv_contrib
+git checkout 3.3.0
+cd ..
+cd opencv
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_C_EXAMPLES=ON \
+      -D WITH_TBB=ON \
+      -D WITH_V4L=ON \
+      -D WITH_QT=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+      -D BUILD_EXAMPLES=ON ..
+## find out number of CPU cores in your machine
+nproc
+## substitute 4 by output of nproc
+make -j4
+sudo make install
+sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
+sudo ldconfig
 ```
-To install Map_server, In a terminal:
+
+## Solo Iterative Process
+
+Link to SIP Planning: [SIP Logs]()
+
+Link to Sprint Planning Notes: [Sprint Notes]()
+
+## Video Demo
+
+Link to the video presentation uploaded on YouTube: [Presentation Video]()
+
+## Build Instructions
+
+To build this code in a catkin workspace:
 ```
- sudo apt-get install ros-kinetic-map-server
+cd ~/catkin_ws/
+catkin_make
+source devel/setup.bash
+cd src/
+git clone https://github.com/Ghost1995/object_collection_robotic_arm.git
+cd ..
+catkin_make
 ```
-
-
-
-## SIP & Sprint Logs
-
-Link to SIP Planning: [SIP Logs](https://docs.google.com/spreadsheets/d/1yglRR3HuQ96tQThB4AsiW9a2gjR8kYN-1Wcj_BuyqH0/edit?usp=sharing)
-
-Link to Sprint Planning Notes: [Sprint Notes](https://docs.google.com/document/d/1rXK6foPKe-qIE33yUQAk5DwvEb2_a-keuWt45c4f9LM/edit)
-
-Link to the video presentation uploaded on youtube: [Presentation Video](https://youtu.be/ouJtWGgyxr0)
-
-
-
-## Build Steps
-If you do not have a catkin workspace, in a new terminal:
+Note, that if you do not have a catkin workspace, then to build this code use the following commands:
 ```
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/
 catkin_make
 source devel/setup.bash
 cd src/
-git clone --recursive https://github.com/inani47/terrapinavigator.git
+git clone https://github.com/Ghost1995/object_collection_robotic_arm.git
 cd ..
 catkin_make
 ```
-If you wish to run this code in an existing catkin workspace:
+
+## Running the Demo using Launch File
+
+To run the demo, a launch file has been created. This launch file loads the Gazebo environment and runs the objSeg node to detect the objects on the table and segregate them into bins based on their color.
+
+After following the build instructions, to run the demo, launch the code using the following commands:
 ```
 cd ~/catkin_ws/
 source devel/setup.bash
-cd src/
-git clone --recursive https://github.com/inani47/terrapinavigator.git
-cd ..
-catkin_make
+roslaunch object_collection_robotic_arm kuka_fwd.launch
 ```
-## Running the Demo Using Launch File
-To run the demo we need to run two launch files. First launch file loads the Gazebo environment and runs the terrapinavigator node to explore and map the environment. The seconds lauch file loads rviz (for visualization) and gmapping (for SLAM and Mapping).
 
-After following the build instructions:
+## Record bag File
 
-To run the demo, in a new terminal:
+A ros bag file records all the topic and messages being published in the terminal. To record a bag file, just enable recording in the launch file using the following commands:
 ```
 cd ~/catkin_ws/
 source devel/setup.bash
-roslaunch terrapinavigator terrapinavigator.launch 
+roslaunch object_collection_robotic_arm kuka_fwd.launch record:=enable
 ```
-This will load the turtlebot in the gazebo world and wait for 15 seconds. Now to run gmapping and Rviz, in a new terminal:
+Note that, the bag file is saved in the results folder by default.
+
+#### Inspecting the bag File Generated
+
+To get more information about the generated rosbag file, such as the data being recorded, the time duration, the size of the bag file, and so on, use the following commands:
 ```
-cd ~/catkin_ws/
-source devel/setup.bash
-roslaunch terrapinavigator demo.launch 
+cd <path to directory>/results
+rosbag info kuka.bag
 ```
 
-This will start the gmapping package and load rviz for visualization.
+#### Playing the bag File Generated
 
-Note: You may close the gazebo window if your rig can't handle the load and continue to use rviz for visualization.
+The rosbag file records all the messages being published on to the terminal. To check if the messages were recorded properly, you can playback the recorded rosbag file.
 
-### Saving the Map
-Once you are happy with the map created. To save a map, in a new terminal:
-```
-rosrun map_server map_saver -f <map_name>
-```
-To view the saved map. In a new terminal
-```
-eog <map_name>.pgm
-```
-### Running Picture Service From Command Line
-The demo implementation is such that a picture is taken every 40 seconds and it gets stored in the ros folder with file name "termpImage" followed by the current time stamp at the time of takin the picture.
-
-If you wish to manually click a picture while the demo is running at any desired time. In a new terminal:
-```
-cd ~/catkin_ws/
-source devel/setup.bash
-rosservice call /pictureService "reqImg: true" 
-```
-If the image was taken succesfully you will see the following output:
-```
-clickImg: True
-```
-The files will get saved in ./ros folder. To view the files. In a terminal:
-```
-gnome-open ~/.ros
-```
-This will open the ./ros folder using the GUI and you can see all the pictures taken manually as well as those autmatically taken every 40 seconds in the demo.
-
-Note: If you do not have gnome-open installed. In a terminal:
-```
-sudo apt install libgnome2-bin
-```
-
-### Recording, Inspecting and Playing back bag files
-To enable bag file recording of all topics except camera. While launching the demo, in a new terminal:
-```
-cd ~/catkin_ws/
-source devel/setup.bash
-roslaunch terrapinavigator terrpainavigator.launch rec:=1
-```
-This will save a bag file in the results folder of the package.
-
-To inspect the bag file, In a new terminal:
-```
-cd ~/catkin_ws/
-source devel/setup.bash
-cd src/terrapinavigator/results
-rosbag info recording.bag
-```
-
-
-To replay the bag file, first run rosmaster from a terminal:
+In a terminal, run "roscore" by using the following command:
 ```
 roscore
 ```
-Now, from the results folder run the following command in a new terminal:
+Now, open a new terminal and use the following commands:
 ```
-cd ~/catkin_ws/
+cd <path to directory>/results
+source ~/catkin_ws/devel/setup.bash
+rosbag play kuka.bag
+```
+Note that, while playing the rosbag file, make sure that Gazebo is not running.
+
+## Run Tests
+
+### 1) Run the Tests while Compiling the Code
+
+You can run the tests while building the code by running the following commands:
+```
+cd ~/catkin_ws
+catkin_make run_tests_object_collection_robotic_arm
+```
+
+### 2) Run the Tests after Compiling the Code
+
+After compiling the code by following the build instructions, to run the tests independently, use the following commands:
+```
+cd ~/catkin_ws
 source devel/setup.bash
-cd src/terrapinavigator/results
-rosbag play recording.bag
+rostest object_collection_robotic_arm kukaTests.test
 ```
 
-## Running Rostest
-To run rostest, in a new terminal:
+### 3) Run the Tests after Running the Code
+
+After running the code by following the run instructions, open a new terminal and use the following commands to run the tests:
 ```
-cd ~/catkin_ws/
+cd ~/catkin_ws
 source devel/setup.bash
-cd build/
-make run_tests
+rosrun object_collection_robotic_arm kukaTests
 ```
-### Code Coverage Output Using lcov
-![Code Coverage](https://user-images.githubusercontent.com/31521157/34026729-fee76d8e-e125-11e7-8342-f9dcf03d3111.png)
-## Known Issues/Bugs 
-* Unable to show code coverage using coveralls. Added lcov output to the readme instead
-* When gazebo initializes it  throws some errors of missing plugins and thi followin error:
-  SpawnModel: Failure - model name mobile_base already exist.
-  However, these make no difference to the demo. The latter error maybe resolved once ros answers is back online.
 
-## API and other developer documentation
+## Plugins
 
-### Generating Doxygen Documentation
+##### CppChEclipse
+
+To run cppcheck in Terminal
+```
+cd <path to directory>
+cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $(find . -name \*.cpp -or -name \*.hpp | grep -vE -e "^./launch/" -e "^./results/" -e "./world/")
+```
+##### Google C++ Sytle
+
+To check Google C++ Style formatting in Terminal
+```
+cd <path to directory>
+cpplint $(find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./launch/" -e "^./world/" -e "^./results")
+```
+
+## Known Issues/Bugs
+
+All the issues and bugs can be seen in the project report on GitHub at this [link]().
+
+## Generating Doxygen Documentation
 
 To install doxygen run the following command: 
 ```
 sudo apt-get install doxygen
 ```
-
-Now from your cloned directory, run the following command:
-
+Now, to generate doxygen documentation, run the following commands:
 ```
-doxygen terpDocs
+cd ~/catkin_ws/src/object_collection_robotic_arm
+doxygen doxconfig
 ```
-
-Doxygen files will be generated to /docs folder
-
-To view them in a browser:
+Doxygen files will be generated to /docs folder. To view them in a browser, run the following commands:
 ```
-cd docs
-cd html
-firefox index.html
+cd docs/html
+google-chrome index.html
 ```
-
 
 ## Disclaimer
 
