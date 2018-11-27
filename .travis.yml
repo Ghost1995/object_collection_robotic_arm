@@ -92,36 +92,43 @@
 ################################################################################
 
 sudo: required
-dist: xenial
-language: cpp
 cache:
   - apt
+
+# Build all valid Ubuntu/ROS combinations available on Travis VMs.
+language: generic
+matrix:
+  include:
+  - name: "Xenial kinetic"
+    dist: xenial
+    env: ROS_DISTRO=kinetic
 
 # Configuration variables. All variables are global now, but this can be used to
 # trigger a build matrix for different ROS distributions if desired.
 env:
   global:
-    - ROS_DISTRO = kinetic
-    - ROS_CI_DESKTOP = "`lsb_release -cs`"
-    - CI_SOURCE_PATH = $(pwd)
-    - ROSINSTALL_FILE = $CI_SOURCE_PATH/dependencies.rosinstall
-    - CATKIN_OPTIONS = $CI_SOURCE_PATH/catkin.options
-    - ROS_PARALLEL_JOBS = '-j8 -l6'
+    - ROS_CI_DESKTOP="`lsb_release -cs`"  # e.g. [precise|trusty|...]
+    - CI_SOURCE_PATH=$(pwd)
+    - ROSINSTALL_FILE=$CI_SOURCE_PATH/dependencies.rosinstall
+    - CATKIN_OPTIONS=$CI_SOURCE_PATH/catkin.options
+    - ROS_PARALLEL_JOBS='-j8 -l6'
+    # Set the python path manually to include /usr/-/python2.7/dist-packages
+    # as this is where apt-get installs python packages.
+    - PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/dist-packages:/usr/local/lib/python2.7/dist-packages
 
 ################################################################################
 
 # Install system dependencies, namely a very barebones ROS setup.
 before_install:
-  - sudo sh -c "echo \"deb http://packages.ros.org/ros/ubuntu $ROS_CI_DESKTOP main" > /etc/apt/sources.list.d/ros-latest.list"
+  - sudo sh -c "echo \"deb http://packages.ros.org/ros/ubuntu $ROS_CI_DESKTOP main\" > /etc/apt/sources.list.d/ros-latest.list"
   - sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
-  - sudo apt-get update
-  - sudo apt-get install ros-$ROS_DISTRO-desktop-full
+  - sudo apt-get update -qq
+  - sudo apt-get install dpkg
+  - sudo apt-get install -y python-catkin-pkg python-rosdep python-wstool ros-$ROS_DISTRO-ros-base
+  - source /opt/ros/$ROS_DISTRO/setup.bash
   # Prepare rosdep to install dependencies.
   - sudo rosdep init
   - rosdep update
-  - echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
-  - source ~/.bashrc
-  - sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 
 # Create a catkin workspace with the package under integration.
 install:
@@ -163,7 +170,7 @@ script:
   - catkin_make $( [ -f $CATKIN_OPTIONS ] && cat $CATKIN_OPTIONS )
   # Run the tests, ensuring the path is set correctly.
   - source devel/setup.bash
-  # - catkin_make run_tests && catkin_test_results
+  - catkin_make run_tests && catkin_test_results
 
-# after_success:
-# - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cc.*"
+after_success:
+- coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cc.*"
