@@ -165,7 +165,7 @@ git clone --recursive https://github.com/anirudhtopiwala/iiwa_stack.git
 
 To run the demo, a launch file has been created. This launch file loads the Gazebo environment and runs the objSeg node to detect the objects on the table and segregate them into bins based on their color.
 
-** Note: This is an ongoing project and the following instructions may not run yet. ** 
+**Note: This is an ongoing project and the following instructions may not run yet.** 
 
 
 After following the build instructions, to run the demo, launch the code using the following commands:
@@ -194,12 +194,49 @@ roslaunch object_collection_robotic_arm kuka_fwd.launch
 
 ##### CppChEclipse
 
+To run cppcheck in Terminal
+```
+cd <path to directory>
+cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $(find . -name \*.cpp -or -name \*.hpp | grep -vE -e "^./launch/" -e "^./results/" -e "./world/")
+```
 ##### Google C++ Sytle
+
+To check Google C++ Style formatting in Terminal
+```
+cd <path to directory>
+cpplint $(find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./launch/" -e "^./world/" -e "^./results")
+```
 
 ## Known Issues/Bugs
 
-## Generating Doxygen Documentation
+All the issues and bugs can be seen in the project report on GitHub at this [link](https://github.com/Ghost1995/object_collection_robotic_arm/projects/1).
 
+## Generating Doxygen Documentation
+```
+sudo apt install doxygen
+cd <path to repository>
+mkdir docs
+doxygen -g config
+```
+Open the Doxygen congiguration file "config" and update the following parameters:
+
+PROJECT_NAME           = "object_collection_robotic_arm"
+
+INPUT                  = ./src ./include/ ./test
+
+OUTPUT_DIRECTORY       = docs
+
+Rename the config file as doxconfig
+
+Now, to generate doxygen documentation, run the following commands:
+```
+doxygen doxconfig
+```
+Doxygen files will be generated to /docs folder. To view them in a browser, run the following commands:
+```
+cd docs/html
+google-chrome index.html
+```
 ## Disclaimer
 
 This software is released under the GNU Lesser General Public License v3.0.
