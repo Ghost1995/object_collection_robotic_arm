@@ -212,13 +212,16 @@ cpplint $(find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./launch/" -e "^.
 All the issues and bugs can be seen in the project report on GitHub at this [link](https://github.com/Ghost1995/object_collection_robotic_arm/projects/1).
 
 ## Generating Doxygen Documentation
+
+To install doxygen run the following command: 
+
 ```
 sudo apt install doxygen
 cd <path to repository>
 mkdir docs
 doxygen -g config
 ```
-Open the Doxygen congiguration file "config" and update the following parameters:
+Open the Doxygen configuration file "config" and update the following parameters:
 
 PROJECT_NAME           = "object_collection_robotic_arm"
 
@@ -237,6 +240,15 @@ Doxygen files will be generated to /docs folder. To view them in a browser, run 
 cd docs/html
 google-chrome index.html
 ```
+## License 
+
+* OpenCV:  Copyright (C) 2015-2016, OpenCV Foundation, all rights reserved.
+* Doxygen license: Copyright © 1997-2016 by Dimitri van Heesch.
+* Googletest license: Copyright 2008, Google Inc.
+* Delaunay triangulation S-hull license: Copyright 2016 Dr David Sinclair
+* iiwa_stack license: Copyright (c) 2016-2017, Salvatore Virga - salvo.virga@tum.de
+* kdl_ros license: Copyright (c) 2016-2017, Ruben Smits - ruben.smits@intermodalics.eu
+
 ## Disclaimer
 
 This software is released under the GNU Lesser General Public License v3.0.
