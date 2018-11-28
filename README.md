@@ -15,12 +15,190 @@ The developed system is capable of:
 * segregating the objects based on their color.
 
 Few applications of the projects include:
-* Object segregation in shipping companies, like Amazon, and Alibaba, and
+* Object segregation in shipping companies, like Amazon, Alibaba and Ikea.
 * Transporting objects from one location to another.
+* Kit buiding operation in assembly lines. 
 
-This project has been programmed in the C++ programming language and uses C++ 11/14 features with emphasis given to Object Oriented Programming principles. The code follows the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) with cpplint validation. Cppcheck was also used for static code analysis. This project followed Test-driven Development to guide implementation and uses unit tests to test the code coverage written using Google Test framework. The code follows doxygen-formatted comments to aid doxygen documentation.
+This project has been programmed in the C++ programming language and uses C++ 11/14 features with emphasis given to Object Oriented Programming principles. The code follows the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) with cpplint validation. Cppcheck is also used for static code analysis. This project follows Test-driven Development to guide implementation and uses unit tests to test the code coverage written using Google Test framework. The code follows doxygen-formatted comments to aid doxygen documentation.
 
-The project was completed in about three weeks time. This project was implemented by following the Solo Iterative Process(SIP). This included the creation of a product backlog using the requirements and ordering them in the order of their priority. Finally, the software was developed over three sprints which were one week long in duration. The first week focused on the planning and design of the project inculding the initial UML diagrams. The second week involved the programming of the actual module. In the third week, the remainder of programming aspect of the project was completed and a video presentation was created.
+The project will be completed in about three weeks time. This project is implemented by following the Solo Iterative Process(SIP). This included the creation of a product backlog using the requirements and ordering them in the order of their priority. Finally, the software was developed over three sprints which were one week long in duration. The first week focuses on the planning and design of the project inculding the initial UML diagrams. The second week involved the programming of the actual module. In the third week, the remainder of programming aspect of the project is completed and a video presentation will be  created.
+
+## About the Developers
+
+This project has been developed by two people.
+
+* Anirudh Topiwala 
+
+I am currently pursing my masters in Robotics at the University of Maryland,College Park. I hold a Bachelors degree in Mechanical Engineering from Institute of Technology, Nirma University, India. I wish to pursue a career in Robotics with a focus in Computer Vision. My resume and more about my projects can be found on [Github](https://github.com/anirudhtopiwala) and [LinkedIn](https://www.linkedin.com/in/anirudhtopiwala/).
+
+* Ashwin Goyal
+
+I am currently pursing my masters in Robotics at University of Maryland, College Park. I hold a Bachelors degree in Mechanical Engineering from Indian Institute of Technology Patna, India. I have worked for two automobile companies, namely Honda Motorcycle and Scooter India Pvt. Ltd. and Maruti Suzuki India Ltd. I worked as summer trainee at both these companies. I also worked at a Robotics centered company, namely Robotech India Pvt. Ltd. I worked as a Technical Associate and worked on microcontrollers and their programmers for a period of 1 month. I am currently working as a Technical Assisstant for the Rehabilitation robotics course. I wish to pursue a career in Robotics with a focus in Artificial Intelligence and Computer Vision.
+
+Few modest projects I was a part of:
+* Visual Odometry in MATLAB with Computer Vision Toolbox.
+* Lane Marker Detection in MATLAB with Computer Vision Toolbox.
+* A-star Path Planning Algorithm using MATLAB.
+* Autonomous Pole Balancing using Q-Learning in MATLAB.
+* Crowd Estimation using Unmanned Aerial Vehicles using ROS and C++.
+
+More about my projects can be found on [Github](https://github.com/Ghost1995/) and [LinkedIn](https://www.linkedin.com/in/ashwin-goyal/)
+
+## Dependencies
+
+To run this program you need to have the following installed on your system:
+* Ubuntu 16.04
+* ROS Kinetic Kame
+* Gazebo 7.x (part of ros-kinetic-desktop-full package)
+* openCV
+
+#### ROS Kinetic
+* To install ROS Kinetic in Ubuntu 16.04, follow the steps in this [link](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+
+* To install catkin, follow the installation steps in this [link](http://wiki.ros.org/catkin).
+
+#### openCV
+
+Install OpenCV 3.3.0 using the following commands:
+
+Install OpenCV Dependencies
+```
+sudo apt-get install build-essential checkinstall cmake pkg-config yasm gfortran git
+sudo apt-get install libjpeg8-dev libjasper-dev libpng12-dev
+## If you are using Ubuntu 14.04
+sudo apt-get install libtiff4-dev
+## If you are using Ubuntu 16.04
+sudo apt-get install libtiff5-dev
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev
+sudo apt-get install libxine2-dev libv4l-dev
+sudo apt-get install libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
+sudo apt-get install libqt4-dev libgtk2.0-dev libtbb-dev
+sudo apt-get install libatlas-base-dev
+sudo apt-get install libfaac-dev libmp3lame-dev libtheora-dev
+sudo apt-get install libvorbis-dev libxvidcore-dev
+sudo apt-get install libopencore-amrnb-dev libopencore-amrwb-dev
+sudo apt-get install x264 v4l-utils
+```
+Download and Compile OpenCV
+```
+git clone https://github.com/opencv/opencv.git
+cd opencv 
+git checkout 3.3.0 
+cd ..
+git clone https://github.com/opencv/opencv_contrib.git
+cd opencv_contrib
+git checkout 3.3.0
+cd ..
+cd opencv
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_C_EXAMPLES=ON \
+      -D WITH_TBB=ON \
+      -D WITH_V4L=ON \
+      -D WITH_QT=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+      -D BUILD_EXAMPLES=ON ..
+## find out number of CPU cores in your machine
+nproc
+## substitute 4 by output of nproc
+make -j4
+sudo make install
+sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
+sudo ldconfig
+```
+#### Other Dependencies
+Make sure you have these packages installed in the environment:
+* ros-kinetic-velocity-controllers
+* ros-kinetic-ros-control
+* ros-kinetic-position-controllers
+* ros-kinetic-joint-state-controller
+* ros-kinetic-joint-trajectory-controller
+
+If not, type:
+```
+sudo apt-get install ros-kinetic-velocity-controllers ros-kinetic-ros-control ros-kinetic-position-controllers ros-kinetic-joint-state-controller ros-kinetic-joint-trajectory-controller
+```
+
+## Solo Iterative Process
+
+Link to SIP Planning: [SIP Logs](https://docs.google.com/spreadsheets/d/1xqPFYUN3OQtDBTkjzTHtdPEkzV7B79HENrkyVhmQdCs/edit#gid=0)
+
+Link to Sprint Planning Notes: [Sprint Notes](https://docs.google.com/document/d/1bKvMWFakLjcAiFi2MnL_bBGUG79L-Hk_sQdlqZ0YWP8/edit?usp=sharing)
+
+## Video Demo
+
+Link to the video presentation uploaded on YouTub will be here shortly.
+
+## Build Instructions
+
+To build this code in a catkin workspace:
+```
+cd ~/catkin_ws/
+catkin_make
+source devel/setup.bash
+cd src/
+git clone https://github.com/Ghost1995/object_collection_robotic_arm.git
+cd ..
+catkin_make
+```
+Note, that if you do not have a catkin workspace, then to build this code use the following commands:
+```
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin_make
+source devel/setup.bash
+cd src/
+git clone https://github.com/Ghost1995/object_collection_robotic_arm.git
+cd ..
+catkin_make
+```
+## Installation of additional packages
+
+In your catkin workspace directory (or create a new one using the above instructions)
+```
+git clone --recursive https://github.com/anirudhtopiwala/iiwa_stack.git
+```
+
+## Running the Demo using Launch File
+
+To run the demo, a launch file has been created. This launch file loads the Gazebo environment and runs the objSeg node to detect the objects on the table and segregate them into bins based on their color.
+
+** Note: This is an ongoing project and the following instructions may not run yet. ** 
+
+
+After following the build instructions, to run the demo, launch the code using the following commands:
+```
+cd ~/catkin_ws/
+source devel/setup.bash
+roslaunch object_collection_robotic_arm kuka_fwd.launch
+```
+
+## Record bag File
+
+
+#### Inspecting the bag File Generated
+
+#### Playing the bag File Generated
+
+## Run Tests
+
+### 1) Run the Tests while Compiling the Code
+
+### 2) Run the Tests after Compiling the Code
+
+### 3) Run the Tests after Running the Code
+
+## Plugins
+
+##### CppChEclipse
+
+##### Google C++ Sytle
+
+## Known Issues/Bugs
+
+## Generating Doxygen Documentation
 
 ## Disclaimer
 
@@ -192,14 +370,4 @@ apply, that proxy's public statement of acceptance of any version is
 permanent authorization for you to choose that version for the
 Library.
 ```
-
-## Dependencies
-
-To run this program you need to have the following installed on your system:
-* Ubuntu (Xenial)
-* ROS Kinetic
-* Gazebo 7.x
-* iiwa-stack
-* openCV
-
 
