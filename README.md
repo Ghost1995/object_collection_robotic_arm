@@ -1,7 +1,7 @@
 # Object Collection Robotic Arm
 
-[![Build Status](https://travis-ci.org/Ghost1995/Object_Collection_Robotic_Arm.svg?branch=master)](https://travis-ci.org/Ghost1995/Object_Collection_Robotic_Arm)
-[![Coverage Status](https://coveralls.io/repos/github/Ghost1995/Object_Collection_Robotic_Arm/badge.svg?branch=master)](https://coveralls.io/github/Ghost1995/Object_Collection_Robotic_Arm?branch=master)
+[![Build Status](https://travis-ci.org/Ghost1995/object_collection_robotic_arm.svg?branch=master)](https://travis-ci.org/Ghost1995/object_collection_robotic_arm)
+[![Coverage Status](https://coveralls.io/repos/github/Ghost1995/object_collection_robotic_arm/badge.svg?branch=master)](https://coveralls.io/github/Ghost1995/object_collection_robotic_arm?branch=master)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 ---
 
@@ -14,14 +14,14 @@ The developed system is capable of:
 * picking up the objects using vacuum gripper and placing them into bins, and
 * segregating the objects based on their color.
 
-Few applications of the projects include:
+Few applications of the project include:
 * Object segregation in shipping companies, like Amazon, Alibaba and Ikea.
 * Transporting objects from one location to another.
-* Kit buiding operation in assembly lines. 
+* Kit building operation in assembly lines. 
 
 This project has been programmed in the C++ programming language and uses C++ 11/14 features with emphasis given to Object Oriented Programming principles. The code follows the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) with cpplint validation. Cppcheck is also used for static code analysis. This project follows Test-driven Development to guide implementation and uses unit tests to test the code coverage written using Google Test framework. The code follows doxygen-formatted comments to aid doxygen documentation.
 
-The project will be completed in about three weeks time. This project is implemented by following the Solo Iterative Process(SIP). This included the creation of a product backlog using the requirements and ordering them in the order of their priority. Finally, the software was developed over three sprints which were one week long in duration. The first week focuses on the planning and design of the project inculding the initial UML diagrams. The second week involved the programming of the actual module. In the third week, the remainder of programming aspect of the project is completed and a video presentation will be  created.
+The project will be completed in about three weeks time. This project is implemented by following the Solo Iterative Process (SIP). This included the creation of a product backlog using the requirements and ordering them in the order of their priority. Finally, the software was developed over three sprints which were one week long in duration. The first week focuses on the planning and design of the project including the initial UML diagrams. The second week involved the programming of the actual module. In the third week, the remainder of programming aspect of the project is completed and a video presentation will be  created.
 
 ## About the Developers
 
@@ -33,9 +33,9 @@ I am currently pursing my masters in Robotics at the University of Maryland,Coll
 
 * Ashwin Goyal
 
-I am currently pursing my masters in Robotics at University of Maryland, College Park. I hold a Bachelors degree in Mechanical Engineering from Indian Institute of Technology Patna, India. I have worked for two automobile companies, namely Honda Motorcycle and Scooter India Pvt. Ltd. and Maruti Suzuki India Ltd. I worked as summer trainee at both these companies. I also worked at a Robotics centered company, namely Robotech India Pvt. Ltd. I worked as a Technical Associate and worked on microcontrollers and their programmers for a period of 1 month. I am currently working as a Technical Assisstant for the Rehabilitation robotics course. I wish to pursue a career in Robotics with a focus in Artificial Intelligence and Computer Vision.
+I am currently pursing my masters in Robotics at University of Maryland, College Park. I hold a Bachelors degree in Mechanical Engineering from Indian Institute of Technology Patna, India. I have worked for two automobile companies and a Robotics centered company in India. I am currently working as a Technical Assistant for the Rehabilitation Robotics course at UMD. I wish to pursue a career in Robotics with a focus in Artificial Intelligence and Computer Vision.
 
-Few modest projects I was a part of:
+Few modest projects I was a part of are:
 * Visual Odometry in MATLAB with Computer Vision Toolbox.
 * Lane Marker Detection in MATLAB with Computer Vision Toolbox.
 * A-star Path Planning Algorithm using MATLAB.
@@ -53,6 +53,7 @@ To run this program you need to have the following installed on your system:
 * openCV
 
 #### ROS Kinetic
+
 * To install ROS Kinetic in Ubuntu 16.04, follow the steps in this [link](http://wiki.ros.org/kinetic/Installation/Ubuntu).
 
 * To install catkin, follow the installation steps in this [link](http://wiki.ros.org/catkin).
@@ -65,9 +66,6 @@ Install OpenCV Dependencies
 ```
 sudo apt-get install build-essential checkinstall cmake pkg-config yasm gfortran git
 sudo apt-get install libjpeg8-dev libjasper-dev libpng12-dev
-## If you are using Ubuntu 14.04
-sudo apt-get install libtiff4-dev
-## If you are using Ubuntu 16.04
 sudo apt-get install libtiff5-dev
 sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev
 sudo apt-get install libxine2-dev libv4l-dev
@@ -100,15 +98,14 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D WITH_QT=ON \
       -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
       -D BUILD_EXAMPLES=ON ..
-## find out number of CPU cores in your machine
-nproc
-## substitute 4 by output of nproc
 make -j4
 sudo make install
 sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
 sudo ldconfig
 ```
+
 #### Other Dependencies
+
 Make sure you have these packages installed in the environment:
 * ros-kinetic-velocity-controllers
 * ros-kinetic-ros-control
@@ -129,7 +126,7 @@ Link to Sprint Planning Notes: [Sprint Notes](https://docs.google.com/document/d
 
 ## Video Demo
 
-Link to the video presentation uploaded on YouTub will be here shortly.
+Link to the video presentation uploaded on YouTube will be here shortly.
 
 ## Build Instructions
 
@@ -190,7 +187,7 @@ roslaunch object_collection_robotic_arm kuka_fwd.launch
 
 ### 3) Run the Tests after Running the Code
 
-## Plugins
+## Plug-ins
 
 ##### CppChEclipse
 
@@ -199,7 +196,7 @@ To run cppcheck in Terminal
 cd <path to directory>
 cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $(find . -name \*.cpp -or -name \*.hpp | grep -vE -e "^./launch/" -e "^./results/" -e "./world/")
 ```
-##### Google C++ Sytle
+##### Google C++ Style
 
 To check Google C++ Style formatting in Terminal
 ```
@@ -223,13 +220,13 @@ doxygen -g config
 ```
 Open the Doxygen configuration file "config" and update the following parameters:
 
-PROJECT_NAME           = "object_collection_robotic_arm"
+* PROJECT_NAME = "object_collection_robotic_arm"
 
-INPUT                  = ./src ./include/ ./test
+* INPUT = ./src ./include/ ./test
 
-OUTPUT_DIRECTORY       = docs
+* OUTPUT_DIRECTORY = docs
 
-Rename the config file as doxconfig
+Then, rename the "config" file to "doxconfig".
 
 Now, to generate doxygen documentation, run the following commands:
 ```
@@ -419,4 +416,3 @@ apply, that proxy's public statement of acceptance of any version is
 permanent authorization for you to choose that version for the
 Library.
 ```
-
