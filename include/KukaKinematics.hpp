@@ -177,9 +177,24 @@
 
 #include <ros/ros.h>
 #include <iostream>
-#include <vector>
-#include <string>
-#include <opencv2/opencv.hpp>
+// #include <vector>
+// #include <string>
+// #include <opencv2/opencv.hpp>
+#include<sensor_msgs/JointState.h>
+#include<trajectory_msgs/JointTrajectory.h>
+#include<trajectory_msgs/JointTrajectoryPoint.h>
+#include<kdl/chain.hpp>
+#include<std_msgs/UInt8.h>
+#include<std_msgs/Bool.h>
+#include<std_msgs/Float64.h>
+#include<std_msgs/Int16.h>
+#include <kdl/chainfksolver.hpp>
+#include <kdl/chainiksolver.hpp>
+#include <kdl/chainfksolverpos_recursive.hpp>
+#include <kdl/chainiksolvervel_pinv.hpp>
+#include <kdl/chainiksolverpos_nr.hpp>
+#include <kdl/chainjnttojacsolver.hpp>
+#include <boost/scoped_ptr.hpp>
 
 /*
  * @brief KukaKinematics is a class used for working with the Kuka robot
@@ -187,15 +202,70 @@
  */
 class KukaKinematics {
  private:
-    ros::NodeHandle n;
-    sensor_msgs::JointState jointInfo;
-    KDL::Chain kinematicChain;
-    KDL::ChainFkSolverPos_recursive fkSolver;
-    KDL::ChainIkSolverVel_pinv ikSolver;
-    unsigned int numJoints;
-    KDL::JntArray jointPos;
-    KDL::Frame currCartesianPos;
-    trajectory_msgs::JointTrajectory jointCommands;
+  sensor_msgs::JointState jointsState_; ///< sensor_msgs::JointState tye
+  ///< variable to read current joint states
+  KDL::Chain kinematicChain_;                     ///< KDL::Chain type vaiable to define
+  ///< kinematic chain
+  //KDL::ChainFkSolverPos_recursive fksolver_;  ///< forward kinematic solver object
+  boost::scoped_ptr<KDL::ChainFkSolverPos> fksolver_;
+    boost::scoped_ptr<KDL::ChainIkSolverVel_pinv> iksolverv_;  ///< inverse kinematics solver velocity
+  /// <object
+  unsigned int numJoints_;  ///< unsigned int variable to hold number of
+  ///< kinematic joints
+  KDL::JntArray jointPosKdl_;  ///< KDL joint array current for FK
+  KDL::JntArray newJointPosKdl_;  ///< KDL joint array new from IK
+  KDL::Frame currCartpos_;  ///< current cartesian pose in from FK
+  trajectory_msgs::JointTrajectory jointCommands_; ///< final motion commads sent
+  ///< to the robot
+  bool kinematicsStatus_;  ///< verify solver status
+  boost::scoped_ptr<KDL::ChainIkSolverPos_NR> IKsolver_;
+  trajectory_msgs::JointTrajectoryPoint homePos_;
+
+
+  /**
+  * @brief <brief>
+  * @param [in] <name> <parameter_description>
+  * @return <return_description>
+  * @details <details>
+  */
+  void makeChain();
+  /**
+  * @brief <brief>
+  * @param [in] <name> <parameter_description>
+  * @return <return_description>
+  * @details <details>
+  */
+  void getJointNums();
+
+    /**
+  * @brief <brief>
+  * @param [in] <name> <parameter_description>
+  * @return <return_description>
+  * @details <details>
+  */
+  void initializeTrajectoryPoint();
+     /**
+      * @brief <brief>
+      * @param [in] <name> <parameter_description>
+      * @return <return_description>
+      * @details <details>
+      */
+    void initializeHomePos();
+
+  /**
+  * @brief <brief>
+  * @param [in] <name> <parameter_description>
+  * @return <return_description>
+  * @details <details>
+  */
+  void initializeJointsSub();
+  /**
+  * @brief <brief>
+  * @param [in] <name> <parameter_description>
+  * @return <return_description>
+  * @details <details>
+  */
+  void initializeJointsKDL();
 
  public:
     /*
@@ -212,7 +282,7 @@ class KukaKinematics {
      * @result This function does not return anything. The new joint values are
      *         stored in the variable taken as input.
      */
-    void getJoints(sensor_msgs::JointState &);
+  void getJoints(const sensor_msgs::JointState::ConstPtr& jointsState_);
 
     /*
      * @brief This is the second method of the class. It solves the inverse
@@ -230,7 +300,7 @@ class KukaKinematics {
      * @result This function returns the new joint coordinates required to
      *         achieve the desired position.
      */
-    KDL::JntArray evalKinematics(KDL::Frame, KDL::JntArray);
+  KDL::Frame evalKinematicsFK();
 
     /*
      * @brief This is the third method of the class. It solves the forward
@@ -242,7 +312,7 @@ class KukaKinematics {
      * @result This function returns joint trajectory that the robot need to
      *         follow to reach the desired joint state.
      */
-    trajectory_msgs::JointTrajectory evalKinematics(std::vector<double>);
+  KDL::JntArray evalKinematicsIK(KDL::Frame);
 
     /*
      * @brief This is the fourth method of the class. It normalizes the output
@@ -266,6 +336,9 @@ class KukaKinematics {
      *         successfully, otherwise it returns false.
      */
     bool checkKinematicStatus();
+
+      trajectory_msgs::JointTrajectory homeRobot();
+
 
     /*
      * @brief This is the destructor for the class
