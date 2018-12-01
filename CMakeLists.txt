@@ -3,11 +3,25 @@ project(object_collection_robotic_arm)
 
 add_compile_options(-std=c++11)
 
-find_package(catkin REQUIRED COMPONENTS geometry_msgs roscpp rospy std_msgs
-                                        tf iiwa_msgs)
-find_package(Eigen3 REQUIRED)
-find_package(orocos_kdl REQUIRED)
-
+find_package(catkin REQUIRED COMPONENTS
+  geometry_msgs
+  geometry_msgs
+  geometry_msgs
+  roscpp
+  roscpp
+  roscpp
+  rospy
+  rospy
+  rospy
+  std_msgs
+  std_msgs
+  std_msgs
+  tf
+  tf_conversions
+  kdl_conversions
+)
+find_package( Eigen3 REQUIRED )
+find_package( orocos_kdl REQUIRED )
 ################################################
 ## Declare ROS messages, services and actions ##
 ################################################
@@ -70,20 +84,29 @@ find_package(orocos_kdl REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES walkerbot
-#  CATKIN_DEPENDS geometry_msgs move_base_msgs roscpp sensor_msgs std_msgs
-#  DEPENDS system_lib
+#  LIBRARIES my_tele
+  CATKIN_DEPENDS geometry_msgs geometry_msgs geometry_msgs roscpp roscpp roscpp rospy rospy rospy std_msgs std_msgs std_msgs kdl_conversions tf tf_conversions
+#  DEPENDS system_lib kdl_conversions tf tf_conversions
 )
 
 ###########
 ## Build ##
 ###########
 
+FIND_PATH(EIGEN3_INCLUDE_DIR Eigen/Core /usr/include /usr/include/eigen3 /usr/local/include /usr/local/include/eigen3)
+IF ( EIGEN3_INCLUDE_DIR )
+    MESSAGE(STATUS "-- Looking for Eigen3 - found")
+    SET(KDL_CFLAGS "${KDL_CFLAGS} -I${EIGEN3_INCLUDE_DIR}" CACHE INTERNAL "")
+ELSE ( EIGEN3_INCLUDE_DIR )
+    MESSAGE(FATAL_ERROR "-- Looking for Eigen3 - not found")
+ENDIF ( EIGEN3_INCLUDE_DIR )
+
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include ${catkin_INCLUDE_DIRS})
-
-## Declare a C++ library
+include_directories(
+ include
+  ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR}
+)## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/walkerbot.cpp
 # )
@@ -97,7 +120,7 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 ## add_executable(objSeg src/main.cpp src/Detection.cpp src/KukaGripper.cpp src/KukaKinematics.cpp)
-add_executable(objSeg src/main.cpp src/KukaKinematics.cpp)
+add_executable(objSeg  src/KukaKinematics.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
