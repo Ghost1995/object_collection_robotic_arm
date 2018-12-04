@@ -288,7 +288,7 @@ class KukaKinematics {
      * @result This function does not return anything. The new joint values are
      *         stored in the variable taken as input.
      */
-    void getJoints(const sensor_msgs::JointState::ConstPtr& jointsState_);
+    void getJoints(const sensor_msgs::JointState::ConstPtr&);
 
     /*
      * @brief This is the second method of the class. It solves the inverse

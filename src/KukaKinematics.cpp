@@ -176,112 +176,109 @@
 
 // This is the constructor for the class
 KukaKinematics::KukaKinematics() {
-  KukaKinematics::makeChain();
-  KukaKinematics::getJointNums();
-  KukaKinematics::initializeTrajectoryPoint();
-  KukaKinematics::initializeHomePos();
-  KukaKinematics::jointPosKdl_=KDL::JntArray(KukaKinematics::numJoints_);
-  KukaKinematics::newJointPosKdl_=KDL::JntArray(KukaKinematics::numJoints_);
-  KukaKinematics::initializeJointsKDL();
-  KukaKinematics::initializeJointsSub();
+  makeChain();
+  getJointNums();
+  initializeTrajectoryPoint();
+  initializeHomePos();
+  jointPosKdl = KDL::JntArray(KukaKinematics::numJoints);
+  newJointPosKdl = KDL::JntArray(KukaKinematics::numJoints);
+  initializeJointsKDL();
+  initializeJointsSub();
 
 }
 
 void KukaKinematics::makeChain() {
-  //Define LWR chain_
-  KDL::Chain chain_;
-
+  //Define LWR chain
+  KDL::Chain chain;
   //base
-  chain_.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::None),KDL::Frame::DH_Craig1989(0,0,0.33989,0)));
+  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::None),KDL::Frame::DH_Craig1989(0,0,0.33989,0)));
   //joint 1
-  chain_.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0, -M_PI_2,0,0)));
+  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0, -M_PI_2,0,0)));
   //joint 2
-  chain_.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0,M_PI_2,0.40011,0)));
+  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0,M_PI_2,0.40011,0)));
   //joint 3
-  chain_.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0,M_PI_2,0,0)));
+  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0,M_PI_2,0,0)));
   //joint 4
-  chain_.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0, -M_PI_2,0.40003,0)));
+  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0, -M_PI_2,0.40003,0)));
   //joint 5
-  chain_.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0, -M_PI_2,0,0)));
+  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0, -M_PI_2,0,0)));
   //joint 6
-  chain_.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0, M_PI_2,0,0)));
+  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0, M_PI_2,0,0)));
   //joint 7 (with flange adapter)
-  chain_.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0,0,0.12597,0)));
-  KukaKinematics::kinematicChain_ = chain_;
-  KukaKinematics::fksolver_.reset(new KDL::ChainFkSolverPos_recursive(chain_));
-  KukaKinematics::iksolverv_.reset(new KDL::ChainIkSolverVel_pinv(chain_));
-  KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain_);
-  KDL::ChainIkSolverVel_pinv iksolverv = KDL::ChainIkSolverVel_pinv(chain_);
-  KukaKinematics::IKsolver_.reset(new KDL::ChainIkSolverPos_NR(chain_,fksolver,
-                                                      iksolverv,100,1e-4));
-
+  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ),KDL::Frame::DH_Craig1989(0,0,0.12597,0)));
+  kinematicChain = chain;
+  fkSolver.reset(new KDL::ChainFkSolverPos_recursive(chain));
+  ikSolverVel.reset(new KDL::ChainIkSolverVel_pinv(chain));
+  KDL::ChainFkSolverPos_recursive fkSolver = KDL::ChainFkSolverPos_recursive(chain);
+  KDL::ChainIkSolverVel_pinv ikSolverVel = KDL::ChainIkSolverVel_pinv(chain);
+  ikSolver.reset(new KDL::ChainIkSolverPos_NR(chain, fkSolver, ikSolverVel, 100, 1e-4));
 }
 
 void KukaKinematics::getJointNums() {
-  KukaKinematics::numJoints_ = KukaKinematics::kinematicChain_.getNrOfJoints();
-  KukaKinematics::jointPosKdl_=KDL::JntArray(numJoints_);
-  KukaKinematics::newJointPosKdl_=KDL::JntArray(numJoints_);
+  numJoints = kinematicChain.getNrOfJoints();
+  jointPosKdl = KDL::JntArray(numJoints);
+  newJointPosKdl = KDL::JntArray(numJoints);
 }
 
 void KukaKinematics::initializeTrajectoryPoint() {
-  KukaKinematics::jointCommands_.joint_names.push_back("iiwa_joint_1");
-  KukaKinematics::jointCommands_.joint_names.push_back("iiwa_joint_2");
-  KukaKinematics::jointCommands_.joint_names.push_back("iiwa_joint_3");
-  KukaKinematics::jointCommands_.joint_names.push_back("iiwa_joint_4");
-  KukaKinematics::jointCommands_.joint_names.push_back("iiwa_joint_5");
-  KukaKinematics::jointCommands_.joint_names.push_back("iiwa_joint_6");
-  KukaKinematics::jointCommands_.joint_names.push_back("iiwa_joint_7");
-  KukaKinematics::jointCommands_.header.seq = 0;
-  KukaKinematics::jointCommands_.header.stamp=ros::Time::now();
-  KukaKinematics::jointCommands_.header.frame_id = "";
+  jointCommands.joint_names.push_back("iiwa_joint_1");
+  jointCommands.joint_names.push_back("iiwa_joint_2");
+  jointCommands.joint_names.push_back("iiwa_joint_3");
+  jointCommands.joint_names.push_back("iiwa_joint_4");
+  jointCommands.joint_names.push_back("iiwa_joint_5");
+  jointCommands.joint_names.push_back("iiwa_joint_6");
+  jointCommands.joint_names.push_back("iiwa_joint_7");
+  jointCommands.header.seq = 0;
+  jointCommands.header.stamp = ros::Time::now();
+  jointCommands.header.frame_id = "";
 }
+
 void KukaKinematics::initializeHomePos() {
-  for (int i = 0; i < KukaKinematics::numJoints_; ++i)
-  {
+  for (int i = 0; i < numJoints; ++i) {
     if(i==0)
-    KukaKinematics::homePos_.positions.push_back(0);//1.3);
+    homePos.positions.push_back(0);//1.3);
     if(i==1)
-    KukaKinematics::homePos_.positions.push_back(1.0);//0.0);
+    homePos.positions.push_back(1.0);//0.0);
     if(i==2)
-    KukaKinematics::homePos_.positions.push_back(1.0);//0.0);
+    homePos.positions.push_back(1.0);//0.0);
     if(i==3)
-    KukaKinematics::homePos_.positions.push_back(-1.57);//-1.57);
+    homePos.positions.push_back(-1.57);//-1.57);
     if(i==4)
-    KukaKinematics::homePos_.positions.push_back(0.0);//0.0);
+    homePos.positions.push_back(0.0);//0.0);
     if(i==5)
-    KukaKinematics::homePos_.positions.push_back(1.0);//1.57);
+    homePos.positions.push_back(1.0);//1.57);
     if(i==6)
-    KukaKinematics::homePos_.positions.push_back(0);
+    homePos.positions.push_back(0);
   }
-  KukaKinematics::homePos_.time_from_start = ros::Duration(1.0);
+  homePos.time_from_start = ros::Duration(1.0);
 }
 // This is the first method of the class. It is a subscriber to the Kuka joint
 // values.
 void KukaKinematics::getJoints(const sensor_msgs::JointState::ConstPtr& msg){
 
-  // ROS_INFO_STREAM("yo"<<jointsState_->position[1]);
-KukaKinematics::jointsState_ = *msg;
+  // ROS_INFO_STREAM("yo"<<jointStates->position[1]);
+jointStates = *msg;
 
 };
 
 
 
 void KukaKinematics::initializeJointsKDL() {
-  for (int i = 0; i < KukaKinematics::numJoints_; ++i) {
-    KukaKinematics::jointPosKdl_(i) = 0.2;
-    KukaKinematics::newJointPosKdl_(i) = 0.2;
+  for (int i = 0; i < numJoints; ++i) {
+    jointPosKdl(i) = 0.2;
+    newJointPosKdl(i) = 0.2;
   }
 }
 
 void KukaKinematics::initializeJointsSub() {
-  for (int i = 0; i < KukaKinematics::numJoints_; ++i) {
-  KukaKinematics::jointsState_.position.push_back(0.2);
+  for (int i = 0; i < numJoints; ++i) {
+  jointStates.position.push_back(0.2);
 }
 }
 trajectory_msgs::JointTrajectory KukaKinematics::homeRobot() {
   trajectory_msgs::JointTrajectory jointCmd;
-  jointCmd=KukaKinematics::jointCommands_;
-  jointCmd.points[0] = KukaKinematics::homePos_;
+  jointCmd=jointCommands;
+  jointCmd.points[0] = homePos;
   jointCmd.header.seq = 0;
   jointCmd.header.stamp=ros::Time::now();
   jointCmd.header.frame_id = "";
@@ -293,12 +290,12 @@ trajectory_msgs::JointTrajectory KukaKinematics::homeRobot() {
 
 KDL::Frame KukaKinematics::evalKinematicsFK() {
   KDL::Frame cartPos;
-  for (int k = 0; k<numJoints_; ++k) {
-    KukaKinematics::jointPosKdl_(k) = KukaKinematics::jointsState_.position[k];
+  for (int k = 0; k<numJoints; ++k) {
+    jointPosKdl(k) = jointStates.position[k];
   }
-  // ROS_INFO_STREAM("yo"<<jointsState_.position[1]);
-  KukaKinematics::kinematicsStatus_ = KukaKinematics::fksolver_->JntToCart(KukaKinematics::jointPosKdl_,cartPos);
-  KukaKinematics::currCartpos_=cartPos;
+  // ROS_INFO_STREAM("yo"<<jointStates.position[1]);
+  kinematicsStatus = fkSolver->JntToCart(jointPosKdl,cartPos);
+  currCartPos=cartPos;
   return cartPos;
 }
 
@@ -308,11 +305,11 @@ KDL::Frame KukaKinematics::evalKinematicsFK() {
 KDL::JntArray KukaKinematics::evalKinematicsIK(KDL::Frame cartpos) {
   ROS_INFO_STREAM("1");
   ROS_INFO_STREAM("cartpos"<< cartpos.p[1]);
-  ROS_INFO_STREAM("currjoint"<< KukaKinematics::jointPosKdl_(1));
-  ROS_INFO_STREAM("currjoint"<< KukaKinematics::newJointPosKdl_(1));
-  int ret = KukaKinematics::IKsolver_->CartToJnt(KukaKinematics::jointPosKdl_,cartpos,KukaKinematics::newJointPosKdl_);
+  ROS_INFO_STREAM("currjoint"<< jointPosKdl(1));
+  ROS_INFO_STREAM("currjoint"<< newJointPosKdl(1));
+  int ret = ikSolver->CartToJnt(jointPosKdl,cartpos,newJointPosKdl);
   ROS_INFO_STREAM("2");
-  return KukaKinematics::newJointPosKdl_;
+  return newJointPosKdl;
 }
 
 
@@ -321,12 +318,12 @@ trajectory_msgs::JointTrajectoryPoint KukaKinematics::normalizePoints(KDL::JntAr
   trajectory_msgs::JointTrajectoryPoint point_;
   // joints can move between -+: 172,120,172,120,172,120,170
   //double joint_bounds[] = {3.002, 2.0944,3.002, 2.0944,3.002, 2.0944, 3.002};
-  for (int i = 0; i < KukaKinematics::numJoints_; ++i){
-    while(KukaKinematics::newJointPosKdl_(i) > M_PI)
-    KukaKinematics::newJointPosKdl_(i) -= 2*M_PI;
-    while(KukaKinematics::newJointPosKdl_(i) < -M_PI)
-    KukaKinematics::newJointPosKdl_(i) += 2*M_PI;
-    point_.positions[i] = KukaKinematics::newJointPosKdl_(i);
+  for (int i = 0; i < numJoints; ++i){
+    while(newJointPosKdl(i) > M_PI)
+    newJointPosKdl(i) -= 2*M_PI;
+    while(newJointPosKdl(i) < -M_PI)
+    newJointPosKdl(i) += 2*M_PI;
+    point_.positions[i] = newJointPosKdl(i);
   }
   return point_;
 }
