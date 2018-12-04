@@ -3,25 +3,12 @@ project(object_collection_robotic_arm)
 
 add_compile_options(-std=c++11)
 
-find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
-  geometry_msgs
-  geometry_msgs
-  roscpp
-  roscpp
-  roscpp
-  rospy
-  rospy
-  rospy
-  std_msgs
-  std_msgs
-  std_msgs
-  tf
-  tf_conversions
-  kdl_conversions
-)
-find_package( Eigen3 REQUIRED )
-find_package( orocos_kdl REQUIRED )
+find_package(catkin REQUIRED COMPONENTS geometry_msgs roscpp rospy std_msgs tf
+                                        tf_conversions kdl_conversions)
+find_package(Eigen3 REQUIRED)
+find_package(orocos_kdl REQUIRED)
+find_package(gazebo REQUIRED)
+
 ################################################
 ## Declare ROS messages, services and actions ##
 ################################################
@@ -85,7 +72,7 @@ find_package( orocos_kdl REQUIRED )
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES my_tele
-  CATKIN_DEPENDS geometry_msgs geometry_msgs geometry_msgs roscpp roscpp roscpp rospy rospy rospy std_msgs std_msgs std_msgs kdl_conversions tf tf_conversions
+  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs kdl_conversions tf tf_conversions
 #  DEPENDS system_lib kdl_conversions tf tf_conversions
 )
 
@@ -105,11 +92,15 @@ ENDIF ( EIGEN3_INCLUDE_DIR )
 ## Your package locations should be listed before other locations
 include_directories(
  include
-  ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR}
+  ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${GAZEBO_INCLUDE_DIRS}
 )## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/walkerbot.cpp
 # )
+# add_library(camera_plugin SHARED src/CameraPlugin.cpp)
+
+# link_directories(${GAZEBO_LIBRARY_DIRS})
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -134,6 +125,7 @@ add_executable(objSeg  src/KukaKinematics.cpp src/main.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(objSeg ${catkin_LIBRARIES})
+# target_link_libraries(camera_plugin ${GAZEBO_LIBRARIES})
 
 #############
 ## Install ##
