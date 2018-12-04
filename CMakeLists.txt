@@ -91,7 +91,7 @@ ENDIF ( EIGEN3_INCLUDE_DIR )
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
- include
+ include/object_collection_robotic_arm include/plugins
   ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${GAZEBO_INCLUDE_DIRS}
 )## Declare a C++ library
 # add_library(${PROJECT_NAME}
