@@ -88,8 +88,8 @@
  *    the Library is used in it and that the Library and its use are
  *    covered by this License.
  *
- *    b) Accompany the Combined Work with a copy of the GNU GPL and this license
- *    document.
+ *    b) Accompany the Combined Work with a copy of the GNU GPL and this
+ *    license document.
  *
  *    c) For a Combined Work that displays copyright notices during
  *    execution, include the copyright notice for the Library among
