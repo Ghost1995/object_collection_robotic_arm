@@ -11,6 +11,7 @@
         name="objSeg"
         type="objSeg"
         output = "screen"
+        launch-prefix = "gnome-terminal -e"
     />
 
  	<node
