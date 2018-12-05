@@ -180,7 +180,13 @@
 #include <vector>
 #include <string>
 #include <opencv2/opencv.hpp>
+#include <image_transport/image_transport.h>
+#include <cv_bridge/cv_bridge.h>
+#include <sensor_msgs/image_encodings.h>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
+static const std::string OPENCV_WINDOW = "Image window";
 /*
  * @brief Detection is a class used for working with the camera in the world
  */
@@ -188,6 +194,8 @@ class Detection {
  private:
     ros::NodeHandle n;
     std::vector<std::vector<double>> pos;
+    image_transport::ImageTransport it_;
+    image_transport::Subscriber image_sub_;
 
  public:
     /*
@@ -214,6 +222,12 @@ class Detection {
      * @result This function returns the position index for that object.
      */
     int colorThresholder(const std::string);
+    /*  
+     *  
+     *  
+    */
+    void readImg(const sensor_msgs::ImageConstPtr&);
+
 
     /*
      * @brief This is the destructor for the class
