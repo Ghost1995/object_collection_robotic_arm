@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="object_collection_robotic_arm" type="objSeg" name="objSeg" />
+  <test pkg="object_collection_robotic_arm" test-name="allTests" type="allTests" />
+</launch>

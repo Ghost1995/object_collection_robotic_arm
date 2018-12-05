@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(object_collection_robotic_arm)
 
+## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
+## Find catkin macros and libraries
 find_package(catkin REQUIRED COMPONENTS geometry_msgs roscpp rospy std_msgs tf
                                         tf_conversions kdl_conversions sensor_msgs 
                                         cv_bridge image_transport)
@@ -10,6 +12,10 @@ find_package(Eigen3 REQUIRED)
 find_package(orocos_kdl REQUIRED)
 find_package(gazebo REQUIRED)
 find_package(OpenCV REQUIRED)
+
+## Check launch files
+# roslaunch_add_file_check(launch)
+
 ################################################
 ## Declare ROS messages, services and actions ##
 ################################################
@@ -99,7 +105,9 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 include_directories(
  include/object_collection_robotic_arm
  ${OpenCV_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${GAZEBO_INCLUDE_DIRS} 
-)## Declare a C++ library
+)
+
+## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/walkerbot.cpp
 # )
@@ -184,3 +192,10 @@ target_link_libraries(objSeg ${OpenCV_LIBS} ${catkin_LIBRARIES} )
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  
+  add_rostest_gtest(allTests test/allTests.test test/main.cpp test/testKukaKinematics.cpp)
+  target_link_libraries(allTests ${catkin_LIBRARIES})
+endif()
+
