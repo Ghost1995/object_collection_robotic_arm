@@ -175,13 +175,17 @@
 
 #include <iostream>
 #include "KukaKinematics.hpp"
+#include "Detection.hpp"
+
 int main(int argc, char **argv) {
  ros::init(argc, argv, "objSeg");
   ros::Time::init();
   KukaKinematics ku;
+  // Detection det;
 
  ros::NodeHandle n;
- auto joints_sub = n.subscribe("/iiwa/joint_states",10,  &KukaKinematics::getJoints, &ku);
+auto joints_sub = n.subscribe("/iiwa/joint_states",10,  &KukaKinematics::getJoints, &ku);
+// auto image_sub_ = n.subscribe("/camera/image_raw", 30,  &Detection::readImg, &det);
 KDL::Frame cartpos;
 KDL::JntArray inv;
 // ros::Duration(5).sleep();
@@ -189,11 +193,13 @@ KDL::JntArray inv;
 while (ros::ok()) {
 ros::Duration(0.0011).sleep();
 
-ROS_INFO_STREAM("hi");
 cartpos = ku.evalKinematicsFK();
-inv = ku.evalKinematicsIK(cartpos);
-ROS_INFO_STREAM("hi");
-ROS_INFO_STREAM("Hi"<< inv(1));
+ROS_INFO_STREAM("hi"<< cartpos.p(1));
+
+// inv = ku.evalKinematicsIK(cartpos);
+// ROS_INFO_STREAM("hi");
+// ROS_INFO_STREAM("Hi"<< inv(1));
+
 ros::spinOnce();
 }
 
