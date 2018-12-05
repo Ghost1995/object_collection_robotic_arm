@@ -174,24 +174,48 @@
 
 #include "Detection.hpp"
 
-// This is the constructor for the class
-Detection::Detection() {
 
+// This is the constructor for the class
+Detection::Detection() :it_(n) {
+// Subscrive to input video feed and publish output video feed
+	// image_sub_ = it_.subscribe("/camera/image_raw", 1,
+ //   	  &Detection::readImg, this);
+    cv::namedWindow(OPENCV_WINDOW);
 }
 
 // This is the first method of the class. It gives the preloaded coordinates
 // for a particular position index.
 std::vector<double> Detection::getObjectCoords(const int index) {
-
+    ROS_INFO("getObjectCoords here.");
 }
 
 // This is the second method of the class. It detects the position index of a
 // particularly colored object.
 int Detection::colorThresholder(const std::string color) {
+    ROS_INFO("colorThresholder here.");
+}
+// ReadImage function
+void readImg(const sensor_msgs::ImageConstPtr& msg) {
+	cv_bridge::CvImagePtr cv_ptr;
+    try
+    {
+      cv_ptr = cv_bridge::toCvCopy(*msg, sensor_msgs::image_encodings::BGR8);
+    }
+    catch (cv_bridge::Exception& e)
+    {
+      ROS_ERROR("cv_bridge exception: %s", e.what());
+      return;
+    }
+    // Update GUI Window
+    cv::imshow(OPENCV_WINDOW, cv_ptr->image);
+    cv::waitKey(3);
 
 }
 
+
+
 // This is the destructor for the class
 Detection::~Detection() {
+	    cv::destroyWindow(OPENCV_WINDOW);
 
 }
