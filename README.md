@@ -58,7 +58,7 @@ To run this program you need to have the following installed on your system:
 
 * To install catkin, follow the installation steps in this [link](http://wiki.ros.org/catkin).
 
-#### openCV
+<!-- #### openCV
 
 Install OpenCV 3.3.0 using the following commands:
 
@@ -103,8 +103,8 @@ sudo make install
 sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
 sudo ldconfig
 ```
-
-#### Other Dependencies
+ -->
+#### Ros Control Dependencies (REQUIRED)
 
 Make sure you have these packages installed in the environment:
 * ros-kinetic-velocity-controllers
@@ -116,6 +116,17 @@ Make sure you have these packages installed in the environment:
 If not, type:
 ```
 sudo apt-get install ros-kinetic-velocity-controllers ros-kinetic-ros-control ros-kinetic-position-controllers ros-kinetic-joint-state-controller ros-kinetic-joint-trajectory-controller
+
+sudo apt-get install ros-kinetic-moveit
+
+sudo apt-get install ros-kinetic-trajectory* //not helpful
+
+sudo apt-get install ros-kinetic-moveit* //not helpful
+
+sudo apt-get install ros-kinetic-joints* //not helpful
+
+sudo apt install ros-kinetic-gazebo-ros-control
+
 ```
 
 ## Solo Iterative Process
@@ -155,7 +166,10 @@ catkin_make
 
 In your catkin workspace directory (or create a new one using the above instructions)
 ```
-git clone --recursive https://github.com/anirudhtopiwala/iiwa_stack.git
+git clone https://github.com/anirudhtopiwala/iiwa_stack.git
+cd ..
+catkin_make
+source devel/setup.bash
 ```
 
 ## Running the Demo using Launch File
@@ -171,7 +185,6 @@ cd ~/catkin_ws/
 source devel/setup.bash
 roslaunch object_collection_robotic_arm kuka_fwd.launch
 ```
-
 ## Record bag File
 
 
