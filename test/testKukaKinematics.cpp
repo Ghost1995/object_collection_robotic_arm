@@ -166,153 +166,20 @@
  */
 /**
  * @file testKukaKinematics.cpp
- * 
+ * Copyright [2018] Ghost1995 [Ashwin Goyal] - driver
+ * anirudhtopiwala [Anirudh Topiwala] - navigator
+ * @date Nov 27, 2018
  * @brief It defines rostest and gtest for KukaKinematics class.
- *
- * Copyright [2018] Ashwin Goyal
  */
 
 #include <gtest/gtest.h>
 #include "KukaKinematics.hpp"
 
 /**
- * @brief This is the google test for the first private method of the class.
+ * @brief This is the google test for the first method of the class.
  *        It is a dummy test for now.
  */
-TEST(KukaKinematicsTest, testMakeChain) {
-  // Dummy test for now
-  EXPECT_TRUE(1);
-}
-
-/**
- * @brief This is the google test for the second private method of the class.
- *        It is a dummy test for now.
- */
-TEST(KukaKinematicsTest, testGetJointNums) {
-  // Dummy test for now
-  EXPECT_TRUE(1);
-}
-
-/**
- * @brief This is the google test for the third private method of the class.
- *        It is a dummy test for now.
- */
-TEST(KukaKinematicsTest, testInitializeTrajectoryPoint) {
-  // Dummy test for now
-  EXPECT_TRUE(1);
-}
-
-/**
- * @brief This is the google test for the fourth private method of the class.
- *        It is a dummy test for now.
- */
-TEST(KukaKinematicsTest, testInitializeHomePos) {
-  // Dummy test for now
-  EXPECT_TRUE(1);
-}
-
-/**
- * @brief This is the google test for the fifth private method of the class.
- *        It is a dummy test for now.
- */
-TEST(KukaKinematicsTest, testInitializeJointsSub) {
-  // Dummy test for now
-  EXPECT_TRUE(1);
-}
-
-/**
- * @brief This is the google test for the sixth private method of the class.
- *        It is a dummy test for now.
- */
-TEST(KukaKinematicsTest, testInitializeJointsKDL) {
-  // Dummy test for now
-  EXPECT_TRUE(1);
-}
-
-/**
- * @brief This is the google test for the first public method of the class.
- *        
- */
-TEST(KukaKinematicsTest, testGetJoints) {
-  // Create NodeHandle
-  ros::NodeHandle n;
-
-  // Initialize a class object for KukaKinematics class
-  KukaKinematics kuka;
-  // Create a subscriber object for getJoint Subscriber
-  auto jnt = n.subscribe("/iiwa/joint_states", 10, &getJoints, &kuka);
-  std::cout << jnt << std::endl;
-}
-
-/**
- * @brief This is the google test for the second public method of the class.
- *        
- */
-TEST(KukaKinematicsTest, testEvalKinematicsFK) {
-  // Create NodeHandle
-  ros::NodeHandle n;
-
-  // Initialize a class object for KukaKinematics class
-  KukaKinematics kuka;
-  // Call the method to be tested
-  auto cartPos = kuka.evalKinematicsFK();
-  std::cout << cartPos.p(0) << std::endl;
-  std::cout << cartPos.p(1) << std::endl;
-  std::cout << cartPos.p(2) << std::endl;
-}
-
-/**
- * @brief This is the google test for the third public method of the class.
- *        
- */
-TEST(KukaKinematicsTest, testEvalKinematicsIK) {
-  // Create NodeHandle
-  ros::NodeHandle n;
-
-  // Initialize a class object for KukaKinematics class
-  KukaKinematics kuka;
-  // Dummy test for now
-  EXPECT_TRUE(1);
-}
-
-/**
- * @brief This is the google test for the fourth public method of the class.
- *        
- */
-TEST(KukaKinematicsTest, testNormalizePoints) {
-  // Create NodeHandle
-  ros::NodeHandle n;
-
-  // Initialize a class object for KukaKinematics class
-  KukaKinematics kuka;
-  // Dummy test for now
-  EXPECT_TRUE(1);
-}
-
-/**
- * @brief This is the google test for the fifth public method of the class.
- *        
- */
-TEST(KukaKinematicsTest, testCheckKinematicStatus) {
-  // Create NodeHandle
-  ros::NodeHandle n;
-
-  // Initialize a class object for KukaKinematics class
-  KukaKinematics kuka;
-  // Dummy test for now
-  EXPECT_TRUE(1);
-}
-
-/**
- * @brief This is the google test for the sixth public method of the class.
- *        
- */
-TEST(KukaKinematicsTest, testHomeRobot) {
-  // Create NodeHandle
-  ros::NodeHandle n;
-
-  // Initialize a class object for KukaKinematics class
-  KukaKinematics kuka;
+TEST(KukaKinematicsTest, testSendRobotToPos) {
   // Dummy test for now
   EXPECT_TRUE(1);
 }
