@@ -172,16 +172,12 @@
  * @brief This is the declaration of the KukaKinematics class
  */
 
-#ifndef INCLUDE_KUKAKINEMATICS_HPP_
-#define INCLUDE_KUKAKINEMATICS_HPP_
+#ifndef INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_KUKAKINEMATICS_HPP_
+#define INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_KUKAKINEMATICS_HPP_
 
+#include <trajectory_msgs/JointTrajectory.h>
 #include <ros/ros.h>
 #include <iostream>
-#include <geometry_msgs/PoseStamped.h>
-#include <geometry_msgs/Twist.h>
-#include <sensor_msgs/JointState.h>
-#include <trajectory_msgs/JointTrajectory.h>
-#include <trajectory_msgs/JointTrajectoryPoint.h>
 
 /*
  * @brief KukaKinematics is a class used for working with the Kuka robot
@@ -238,4 +234,4 @@ class KukaKinematics {
     ~KukaKinematics();
 };
 
-#endif  // INCLUDE_KUKAKINEMATICS_HPP_
+#endif  // INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_KUKAKINEMATICS_HPP_

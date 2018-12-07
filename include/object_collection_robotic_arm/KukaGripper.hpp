@@ -172,13 +172,13 @@
  * @brief This is the declaration of the KukaGripper class
  */
 
-#ifndef INCLUDE_KUKAGRIPPER_HPP_
-#define INCLUDE_KUKAGRIPPER_HPP_
+#ifndef INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_KUKAGRIPPER_HPP_
+#define INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_KUKAGRIPPER_HPP_
 
-#include <ros/ros.h>
-#include <iostream>
 #include <std_srvs/Empty.h>
 #include <std_msgs/Bool.h>
+#include <ros/ros.h>
+#include <iostream>
 
 /*
  * @brief KukaGripper is a class used for working with the Kuka robot
@@ -230,4 +230,4 @@ class KukaGripper {
     ~KukaGripper();
 };
 
-#endif  // INCLUDE_KUKAGRIPPER_HPP_
+#endif  // INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_KUKAGRIPPER_HPP_

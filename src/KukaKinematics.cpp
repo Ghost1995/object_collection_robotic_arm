@@ -190,12 +190,11 @@ KukaKinematics::KukaKinematics() : position_joints{{2.918232931819958,
     -0.7114584416147531}, {-0.49584801156347513, -0.7282973144476284,
     -1.0608509979595278, 0.8929195071031097, -2.4641855236659262,
     1.7728411547958132, -1.1338010045240487}} {
-
     // Initialize the trajectory message attributes
     initializeTrajectoryPoint();
     // Initialize the publisher
     joint_pub = n.advertise<trajectory_msgs::JointTrajectory>
-            ("/iiwa/PositionJointInterface_trajectory_controller/command",.10);
+        ("/iiwa/PositionJointInterface_trajectory_controller/command", .10);
 }
 
 // This is the first method of the class. It moves the robot from its current
