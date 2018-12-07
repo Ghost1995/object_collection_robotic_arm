@@ -182,7 +182,7 @@ int main(int argc, char **argv) {
  ros::init(argc, argv, "objSeg");
   ros::Time::init();
   KukaKinematics ku;
-  // Detection det;
+  Detection det;
 
  ros::NodeHandle n;
 
