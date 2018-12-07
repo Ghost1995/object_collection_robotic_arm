@@ -38,7 +38,7 @@
  * object code and/or source code for the Application, including any data
  * and utility programs needed for reproducing the Combined Work from the
  * Application, but excluding the System Libraries of the Combined Work.
- *
+ * 
  *   1. Exception to Section 3 of the GNU GPL.
  *
  *   You may convey a covered work under sections 3 and 4 of this License
@@ -51,7 +51,7 @@
  * that uses the facility (other than as an argument passed when the
  * facility is invoked), then you may convey a copy of the modified
  * version:
- *
+ * 
  *    a) under this License, provided that you make a good faith effort to
  *    ensure that, in the event an Application does not supply the
  *    function or data, the facility still operates, and performs
@@ -176,7 +176,8 @@
 #include <iostream>
 #include "KukaKinematics.hpp"
 #include "Detection.hpp"
-
+#include <vector>
+#include <kdl/frames.hpp>
 int main(int argc, char **argv) {
  ros::init(argc, argv, "objSeg");
   ros::Time::init();
@@ -184,24 +185,46 @@ int main(int argc, char **argv) {
   // Detection det;
 
  ros::NodeHandle n;
-auto joints_sub = n.subscribe("/iiwa/joint_states",10,  &KukaKinematics::getJoints, &ku);
+
+// auto joints_sub = n.subscribe("/iiwa/joint_states",10,  &KukaKinematics::getJoints, &ku);
 // auto image_sub_ = n.subscribe("/camera/image_raw", 30,  &Detection::readImg, &det);
-KDL::Frame cartpos;
-KDL::JntArray inv;
+// KDL::Frame destFrame(KDL::Vector(0.4, -0.5, 1.2));
+// KDL::Frame cartpos(a);
+// KDL::JntArray inv;
 // ros::Duration(5).sleep();
 
 while (ros::ok()) {
 ros::Duration(0.0011).sleep();
 
-cartpos = ku.evalKinematicsFK();
-ROS_INFO_STREAM("hi"<< cartpos.p(1));
+// cartpos = ku.evalKinematicsFK();
+// ROS_INFO_STREAM("hi"<< cartpos.p(0));
+ROS_INFO_STREAM("Going to Home Position");
+ku.sendRobotToPos(0);
+ROS_INFO_STREAM("Going to Disc 1");
+ku.sendRobotToPos(1);
+ROS_INFO_STREAM("Going to Left Table");
+ku.sendRobotToPos(2);
+ROS_INFO_STREAM("Going to Home Position");
+ku.sendRobotToPos(0);
+ROS_INFO_STREAM("Going to Disc 2");
+ku.sendRobotToPos(3);
+ROS_INFO_STREAM("Going to Right Table");
+ku.sendRobotToPos(4);
+ROS_INFO_STREAM("Going to Home Position");
+ku.sendRobotToPos(0);
+ROS_INFO_STREAM("Going to Disc 3");
+ku.sendRobotToPos(5);
 
-// inv = ku.evalKinematicsIK(cartpos);
+
 // ROS_INFO_STREAM("hi");
 // ROS_INFO_STREAM("Hi"<< inv(1));
 
+	
 ros::spinOnce();
+ros::Duration(0.5).sleep();
+ros::shutdown();
 }
+
 
   return 0;
 }
