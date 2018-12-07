@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <sdf version='1.6'>
   <world name='default'>
     <light name='sun' type='directional'>
@@ -80,354 +81,6 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
-    <model name='disk_part_0'>
-      <link name='link'>
-        <inertial>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <mass>0.5</mass>
-          <inertia>
-            <ixx>0.00321218</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.00321218</iyy>
-            <iyz>0</iyz>
-            <izz>0.00614499</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <length>0.0579</length>
-              <radius>0.15678</radius>
-            </cylinder>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://disk_part/meshes/disk.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://arm_part/materials/scripts</uri>
-              <uri>model://arm_part/materials/textures</uri>
-              <name>ArmPart/Diffuse</name>
-            </script>
-            <ambient>1 0 0 1</ambient>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>-0.015474 0.027049 0 0 -0 0</pose>
-    </model>
-    <model name='disk_part_1'>
-      <link name='link'>
-        <inertial>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <mass>0.5</mass>
-          <inertia>
-            <ixx>0.00321218</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.00321218</iyy>
-            <iyz>0</iyz>
-            <izz>0.00614499</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <length>0.0579</length>
-              <radius>0.15678</radius>
-            </cylinder>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://disk_part/meshes/disk.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://arm_part/materials/scripts</uri>
-              <uri>model://arm_part/materials/textures</uri>
-              <name>ArmPart/Diffuse</name>
-            </script>
-            <ambient>1 0 0 1</ambient>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>-0.015474 0.027049 0 0 -0 0</pose>
-    </model>
-    <model name='disk_part_2'>
-      <link name='link'>
-        <inertial>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <mass>0.5</mass>
-          <inertia>
-            <ixx>0.00321218</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.00321218</iyy>
-            <iyz>0</iyz>
-            <izz>0.00614499</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <length>0.0579</length>
-              <radius>0.15678</radius>
-            </cylinder>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://disk_part/meshes/disk.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://arm_part/materials/scripts</uri>
-              <uri>model://arm_part/materials/textures</uri>
-              <name>ArmPart/Diffuse</name>
-            </script>
-            <ambient>1 0 0 1</ambient>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>-0.015474 0.027049 0 0 -0 0</pose>
-    </model>
-    <model name='disk_part_3'>
-      <link name='link'>
-        <inertial>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <mass>0.5</mass>
-          <inertia>
-            <ixx>0.00321218</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.00321218</iyy>
-            <iyz>0</iyz>
-            <izz>0.00614499</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <length>0.0579</length>
-              <radius>0.15678</radius>
-            </cylinder>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://disk_part/meshes/disk.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://arm_part/materials/scripts</uri>
-              <uri>model://arm_part/materials/textures</uri>
-              <name>ArmPart/Diffuse</name>
-            </script>
-            <ambient>0 1 0 1</ambient>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>-0.015474 0.027049 0 0 -0 0</pose>
-    </model>
-    <model name='disk_part_4'>
-      <link name='link'>
-        <inertial>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <mass>0.5</mass>
-          <inertia>
-            <ixx>0.00321218</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.00321218</iyy>
-            <iyz>0</iyz>
-            <izz>0.00614499</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <length>0.0579</length>
-              <radius>0.15678</radius>
-            </cylinder>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://disk_part/meshes/disk.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://arm_part/materials/scripts</uri>
-              <uri>model://arm_part/materials/textures</uri>
-              <name>ArmPart/Diffuse</name>
-            </script>
-            <ambient>0 1 0 1</ambient>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>-0.015474 0.027049 0 0 -0 0</pose>
-    </model>
-    <model name='disk_part_5'>
-      <link name='link'>
-        <inertial>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <mass>0.5</mass>
-          <inertia>
-            <ixx>0.00321218</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.00321218</iyy>
-            <iyz>0</iyz>
-            <izz>0.00614499</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0.02895 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <length>0.0579</length>
-              <radius>0.15678</radius>
-            </cylinder>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://disk_part/meshes/disk.dae</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://arm_part/materials/scripts</uri>
-              <uri>model://arm_part/materials/textures</uri>
-              <name>ArmPart/Diffuse</name>
-            </script>
-            <ambient>0 0 1 1</ambient>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>-0.015474 0.027049 0 0 -0 0</pose>
-    </model>
     <model name='camera'>
       <link name='link'>
         <gravity>0</gravity>
@@ -478,7 +131,7 @@
           </plugin>
           <always_on>1</always_on>
           <update_rate>30</update_rate>
-          <visualize>1</visualize>
+          <visualize>0</visualize>
         </sensor>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
@@ -486,10 +139,10 @@
       <pose frame=''>-0.046437 -0.060808 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>130 503000000</sim_time>
-      <real_time>132 863737409</real_time>
-      <wall_time>1544069368 366224394</wall_time>
-      <iterations>130503</iterations>
+      <sim_time>86 323000000</sim_time>
+      <real_time>21 130700688</real_time>
+      <wall_time>1544168902 582841231</wall_time>
+      <iterations>20380</iterations>
       <model name='camera'>
         <pose frame=''>-0.048584 0.550339 2.2216 0 1.57 0</pose>
         <scale>1 1 1</scale>
@@ -500,64 +153,34 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='disk_part_0'>
-        <pose frame=''>0.5 0.95 0.515 0 -0 0</pose>
+      <model name='disk_part_2_thin_collision_red'>
+        <pose frame=''>0.074737 0.500003 0.51499 0 0 -2e-06</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.5 0.95 0.515 0 -0 0</pose>
+          <pose frame=''>0.074737 0.500003 0.51499 0 0 -2e-06</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 19.6 -4e-06 3e-06 0</acceleration>
-          <wrench>0 0 9.8 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='disk_part_1'>
-        <pose frame=''>-0.5 0.950001 0.514998 -1.3e-05 -0 -7e-06</pose>
+      <model name='disk_part_4_thin_collision'>
+        <pose frame=''>-0.361959 0.5 0.51104 0 0 -0.00499</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.5 0.950001 0.514998 -1.3e-05 -0 -7e-06</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.030393 1.33578 -7.5737 1.96917 -1.07197 -0.004128</acceleration>
-          <wrench>-0.015196 0.667891 -3.78685 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='disk_part_2'>
-        <pose frame=''>0 0.5 0.515 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>0 0.5 0.515 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 19.6 -5e-06 -1e-06 0</acceleration>
-          <wrench>0 0 9.8 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='disk_part_3'>
-        <pose frame=''>0.499997 0.499998 0.515007 2.8e-05 -3.4e-05 1e-06</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>0.499997 0.499998 0.515007 2.8e-05 -3.4e-05 1e-06</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 -1e-06 19.6 2.1e-05 -1.6e-05 0</acceleration>
-          <wrench>0 0 9.8 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='disk_part_4'>
-        <pose frame=''>-0.499987 0.500006 0.514999 -1.3e-05 -2.3e-05 -5.7e-05</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>-0.499987 0.500006 0.514999 -1.3e-05 -2.3e-05 -5.7e-05</pose>
+          <pose frame=''>-0.361959 0.5 0.51104 0 0 -0.00499</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 -9.8 0 -0 0</acceleration>
           <wrench>0 0 -4.9 0 -0 0</wrench>
         </link>
       </model>
-      <model name='disk_part_5'>
-        <pose frame=''>0 0.950001 0.514997 1.6e-05 2e-06 -1.1e-05</pose>
+      <model name='disk_part_5_thin_collision_blue'>
+        <pose frame=''>0.485501 0.50738 0.514998 -1.3e-05 -2.1e-05 -2.5e-05</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0 0.950001 0.514997 1.6e-05 2e-06 -1.1e-05</pose>
+          <pose frame=''>0.485501 0.50738 0.514998 -1.3e-05 -2.1e-05 -2.5e-05</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.197382 -1.33714 -7.57143 -2.47574 0.675818 -0.026111</acceleration>
-          <wrench>0.098691 -0.668571 -3.78572 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -580,21 +203,21 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='table_small_0'>
-        <pose frame=''>-0.85 -0.38 0 0 -0 1.5708</pose>
+      <model name='table_small_1'>
+        <pose frame=''>-0.698826 -0.388706 0 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.85 -0.38 0 0 -0 1.5708</pose>
+          <pose frame=''>-0.698826 -0.388706 0 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='table_small_0_clone'>
-        <pose frame=''>0.85 -0.38 0 0 -0 1.5708</pose>
+      <model name='table_small_1_clone'>
+        <pose frame=''>0.301174 -0.388706 0 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.85 -0.38 0 0 -0 1.5708</pose>
+          <pose frame=''>0.301174 -0.388706 0 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -606,7 +229,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>0.102892 -2.9803 5.33127 0 0.850203 1.72419</pose>
+        <pose frame=''>-4.88705 8.94777 5.72845 -0 0.618097 -1.39285</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -630,10 +253,10 @@
         <kinematic>0</kinematic>
         <gravity>1</gravity>
         <visual name='visual1'>
-          <pose frame=''>0 0 0.5 0 -0 0</pose>
+          <pose frame=''>0 -0.2 0.5 0 -0 0</pose>
           <geometry>
             <box>
-              <size>1.4 0.8 0.04</size>
+              <size>1.4 0.4 0.04</size>
             </box>
           </geometry>
           <material>
@@ -653,7 +276,7 @@
           <cast_shadows>1</cast_shadows>
         </visual>
         <visual name='front_left_leg'>
-          <pose frame=''>0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -725,7 +348,7 @@
           <cast_shadows>1</cast_shadows>
         </visual>
         <visual name='back_left_leg'>
-          <pose frame=''>-0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>-0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -751,10 +374,10 @@
         <collision name='surface'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>0 0 0.5 0 -0 0</pose>
+          <pose frame=''>0 -0.2 0.5 0 -0 0</pose>
           <geometry>
             <box>
-              <size>1.5 0.8 0.03</size>
+              <size>1.4 0.4 0.03</size>
             </box>
           </geometry>
           <surface>
@@ -806,7 +429,7 @@
         <collision name='front_left_leg'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -862,7 +485,7 @@
         <collision name='front_right_leg'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>0.68 -0.38 0 0 -0 0</pose>
+          <pose frame=''>0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -974,7 +597,7 @@
         <collision name='back_left_leg'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>-0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>-0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1030,9 +653,9 @@
       </link>
       <static>1</static>
       <allow_auto_disable>1</allow_auto_disable>
-      <pose frame=''>0.001538 1.00307 0 0 -0 0</pose>
+      <pose frame=''>-0.004167 0.728841 0 0 -0 0</pose>
     </model>
-    <model name='table_small_0'>
+    <model name='table_small_1'>
       <link name='link'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <inertial>
@@ -1051,10 +674,10 @@
         <kinematic>0</kinematic>
         <gravity>1</gravity>
         <visual name='visual1'>
-          <pose frame=''>0 0 0.5 0 -0 0</pose>
+          <pose frame=''>0 -0.2 0.5 0 -0 0</pose>
           <geometry>
             <box>
-              <size>1.4 0.8 0.04</size>
+              <size>1.4 0.4 0.04</size>
             </box>
           </geometry>
           <material>
@@ -1074,7 +697,7 @@
           <cast_shadows>1</cast_shadows>
         </visual>
         <visual name='front_left_leg'>
-          <pose frame=''>0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1146,7 +769,7 @@
           <cast_shadows>1</cast_shadows>
         </visual>
         <visual name='back_left_leg'>
-          <pose frame=''>-0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>-0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1172,10 +795,10 @@
         <collision name='surface'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>0 0 0.5 0 -0 0</pose>
+          <pose frame=''>0 -0.2 0.5 0 -0 0</pose>
           <geometry>
             <box>
-              <size>1.5 0.8 0.03</size>
+              <size>1.4 0.4 0.03</size>
             </box>
           </geometry>
           <surface>
@@ -1227,7 +850,7 @@
         <collision name='front_left_leg'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1283,7 +906,7 @@
         <collision name='front_right_leg'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>0.68 -0.38 0 0 -0 0</pose>
+          <pose frame=''>0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1395,7 +1018,7 @@
         <collision name='back_left_leg'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>-0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>-0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1451,9 +1074,9 @@
       </link>
       <static>1</static>
       <allow_auto_disable>1</allow_auto_disable>
-      <pose frame=''>-1.4362 -0.0389 0 0 -0 0</pose>
+      <pose frame=''>-2.07408 0.994993 0 0 -0 0</pose>
     </model>
-    <model name='table_small_0_clone'>
+    <model name='table_small_1_clone'>
       <link name='link'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <inertial>
@@ -1472,10 +1095,10 @@
         <kinematic>0</kinematic>
         <gravity>1</gravity>
         <visual name='visual1'>
-          <pose frame=''>0 0 0.5 0 -0 0</pose>
+          <pose frame=''>0 -0.2 0.5 0 -0 0</pose>
           <geometry>
             <box>
-              <size>1.4 0.8 0.04</size>
+              <size>1.4 0.4 0.04</size>
             </box>
           </geometry>
           <material>
@@ -1495,7 +1118,7 @@
           <cast_shadows>1</cast_shadows>
         </visual>
         <visual name='front_left_leg'>
-          <pose frame=''>0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1567,7 +1190,7 @@
           <cast_shadows>1</cast_shadows>
         </visual>
         <visual name='back_left_leg'>
-          <pose frame=''>-0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>-0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1593,10 +1216,10 @@
         <collision name='surface'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>0 0 0.5 0 -0 0</pose>
+          <pose frame=''>0 -0.2 0.5 0 -0 0</pose>
           <geometry>
             <box>
-              <size>1.5 0.8 0.03</size>
+              <size>1.4 0.4 0.03</size>
             </box>
           </geometry>
           <surface>
@@ -1648,7 +1271,7 @@
         <collision name='front_left_leg'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1704,7 +1327,7 @@
         <collision name='front_right_leg'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>0.68 -0.38 0 0 -0 0</pose>
+          <pose frame=''>0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1816,7 +1439,7 @@
         <collision name='back_left_leg'>
           <laser_retro>0</laser_retro>
           <max_contacts>10</max_contacts>
-          <pose frame=''>-0.68 0.38 0 0 -0 0</pose>
+          <pose frame=''>-0.68 0 0 0 -0 0</pose>
           <geometry>
             <cylinder>
               <radius>0.02</radius>
@@ -1872,7 +1495,319 @@
       </link>
       <static>1</static>
       <allow_auto_disable>1</allow_auto_disable>
-      <pose frame=''>0.783578 -0.44698 0 0 -0 1.5708</pose>
+      <pose frame=''>0.295969 -0.395695 0 0 -0 1.5708</pose>
+    </model>
+    <model name='disk_part_4_thin_collision'>
+      <link name='link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0.02895 0 -0 0</pose>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.00321218</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00321218</iyy>
+            <iyz>0</iyz>
+            <izz>0.00614499</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://disk_part/meshes/disk.dae</uri>
+              <scale>1 1 0.85</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://arm_part/materials/scripts</uri>
+              <uri>model://arm_part/materials/textures</uri>
+              <name>ArmPart/Diffuse</name>
+            </script>
+            <ambient>0 1 0 1</ambient>
+            <shader type='pixel'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0.02895 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.15678</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose frame=''>-0.354702 0.499998 0.514995 -3e-05 -1e-06 -7.2e-05</pose>
+    </model>
+    <model name='disk_part_2_thin_collision_red'>
+      <link name='link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0.02895 0 -0 0</pose>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.00321218</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00321218</iyy>
+            <iyz>0</iyz>
+            <izz>0.00614499</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://disk_part/meshes/disk.dae</uri>
+              <scale>1 1 0.85</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://arm_part/materials/scripts</uri>
+              <uri>model://arm_part/materials/textures</uri>
+              <name>ArmPart/Diffuse</name>
+            </script>
+            <ambient>1 0 0 1</ambient>
+            <shader type='pixel'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0.02895 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.15678</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose frame=''>0.074737 0.500003 0.51499 -0 -0 -2e-06</pose>
+    </model>
+    <model name='disk_part_5_thin_collision_blue'>
+      <link name='link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0.02895 0 -0 0</pose>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.00321218</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00321218</iyy>
+            <iyz>0</iyz>
+            <izz>0.00614499</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://disk_part/meshes/disk.dae</uri>
+              <scale>1 1 0.85</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://arm_part/materials/scripts</uri>
+              <uri>model://arm_part/materials/textures</uri>
+              <name>ArmPart/Diffuse</name>
+            </script>
+            <ambient>0 0 1 1</ambient>
+            <shader type='pixel'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0.02895 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.15678</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose frame=''>0.485501 0.50738 0.514998 -1.3e-05 -2.1e-05 -2.5e-05</pose>
     </model>
   </world>
 </sdf>
