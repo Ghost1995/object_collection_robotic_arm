@@ -176,19 +176,54 @@
 
 // This is the constructor for the class
 KukaGripper::KukaGripper() {
-   }
+    // Initialize the subscriber
+    gripperSubscriber = n.subscribe("/robot/left_vacuum_gripper/grasping", 10,
+                                          gripperCallback);
+    // Initialize the service client for switching ON the gripper
+    gripperOn = n.serviceClient<std_srvs::Empty>(
+                                            "/robot/left_vacuum_gripper/on");
+    // Initialize the service client for switching OFF the gripper
+    gripperOff = n.serviceClient<std_srvs::Empty>(
+                                            "/robot/left_vacuum_gripper/off");
+}
 
 // This is the first method of the class. It toggles the state of the gripper.
 void KukaGripper::gripperToggle(const bool & state) {
-   
+    // Call the gripper service
+    int count = 0;
+    std_srvs::Empty empty;
+    if (state) {
+        gripperOn.call(empty);
+        while (!gripperState) {
+            // if (gripperState)
+            //     std::cout << count++ << ": true" <<std::endl;
+            // else
+            //     std::cout << count++ << ": false" <<std::endl;
+        }
+        ROS_INFO_STREAM("Gripper has been Switched ON");
+    } else {
+        gripperOff.call(empty);
+        while (gripperState) {
+            // if (gripperState)
+            //     std::cout << count++ << ": true" <<std::endl;
+            // else
+            //     std::cout << count++ << ": false" <<std::endl;
+        }
+        ROS_INFO_STREAM("Gripper has been Switched OFF");
+    }
 }
 
 // This is a private method of this class. It is the gripper callback function
 // which checks the current state of the gripper.
 void KukaGripper::gripperCallback(const std_msgs::Bool & state) {
-   
+    static int count = 0;
+    if (state.data != gripperState) {
+	    std::cout << count++ << ": changing state" <<std::endl;
+        gripperState = state.data;
+    }
 }
 
 // This is the destructor for the class
 KukaGripper::~KukaGripper() {
+    std::cout << "Gripper State Control Module has been Shut Down\n";
 }
