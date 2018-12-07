@@ -175,15 +175,19 @@
 
 #include <iostream>
 #include "KukaKinematics.hpp"
+#include "KukaGripper.hpp"
 #include "Detection.hpp"
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "objSeg");
     ros::Time::init();
     KukaKinematics ku;
+    KukaGripper grip;
     // Detection det;
     ros::NodeHandle n;
-// auto image_sub_ = n.subscribe("/camera/image_raw", 30,  &Detection::readImg, &det);
+
+    // auto image_sub_ = n.subscribe("/camera/image_raw", 30,  &Detection::readImg, &det);
+    
     while (ros::ok()) {
 		ros::Duration(0.0011).sleep();
 
@@ -191,18 +195,29 @@ int main(int argc, char **argv) {
 		ku.sendRobotToPos(0);
 		ROS_INFO_STREAM("Going to Disc 1");
 		ku.sendRobotToPos(1);
+		grip.gripperToggle(true);
+		ROS_INFO_STREAM("Going to Home Position");
+		ku.sendRobotToPos(0);
 		ROS_INFO_STREAM("Going to Left Table");
 		ku.sendRobotToPos(2);
+		grip.gripperToggle(false);
 		ROS_INFO_STREAM("Going to Home Position");
 		ku.sendRobotToPos(0);
 		ROS_INFO_STREAM("Going to Disc 2");
 		ku.sendRobotToPos(3);
+		grip.gripperToggle(true);
+		ROS_INFO_STREAM("Going to Home Position");
+		ku.sendRobotToPos(0);
 		ROS_INFO_STREAM("Going to Right Table");
 		ku.sendRobotToPos(4);
+		grip.gripperToggle(false);
 		ROS_INFO_STREAM("Going to Home Position");
 		ku.sendRobotToPos(0);
 		ROS_INFO_STREAM("Going to Disc 3");
 		ku.sendRobotToPos(5);
+		grip.gripperToggle(true);
+		ROS_INFO_STREAM("Going to Home Position");
+		ku.sendRobotToPos(0);
 
 		ros::spinOnce();
 		ros::Duration(0.5).sleep();
