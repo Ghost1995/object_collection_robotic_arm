@@ -175,54 +175,66 @@
 #include "KukaKinematics.hpp"
 
 // This is the constructor for the class
-KukaKinematics::KukaKinematics() : position_joints{
-                             {2.918232931819958, -0.03327128068635865, -1.168222646872703, -1.2265077682929597, -0.028973511280637965, 1.9434842643815777, -1.402031709125911},
-                             {-2.21389532830165, -0.34602504482093455, 0.696184653958209, 1.2567434492764331, 2.9320664087062145, 1.5860835508861895, -1.441352996463479},
-                             {0.21351211197587183, -0.7330547797325959, 1.0832547519372078, 0.8793723299536111, -0.6545890640361121, -1.813080768567132, 0.9917921256510782},
-                             {0.6792482988825581, 0.8599605609631125, -2.5690240012934122, 0.43208146096807276, -0.4863815052273104, -1.8754601535685547, -2.231439350038941},
-                             {2.7575663568670254, -0.5858281224554007, -0.440354297731969, 0.941934191128194, -2.8727544970384757, 1.6237417994837084, -0.7114584416147531},
-                             {-0.49584801156347513, -0.7282973144476284, -1.0608509979595278, 0.8929195071031097, -2.4641855236659262, 1.7728411547958132, -1.1338010045240487}}{
-  initializeTrajectoryPoint();
-  initializeHomePos();
-  // numJoints = 7;
-  // totalPoints = 27;
- joint_pub = n.advertise<trajectory_msgs::JointTrajectory>("/iiwa/PositionJointInterface_trajectory_controller/command",.10);
+KukaKinematics::KukaKinematics() : position_joints{{2.918232931819958,
+    -0.03327128068635865, -1.168222646872703, -1.2265077682929597,
+    -0.028973511280637965, 1.9434842643815777, -1.402031709125911},
+    {-2.21389532830165, -0.34602504482093455, 0.696184653958209,
+    1.2567434492764331, 2.9320664087062145, 1.5860835508861895,
+    -1.441352996463479}, {0.21351211197587183, -0.7330547797325959,
+    1.0832547519372078, 0.8793723299536111, -0.6545890640361121,
+    -1.813080768567132, 0.9917921256510782}, {0.6792482988825581,
+    0.8599605609631125, -2.5690240012934122, 0.43208146096807276,
+    -0.4863815052273104, -1.8754601535685547, -2.231439350038941},
+    {2.7575663568670254, -0.5858281224554007, -0.440354297731969,
+    0.941934191128194, -2.8727544970384757, 1.6237417994837084,
+    -0.7114584416147531}, {-0.49584801156347513, -0.7282973144476284,
+    -1.0608509979595278, 0.8929195071031097, -2.4641855236659262,
+    1.7728411547958132, -1.1338010045240487}} {
+
+    // Initialize the trajectory message attributes
+    initializeTrajectoryPoint();
+    // Initialize the publisher
+    joint_pub = n.advertise<trajectory_msgs::JointTrajectory>
+            ("/iiwa/PositionJointInterface_trajectory_controller/command",.10);
 }
 
 // This is the first method of the class. It moves the robot from its current
 // position to the desired position.
 void KukaKinematics::sendRobotToPos(int num) {
-      jointCommands.points[0].positions[0] = position_joints[num][0];
-      jointCommands.points[0].positions[1] = position_joints[num][1];
-      jointCommands.points[0].positions[2] = position_joints[num][2];
-      jointCommands.points[0].positions[3] = position_joints[num][3];
-      jointCommands.points[0].positions[4] = position_joints[num][4];
-      jointCommands.points[0].positions[5] = position_joints[num][5];
-      jointCommands.points[0].positions[6] = position_joints[num][6];
-      joint_pub.publish(jointCommands);
-      ros::spinOnce();
-      ros::Duration(5).sleep();
+    // Initialize the jointCommands variable
+    jointCommands.points[0].positions[0] = position_joints[num][0];
+    jointCommands.points[0].positions[1] = position_joints[num][1];
+    jointCommands.points[0].positions[2] = position_joints[num][2];
+    jointCommands.points[0].positions[3] = position_joints[num][3];
+    jointCommands.points[0].positions[4] = position_joints[num][4];
+    jointCommands.points[0].positions[5] = position_joints[num][5];
+    jointCommands.points[0].positions[6] = position_joints[num][6];
+    // Publish the joint Commands
+    joint_pub.publish(jointCommands);
+    ros::spinOnce();
+    ros::Duration(5).sleep();  // Stop the robot at each position for 5 secs
 }
 
 // This is a private method of this class. It initializes all the attributes of
 // the trajectory message.
 void KukaKinematics::initializeTrajectoryPoint() {
-  jointCommands.joint_names.push_back("iiwa_joint_1");
-  jointCommands.joint_names.push_back("iiwa_joint_2");
-  jointCommands.joint_names.push_back("iiwa_joint_3");
-  jointCommands.joint_names.push_back("iiwa_joint_4");
-  jointCommands.joint_names.push_back("iiwa_joint_5");
-  jointCommands.joint_names.push_back("iiwa_joint_6");
-  jointCommands.joint_names.push_back("iiwa_joint_7");
-  jointCommands.header.seq = 0;
-  jointCommands.header.stamp = ros::Time::now();
-  jointCommands.header.frame_id = "";
-  jointCommands.points.resize(1);
-  jointCommands.points[0].positions.resize(7);
-  jointCommands.points[0].time_from_start = ros::Duration(1.0);
+    // Initailize the attributes of the trajectory message
+    jointCommands.joint_names.push_back("iiwa_joint_1");
+    jointCommands.joint_names.push_back("iiwa_joint_2");
+    jointCommands.joint_names.push_back("iiwa_joint_3");
+    jointCommands.joint_names.push_back("iiwa_joint_4");
+    jointCommands.joint_names.push_back("iiwa_joint_5");
+    jointCommands.joint_names.push_back("iiwa_joint_6");
+    jointCommands.joint_names.push_back("iiwa_joint_7");
+    jointCommands.header.seq = 0;
+    jointCommands.header.stamp = ros::Time::now();
+    jointCommands.header.frame_id = "";
+    jointCommands.points.resize(1);
+    jointCommands.points[0].positions.resize(7);
+    jointCommands.points[0].time_from_start = ros::Duration(1.0);
 }
 
 // This is the destructor for the class
 KukaKinematics::~KukaKinematics() {
-
+    std::cout << "Robot Motion Control Module has been Shut Down" << std::endl;
 }
