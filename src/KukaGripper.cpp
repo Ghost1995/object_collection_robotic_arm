@@ -178,8 +178,8 @@
 KukaGripper::KukaGripper() {
     // Initialize the subscriber
     gripperSubscriber = n.subscribe("/robot/left_vacuum_gripper/grasping", 10,
-                                          gripperCallback);
-    // Initialize the service client for switching ON the gripper
+                                        &KukaGripper::gripperCallback, this);    
+                            // Initialize the service client for switching ON the gripper
     gripperOn = n.serviceClient<std_srvs::Empty>(
                                             "/robot/left_vacuum_gripper/on");
     // Initialize the service client for switching OFF the gripper
@@ -194,6 +194,9 @@ void KukaGripper::gripperToggle(const bool & state) {
     std_srvs::Empty empty;
     if (state) {
         gripperOn.call(empty);
+        ros::Duration(1).sleep();
+        ros::spinOnce();
+        ros::Duration(0.1).sleep();
         while (!gripperState) {
             // if (gripperState)
             //     std::cout << count++ << ": true" <<std::endl;
@@ -203,6 +206,9 @@ void KukaGripper::gripperToggle(const bool & state) {
         ROS_INFO_STREAM("Gripper has been Switched ON");
     } else {
         gripperOff.call(empty);
+        ros::Duration(1).sleep();
+        ros::spinOnce();
+        ros::Duration(0.1).sleep();
         while (gripperState) {
             // if (gripperState)
             //     std::cout << count++ << ": true" <<std::endl;
@@ -221,6 +227,8 @@ void KukaGripper::gripperCallback(const std_msgs::Bool & state) {
 	    std::cout << count++ << ": changing state" <<std::endl;
         gripperState = state.data;
     }
+
+
 }
 
 // This is the destructor for the class
