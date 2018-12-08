@@ -166,20 +166,43 @@
  */
 /**
  * @file testKukaGripper.cpp
- * Copyright [2018] Ghost1995 [Ashwin Goyal] - Navigator
- * anirudhtopiwala [Anirudh Topiwala] - driver
- * @date Dec 7, 2018
+ * Copyright [2018] anirudhtopiwala [Anirudh Topiwala] - driver
+ * Ghost1995 [Ashwin Goyal] - navigator
+ * @date Dec 07, 2018
  * @brief It defines rostest and gtest for KukaGripper class.
  */
 
 #include <gtest/gtest.h>
+#include "KukaKinematics.hpp"
 #include "KukaGripper.hpp"
 
-/**
- * @brief This is the google test for the first method of the class.
- *        It is a dummy test for now.
- */
-TEST(KukaGripperTest, testgripperToggle) {
-  // Dummy test for now
-  EXPECT_TRUE(1);
+//This is the google test for the second method of the class.
+TEST(KukaGripperTest, testGetGripperState) {
+	// Initialize the KukaGripper object
+	KukaGripper test;
+
+	// Check if the gripper state is initialized to false
+    EXPECT_FALSE(test.getGripperState());
+}
+
+// This is the google test for the first method of the class.
+TEST(KukaGripperTest, testGripperToggle) {
+	// Initialize the KukaGripper and KukaKinematics object
+	KukaGripper test;
+	KukaKinematics robot;
+
+    // Move the robot to the center disk
+    robot.sendRobotToPos(robot.CENTER_DISK);
+
+	// Change the gripper state
+	test.gripperToggle(true);
+
+	//Check if the state of the gripper was changed
+    EXPECT_TRUE(test.getGripperState());
+
+	// Change the gripper state
+	test.gripperToggle(false);
+
+    // Move the robot to the home position
+    robot.sendRobotToPos(robot.HOME);
 }

@@ -225,6 +225,17 @@ class KukaGripper {
     void gripperToggle(const bool &);
 
     /*
+     * @brief This is the second method of the class. It gives the state of the
+     *        gripper.
+     *
+     * @param This method does not take any input. It directly accesses the
+     *        private variable defining the gripper state.
+     *
+     * @result This method returns the state of the gripper.
+     */
+    bool getGripperState();
+
+    /*
      * @brief This is the destructor for the class
      */
     ~KukaGripper();

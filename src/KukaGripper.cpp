@@ -194,41 +194,33 @@ void KukaGripper::gripperToggle(const bool & state) {
     std_srvs::Empty empty;
     if (state) {
         gripperOn.call(empty);
-        ros::Duration(1).sleep();
-        ros::spinOnce();
-        ros::Duration(0.1).sleep();
+        // Check if the gripper was activated
         while (!gripperState) {
-            // if (gripperState)
-            //     std::cout << count++ << ": true" <<std::endl;
-            // else
-            //     std::cout << count++ << ": false" <<std::endl;
+            ros::spinOnce();
+            ros::Duration(0.1).sleep();
         }
+        ros::Duration(2).sleep();
         ROS_INFO_STREAM("Gripper has been Switched ON");
     } else {
         gripperOff.call(empty);
-        ros::Duration(1).sleep();
-        ros::spinOnce();
-        ros::Duration(0.1).sleep();
+        // Check if the gripper was deactivated
         while (gripperState) {
-            // if (gripperState)
-            //     std::cout << count++ << ": true" <<std::endl;
-            // else
-            //     std::cout << count++ << ": false" <<std::endl;
+            ros::spinOnce();
+            ros::Duration(0.1).sleep();
         }
         ROS_INFO_STREAM("Gripper has been Switched OFF");
     }
 }
 
+// This is the second method of the class. It gives the state of the gripper.
+bool KukaGripper::getGripperState() {
+    return gripperState;
+}
+
 // This is a private method of this class. It is the gripper callback function
 // which checks the current state of the gripper.
 void KukaGripper::gripperCallback(const std_msgs::Bool & state) {
-    static int count = 0;
-    if (state.data != gripperState) {
-	    std::cout << count++ << ": changing state" <<std::endl;
-        gripperState = state.data;
-    }
-
-
+    gripperState = state.data;
 }
 
 // This is the destructor for the class
