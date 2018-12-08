@@ -199,7 +199,10 @@ KukaKinematics::KukaKinematics() : position_joints{{2.918232931819958,
 
 // This is the first method of the class. It moves the robot from its current
 // position to the desired position.
-void KukaKinematics::sendRobotToPos(int num) {
+void KukaKinematics::sendRobotToPos(const States state) {
+    // Define the position
+    int num = static_cast<int>(state);
+
     // Initialize the jointCommands variable
     jointCommands.points[0].positions[0] = position_joints[num][0];
     jointCommands.points[0].positions[1] = position_joints[num][1];
@@ -211,7 +214,7 @@ void KukaKinematics::sendRobotToPos(int num) {
     // Publish the joint Commands
     joint_pub.publish(jointCommands);
     ros::spinOnce();
-    ros::Duration(5).sleep();  // Stop the robot at each position for 5 secs
+    ros::Duration(1).sleep();  // Stop the robot at each position for 5 secs
 }
 
 // This is a private method of this class. It initializes all the attributes of

@@ -211,6 +211,10 @@ class KukaKinematics {
     void initializeTrajectoryPoint();
 
  public:
+    // Define the various states of the robot
+    enum States {HOME, CENTER_DISK, LEFT_TABLE_POS_1, RIGHT_DISK,
+                 RIGHT_TABLE_POS_1, LEFT_DISK};
+
     /*
      * @brief This is the constructor for the class
      */
@@ -226,7 +230,7 @@ class KukaKinematics {
      *         from one point to another and then publishes the joint
      *         trajectory to the robot.
      */
-    void sendRobotToPos(int num);
+    void sendRobotToPos(const States);
 
     /*
      * @brief This is the destructor for the class
