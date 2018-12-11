@@ -194,28 +194,28 @@ std::vector<KukaKinematics::States> Detection::colorThresholder(
     // Detect red colored discs
     if (color == "red" ||color =="r" || color == "Red" || color == "R") {
         if (rightDisc.val[2] >= 125) {
-            value.push_back(RIGHT_DISK);
+            value.push_back(kuka.RIGHT_DISK);
         }
         if (leftDisc.val[2] >= 125) {
-            value.push_back(LEFT_DISK);
+            value.push_back(kuka.LEFT_DISK);
         }
     }
     // Detect green colored discs
     if (color == "green" ||color =="g" || color == "Green" || color == "G") {
         if (rightDisc.val[1] >= 125) {
-            value.push_back(RIGHT_DISK);
+            value.push_back(kuka.RIGHT_DISK);
         }
         if (leftDisc.val[1] >= 125) {
-            value.push_back(LEFT_DISK);
+            value.push_back(kuka.LEFT_DISK);
         }
     }
     // Detect blue colored discs
     if (color == "blue" ||color =="b" || color == "Blue" || color == "B") {
         if (rightDisc.val[0] >= 125) {
-            value.push_back(RIGHT_DISK);
+            value.push_back(kuka.RIGHT_DISK);
         }
         if (leftDisc.val[0] >= 125) {
-            value.push_back(LEFT_DISK);
+            value.push_back(kuka.LEFT_DISK);
         }
     }
 
