@@ -192,9 +192,9 @@ class KukaKinematics {
     // Total points that need to be traversed
     const unsigned int totalPoints = 6;
     // Joint values to achieve each point
-    double position_joints[6][7];
+    double posJoints[6][7];
     // Publish robot joints to move the robot
-    ros::Publisher joint_pub;
+    ros::Publisher jointPublisher;
     // ROS node handle
     ros::NodeHandle n;
 

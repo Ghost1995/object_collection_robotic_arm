@@ -175,7 +175,7 @@
 #include "KukaKinematics.hpp"
 
 // This is the constructor for the class
-KukaKinematics::KukaKinematics() : position_joints{{2.918232931819958,
+KukaKinematics::KukaKinematics() : posJoints{{2.918232931819958,
     -0.03327128068635865, -1.168222646872703, -1.2265077682929597,
     -0.028973511280637965, 1.9434842643815777, -1.402031709125911},
     {-2.21389532830165, -0.34602504482093455, 0.696184653958209,
@@ -193,7 +193,7 @@ KukaKinematics::KukaKinematics() : position_joints{{2.918232931819958,
     // Initialize the trajectory message attributes
     initializeTrajectoryPoint();
     // Initialize the publisher
-    joint_pub = n.advertise<trajectory_msgs::JointTrajectory>
+    jointPublisher = n.advertise<trajectory_msgs::JointTrajectory>
         ("/iiwa/PositionJointInterface_trajectory_controller/command", .10);
 }
 
@@ -204,15 +204,15 @@ void KukaKinematics::sendRobotToPos(const States state) {
     int num = static_cast<int>(state);
 
     // Initialize the jointCommands variable
-    jointCommands.points[0].positions[0] = position_joints[num][0];
-    jointCommands.points[0].positions[1] = position_joints[num][1];
-    jointCommands.points[0].positions[2] = position_joints[num][2];
-    jointCommands.points[0].positions[3] = position_joints[num][3];
-    jointCommands.points[0].positions[4] = position_joints[num][4];
-    jointCommands.points[0].positions[5] = position_joints[num][5];
-    jointCommands.points[0].positions[6] = position_joints[num][6];
+    jointCommands.points[0].positions[0] = posJoints[num][0];
+    jointCommands.points[0].positions[1] = posJoints[num][1];
+    jointCommands.points[0].positions[2] = posJoints[num][2];
+    jointCommands.points[0].positions[3] = posJoints[num][3];
+    jointCommands.points[0].positions[4] = posJoints[num][4];
+    jointCommands.points[0].positions[5] = posJoints[num][5];
+    jointCommands.points[0].positions[6] = posJoints[num][6];
     // Publish the joint Commands
-    joint_pub.publish(jointCommands);
+    jointPublisher.publish(jointCommands);
     ros::spinOnce();
     ros::Duration(1).sleep();  // Stop the robot at each position for 5 secs
 }
