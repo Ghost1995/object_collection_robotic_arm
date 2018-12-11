@@ -138,10 +138,10 @@
       <pose frame=''>-0.046437 -0.060808 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>280 427000000</sim_time>
-      <real_time>18 307363500</real_time>
-      <wall_time>1544504434 895544462</wall_time>
-      <iterations>18239</iterations>
+      <sim_time>0 0</sim_time>
+      <real_time>0 0</real_time>
+      <wall_time>1544506630 270703093</wall_time>
+      <iterations>0</iterations>
       <model name='camera'>
         <pose frame=''>-0.048584 0.550339 2.2216 0 1.57 0</pose>
         <scale>1 1 1</scale>
@@ -153,33 +153,33 @@
         </link>
       </model>
       <model name='disk_part_2_small_thin_box_collision'>
-        <pose frame=''>0.074779 0.51679 0.51105 0 0 -0.01479</pose>
+        <pose frame=''>0.074777 0.516784 0.511045 -2.5e-05 -0 -0.01479</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.074779 0.51679 0.51105 0 0 -0.01479</pose>
+          <pose frame=''>0.074777 0.516784 0.511045 -2.5e-05 -0 -0.01479</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -4.9 0 -0 0</wrench>
         </link>
       </model>
       <model name='disk_part_4_small_thin_box_collision'>
-        <pose frame=''>-0.361959 0.5 0.51105 0 0 -0.00499</pose>
+        <pose frame=''>-0.361964 0.499991 0.511041 -1.2e-05 -0 -0.004999</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.361959 0.5 0.51105 0 0 -0.00499</pose>
+          <pose frame=''>-0.361964 0.499991 0.511041 -1.2e-05 -0 -0.004999</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -4.9 0 -0 0</wrench>
         </link>
       </model>
       <model name='disk_part_5_small_thin_box_collision_1'>
-        <pose frame=''>0.485503 0.507382 0.51105 0 0 -4.9e-05</pose>
+        <pose frame=''>0.485501 0.507376 0.511046 3.7e-05 1.3e-05 -5e-05</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.485503 0.507382 0.51105 0 0 -4.9e-05</pose>
+          <pose frame=''>0.485501 0.507376 0.511046 3.7e-05 1.3e-05 -5e-05</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -4.9 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -228,7 +228,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>0.003558 1.28029 0.764016 0 0.229937 -1.5489</pose>
+        <pose frame=''>0.066743 1.29468 0.708481 0 0.229937 -1.5489</pose>
         <view_controller>ortho</view_controller>
         <projection_type>orthographic</projection_type>
       </camera>
