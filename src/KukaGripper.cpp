@@ -178,8 +178,8 @@
 KukaGripper::KukaGripper() {
     // Initialize the subscriber
     gripperSubscriber = n.subscribe("/robot/left_vacuum_gripper/grasping", 10,
-                                        &KukaGripper::gripperCallback, this);    
-                            // Initialize the service client for switching ON the gripper
+                                        &KukaGripper::gripperCallback, this);
+    // Initialize the service client for switching ON the gripper
     gripperOn = n.serviceClient<std_srvs::Empty>(
                                             "/robot/left_vacuum_gripper/on");
     // Initialize the service client for switching OFF the gripper
@@ -190,7 +190,6 @@ KukaGripper::KukaGripper() {
 // This is the first method of the class. It toggles the state of the gripper.
 void KukaGripper::gripperToggle(const bool & state) {
     // Call the gripper service
-    int count = 0;
     std_srvs::Empty empty;
     if (state) {
         gripperOn.call(empty);
@@ -225,5 +224,5 @@ void KukaGripper::gripperCallback(const std_msgs::Bool & state) {
 
 // This is the destructor for the class
 KukaGripper::~KukaGripper() {
-    std::cout << "Gripper State Control Module has been Shut Down\n";
+    ROS_WARN_STREAM("Gripper State Control Module has been Shut Down");
 }
