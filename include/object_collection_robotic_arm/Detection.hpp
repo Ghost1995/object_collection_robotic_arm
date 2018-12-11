@@ -172,49 +172,62 @@
  * @brief This is the declaration of the Detection class
  */
 
-#ifndef INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_KUKAKINEMATICS_DETECTION_HPP_
-#define INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_KUKAKINEMATICS_DETECTION_HPP_
+#ifndef INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_DETECTION_HPP_
+#define INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_DETECTION_HPP_
 
 #include <ros/ros.h>
 #include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.h>
-// #include <opencv2/imgproc/imgproc.hpp>
+#include <string>
+#include <vector>
 #include <opencv2/highgui/highgui.hpp>
-// #include <sensor_msgs/image_encodings.h>
-// #include <string>
 #include "KukaKinematics.hpp"
 
 /*
  * @brief Detection is a class used for working with the camera in the world
  */
-class Detection : public KukaKinematics {
+class Detection {
  private:
+    // ROS node handle
     ros::NodeHandle n;
+    // A cv_bridge variable to convert sensor_imgs data to readable openCV data
     image_transport::ImageTransport imgT;
+    // It is a subscriber for the Image Transport data
     image_transport::Subscriber imageSubscriber;
+    // It is the variable to read image data
     cv_bridge::CvImagePtr cv_ptr;
+    // It is a variable denoting the name of the image window
     const std::string OPENCV_WINDOW = "Image Window";
-    
-    /*  
-     *  
-     *  
-    */
-    void readImg(const sensor_msgs::ImageConstPtr&);
+    // It is a KukaKinematics class object
+    KukaKinematics & kuka;
+
+    /**
+     * @brief This is a private method of this class. It is the image callback
+     *        function which reads the image captured by the camera sensor.
+     *
+     * @param This method takes the message being published to the 'camera_raw'
+     *        topic as input.
+     *
+     * @return This method does not return any argument. It simply reads the
+     *         image and assigns the value to the respective variable.
+     */
+    void readImg(const sensor_msgs::ImageConstPtr &);
+
  public:
     /*
      * @brief This is the constructor for the class
      */
-    Detection();
+    explicit Detection(KukaKinematics &);
 
     /*
-     * @brief This is the second method of the class. It detects the position
-     *        index of a particularly colored object.
+     * @brief This is the first method of the class. It detects the position
+     *        of a particularly colored object.
      *
      * @param This function takes colour of the object as input.
      *
-     * @result This function returns the position index for that object.
+     * @result This function returns the positions for that object.
      */
-    std::vector<KukaKinematics::States> colorThresholder(std::string&);
+    std::vector<KukaKinematics::States> colorThresholder(const std::string &);
 
     /*
      * @brief This is the destructor for the class
@@ -222,4 +235,4 @@ class Detection : public KukaKinematics {
     ~Detection();
 };
 
-#endif  // INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_KUKAKINEMATICS_DETECTION_HPP_
+#endif  // INCLUDE_OBJECT_COLLECTION_ROBOTIC_ARM_DETECTION_HPP_

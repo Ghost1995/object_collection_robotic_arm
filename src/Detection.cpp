@@ -171,47 +171,28 @@
  * @date Nov 26, 2018
  * @brief This is the declaration of the Detection class
  */
-// Code taken from ROS tutorials for understanding purposes: http://wiki.ros.org/cv_bridge/Tutorials/UsingCvBridgeToConvertBetweenROSImagesAndOpenCVImages
 
 #include "Detection.hpp"
 
-Detection::Detection() : imgT(n) {
-    // Subscribe to input video feed and publish output video feed
-    imageSubscriber = imgT.subscribe("/camera/image_raw", 1, &Detection::readImg, this);
-
+// This is the constructor for the class
+Detection::Detection(KukaKinematics & ku) : imgT(n), kuka(ku) {
+    // Subscribe to input video feed
+    imageSubscriber = imgT.subscribe("/camera/image_raw", 1,
+                                                    &Detection::readImg, this);
+    // Display the image
     cv::namedWindow(OPENCV_WINDOW);
 }
 
-Detection::~Detection() {
-    cv::destroyWindow(OPENCV_WINDOW);
-}
-
-void Detection::readImg(const sensor_msgs::ImageConstPtr& msg) {
-    try
-    {
-      cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
-    }
-    catch (cv_bridge::Exception& e)
-    {
-      ROS_ERROR("cv_bridge exception: %s", e.what());
-      return;
-    }
-
-    // // Draw an example circle on the video stream
-    // if (cv_ptr->image.rows > 60 && cv_ptr->image.cols > 60)
-    //   cv::circle(cv_ptr->image, cv::Point(50, 50), 10, CV_RGB(255,0,0));
-
-    // Update GUI Window
-    cv::imshow(OPENCV_WINDOW, cv_ptr->image);
-    cv::waitKey(3);
-}
-
-std::vector<KukaKinematics::States> Detection::colorThresholder(std::string& color) {
+// This is the first method of the class. It detects the position of a
+// particularly colored object.
+std::vector<KukaKinematics::States> Detection::colorThresholder(
+                                                const std::string & color) {
     std::vector<KukaKinematics::States> value;
     auto rightDisc = cv_ptr->image.at<cv::Vec3b>(51, 190);
-    auto leftDisc =  cv_ptr->image.at<cv::Vec3b>(199, 188);
-    
-    if (color== "red" ||color=="r" || color == "Red" || color == "R") {
+    auto leftDisc = cv_ptr->image.at<cv::Vec3b>(199, 188);
+
+    // Detect red colored discs
+    if (color == "red" ||color =="r" || color == "Red" || color == "R") {
         if (rightDisc.val[2] >= 125) {
             value.push_back(RIGHT_DISK);
         }
@@ -219,7 +200,8 @@ std::vector<KukaKinematics::States> Detection::colorThresholder(std::string& col
             value.push_back(LEFT_DISK);
         }
     }
-    if (color== "green" ||color=="g" || color == "Green" || color == "G") {
+    // Detect green colored discs
+    if (color == "green" ||color =="g" || color == "Green" || color == "G") {
         if (rightDisc.val[1] >= 125) {
             value.push_back(RIGHT_DISK);
         }
@@ -227,8 +209,8 @@ std::vector<KukaKinematics::States> Detection::colorThresholder(std::string& col
             value.push_back(LEFT_DISK);
         }
     }
-
-    if (color== "blue" ||color=="b" || color == "Blue" || color == "B") {
+    // Detect blue colored discs
+    if (color == "blue" ||color =="b" || color == "Blue" || color == "B") {
         if (rightDisc.val[0] >= 125) {
             value.push_back(RIGHT_DISK);
         }
@@ -237,8 +219,26 @@ std::vector<KukaKinematics::States> Detection::colorThresholder(std::string& col
         }
     }
 
-    
     return value;
-
 }
 
+// This is a private method of this class. It is the image callback function
+// which reads the image captured by the camera sensor.
+void Detection::readImg(const sensor_msgs::ImageConstPtr & msg) {
+    // Read the image
+    try {
+        cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+    } catch (cv_bridge::Exception& e) {
+        ROS_ERROR("cv_bridge exception: %s", e.what());
+        return;
+    }
+
+    // Update GUI Window
+    cv::imshow(OPENCV_WINDOW, cv_ptr->image);
+}
+
+// This is the destructor for the class
+Detection::~Detection() {
+    cv::destroyWindow(OPENCV_WINDOW);
+    ROS_WARN_STREAM("Image Capture Module has been Shut Down");
+}

@@ -241,5 +241,5 @@ void KukaKinematics::initializeTrajectoryPoint() {
 
 // This is the destructor for the class
 KukaKinematics::~KukaKinematics() {
-    std::cout << "Robot Motion Control Module has been Shut Down" << std::endl;
+    ROS_WARN_STREAM("Robot Motion Control Module has been Shut Down");
 }
