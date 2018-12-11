@@ -187,7 +187,6 @@ Detection::~Detection() {
 }
 
 void Detection::readImg(const sensor_msgs::ImageConstPtr& msg) {
-    cv_bridge::CvImagePtr cv_ptr;
     try
     {
       cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
@@ -198,13 +197,47 @@ void Detection::readImg(const sensor_msgs::ImageConstPtr& msg) {
       return;
     }
 
-    // Draw an example circle on the video stream
-    if (cv_ptr->image.rows > 60 && cv_ptr->image.cols > 60)
-      cv::circle(cv_ptr->image, cv::Point(50, 50), 10, CV_RGB(255,0,0));
+    // // Draw an example circle on the video stream
+    // if (cv_ptr->image.rows > 60 && cv_ptr->image.cols > 60)
+    //   cv::circle(cv_ptr->image, cv::Point(50, 50), 10, CV_RGB(255,0,0));
 
     // Update GUI Window
     cv::imshow(OPENCV_WINDOW, cv_ptr->image);
     cv::waitKey(3);
 }
 
-std::vector<KukaKinematics::States> Detection::colorThresholder(const std::string) {};
+std::vector<KukaKinematics::States> Detection::colorThresholder(std::string& color) {
+    std::vector<KukaKinematics::States> value;
+    auto rightDisc = cv_ptr->image.at<cv::Vec3b>(51, 190);
+    auto leftDisc =  cv_ptr->image.at<cv::Vec3b>(199, 188);
+    if (color== "red" ||color=="r" || color == "Red" || color == "R") {
+        if (rightDisc.val[2]>=leftDisc.val[2]){
+            value.push_back(RIGHT_DISK);
+        }
+        else{
+         value.push_back(LEFT_DISK);   
+        }
+    }
+    if (color== "green" ||color=="g" || color == "Green" || color == "G") {
+        if (rightDisc.val[1]>=leftDisc.val[1]){
+            value.push_back(RIGHT_DISK);
+        }
+        else{
+         value.push_back(LEFT_DISK);   
+        }
+    }
+
+    if (color== "blue" ||color=="b" || color == "Blue" || color == "B") {
+        if (rightDisc.val[0]>=leftDisc.val[0]){
+            value.push_back(RIGHT_DISK);
+        }
+        else{
+         value.push_back(LEFT_DISK);   
+        }
+    }
+
+    
+    return value;
+
+}
+

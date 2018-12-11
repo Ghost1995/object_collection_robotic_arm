@@ -182,7 +182,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <sensor_msgs/image_encodings.h>
 #include "KukaKinematics.hpp"
-
+#include <string>
 /*
  * @brief Detection is a class used for working with the camera in the world
  */
@@ -191,8 +191,13 @@ class Detection : public KukaKinematics {
     ros::NodeHandle n;
     image_transport::ImageTransport imgT;
     image_transport::Subscriber imageSubscriber;
+    cv_bridge::CvImagePtr cv_ptr;
     const std::string OPENCV_WINDOW = "Image Window";
-
+    /*  
+     *  
+     *  
+    */
+    void readImg(const sensor_msgs::ImageConstPtr&);
  public:
     /*
      * @brief This is the constructor for the class
@@ -207,13 +212,7 @@ class Detection : public KukaKinematics {
      *
      * @result This function returns the position index for that object.
      */
-    std::vector<KukaKinematics::States> colorThresholder(const std::string);
-    /*  
-     *  
-     *  
-    */
-    void readImg(const sensor_msgs::ImageConstPtr&);
-
+    std::vector<KukaKinematics::States> colorThresholder(std::string&);
 
     /*
      * @brief This is the destructor for the class
