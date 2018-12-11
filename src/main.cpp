@@ -183,7 +183,7 @@ int main(int argc, char **argv) {
     ros::Time::init();
     KukaKinematics ku;
     KukaGripper grip;
-    // Detection det;
+    Detection det;
     ros::NodeHandle n;
 
     // auto image_sub_ = n.subscribe("/camera/image_raw", 30,  &Detection::readImg, &det);
