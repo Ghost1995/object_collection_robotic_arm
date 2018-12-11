@@ -190,9 +190,9 @@ class KukaKinematics {
     // Number of kinematic joints in the robot
     const unsigned int numJoints = 7;
     // Total points that need to be traversed
-    const unsigned int totalPoints = 6;
+    const unsigned int totalPoints = 7;
     // Joint values to achieve each point
-    double posJoints[6][7];
+    double posJoints[7][7];
     // Publish robot joints to move the robot
     ros::Publisher jointPublisher;
     // ROS node handle
@@ -212,8 +212,8 @@ class KukaKinematics {
 
  public:
     // Define the various states of the robot
-    enum States {HOME, CENTER_DISK, LEFT_TABLE_POS_1, RIGHT_DISK,
-                 RIGHT_TABLE_POS_1, LEFT_DISK};
+    enum States {HOME, LEFT_DISK, CENTER_DISK, RIGHT_DISK, LEFT_TABLE_POS_1,
+                 LEFT_TABLE_POS_2, RIGHT_TABLE_POS_1};
 
     /*
      * @brief This is the constructor for the class

@@ -208,8 +208,9 @@ int main(int argc, char **argv) {
 		grip.gripperToggle(true);
 		ROS_INFO_STREAM("Going to Home Position");
 		ku.sendRobotToPos(ku.HOME);
-		ROS_INFO_STREAM("Going to Right Table");
-		ku.sendRobotToPos(ku.RIGHT_TABLE_POS_1);
+//		ros::spin();
+		ROS_INFO_STREAM("Going to Left Table");
+		ku.sendRobotToPos(ku.LEFT_TABLE_POS_2);
 		grip.gripperToggle(false);
 		ROS_INFO_STREAM("Going to Home Position");
 		ku.sendRobotToPos(ku.HOME);
@@ -218,6 +219,16 @@ int main(int argc, char **argv) {
 		grip.gripperToggle(true);
 		ROS_INFO_STREAM("Going to Home Position");
 		ku.sendRobotToPos(ku.HOME);
+		// ROS_INFO_STREAM("Going to Right Table");
+		// ku.sendRobotToPos(ku.RIGHT_TABLE_POS_1);
+		// grip.gripperToggle(false);
+		// ROS_INFO_STREAM("Going to Home Position");
+		// ku.sendRobotToPos(ku.HOME);
+		// ROS_INFO_STREAM("Going to Disc 3");
+		// ku.sendRobotToPos(ku.LEFT_DISK);
+		// grip.gripperToggle(true);
+		// ROS_INFO_STREAM("Going to Home Position");
+		// ku.sendRobotToPos(ku.HOME);
 
 		ros::spinOnce();
 		ros::Duration(0.5).sleep();
