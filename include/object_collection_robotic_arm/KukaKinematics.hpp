@@ -212,8 +212,8 @@ class KukaKinematics {
 
  public:
     // Define the various states of the robot
-    enum States {HOME, LEFT_DISK, CENTER_DISK, RIGHT_DISK, LEFT_TABLE_POS_1,
-                 LEFT_TABLE_POS_2, RIGHT_TABLE_POS_1};
+    enum States {HOME, LEFT_DISK, RIGHT_DISK, LEFT_TABLE_POS_1,
+                 LEFT_TABLE_POS_2, RIGHT_TABLE_POS_1, RIGHT_TABLE_POS_2};
 
     /*
      * @brief This is the constructor for the class
