@@ -201,15 +201,18 @@ int main(int argc, char **argv) {
     	ROS_INFO_STREAM("Going to Home Position");
 		kuka.sendRobotToPos(kuka.HOME);
 
-        // Read blue colored objects
-        auto blue = detect.colorThresholder(colors.at(1));
+        // Read all colored object positions
+        auto blue = detect.colorThresholder(colors.at(0));
+        auto red = detect.colorThresholder(colors.at(1));
+        auto green = detect.colorThresholder(colors.at(2));
+        
+        // Move the blue disks, if any
         if (blue.empty()) {
         	ROS_INFO_STREAM("There is no Blue Disk in the Workspace");
         } else if (blue.size() == 1) {
-        	ROS_WARN_STREAM(blue.at(1));
         	ROS_INFO_STREAM("There is only one Blue Disk in the Workspace");
 			ROS_INFO_STREAM("Going to the Blue Disc");
-			kuka.sendRobotToPos(blue.at(1));
+			kuka.sendRobotToPos(blue.at(0));
 			gripper.gripperToggle(true);
 			ROS_INFO_STREAM("Going to the Blue Table");
 			kuka.sendRobotToPos(kuka.RIGHT_TABLE_POS_1);
@@ -218,17 +221,15 @@ int main(int argc, char **argv) {
 			kuka.sendRobotToPos(kuka.HOME);
         	ROS_INFO_STREAM("All Blue Disks have been Successfully Placed");
         } else if (blue.size() == 2) {
-        	ROS_WARN_STREAM(blue.at(1));
-        	ROS_WARN_STREAM(blue.at(2));
         	ROS_INFO_STREAM("There are two Blue Disks in the Workspace");
 			ROS_INFO_STREAM("Going to Blue Disc 1");
-			kuka.sendRobotToPos(blue.at(1));
+			kuka.sendRobotToPos(blue.at(0));
 			gripper.gripperToggle(true);
 			ROS_INFO_STREAM("Going to the Blue Table");
 			kuka.sendRobotToPos(kuka.RIGHT_TABLE_POS_1);
 			gripper.gripperToggle(false);
 			ROS_INFO_STREAM("Going to Blue Disc 2");
-			kuka.sendRobotToPos(blue.at(2));
+			kuka.sendRobotToPos(blue.at(1));
 			gripper.gripperToggle(true);
 			ROS_INFO_STREAM("Going to the Blue Table");
 			kuka.sendRobotToPos(kuka.RIGHT_TABLE_POS_2);
@@ -243,14 +244,13 @@ int main(int argc, char **argv) {
         	return 0;
         }
 
-        // Read red colored objects
-        auto red = detect.colorThresholder(colors.at(2));
+        // Move the red disks, if any
         if (red.empty()) {
         	ROS_INFO_STREAM("There is no Red Disk in the Workspace");
         } else if (red.size() == 1) {
         	ROS_INFO_STREAM("There is only one Red Disk in the Workspace");
 			ROS_INFO_STREAM("Going to the Red Disc");
-			kuka.sendRobotToPos(red.at(1));
+			kuka.sendRobotToPos(red.at(0));
 			gripper.gripperToggle(true);
 			ROS_INFO_STREAM("Going to the Red Table");
 			kuka.sendRobotToPos(kuka.LEFT_TABLE_POS_1);
@@ -261,13 +261,13 @@ int main(int argc, char **argv) {
         } else if (red.size() == 2) {
         	ROS_INFO_STREAM("There are two Red Disks in the Workspace");
 			ROS_INFO_STREAM("Going to Red Disc 1");
-			kuka.sendRobotToPos(red.at(1));
+			kuka.sendRobotToPos(red.at(0));
 			gripper.gripperToggle(true);
 			ROS_INFO_STREAM("Going to the Red Table");
 			kuka.sendRobotToPos(kuka.LEFT_TABLE_POS_1);
 			gripper.gripperToggle(false);
 			ROS_INFO_STREAM("Going to Red Disc 2");
-			kuka.sendRobotToPos(red.at(2));
+			kuka.sendRobotToPos(red.at(1));
 			gripper.gripperToggle(true);
 			ROS_INFO_STREAM("Going to the Red Table");
 			kuka.sendRobotToPos(kuka.LEFT_TABLE_POS_2);
@@ -282,13 +282,12 @@ int main(int argc, char **argv) {
         	return 0;
         }
 
-		// Read green colored objects
-        auto green = detect.colorThresholder(colors.at(3));
+        // Identify the green disks, if any
         if (green.empty()) {
         	ROS_INFO_STREAM("There is no Faulty Disk in the Workspace");
         } else if (green.size() == 1) {
         	ROS_INFO_STREAM("There is only one Faulty Disk in the Workspace");
-        } else if (red.size() == 2) {
+        } else if (green.size() == 2) {
         	ROS_INFO_STREAM("There are two Faulty Disks in the Workspace");
         } else {
         	ROS_INFO_STREAM("More than two disks have been identified as " <<
