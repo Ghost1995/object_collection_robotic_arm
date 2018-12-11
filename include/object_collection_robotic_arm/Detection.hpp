@@ -178,11 +178,12 @@
 #include <ros/ros.h>
 #include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.h>
-#include <opencv2/imgproc/imgproc.hpp>
+// #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include <sensor_msgs/image_encodings.h>
+// #include <sensor_msgs/image_encodings.h>
+// #include <string>
 #include "KukaKinematics.hpp"
-#include <string>
+
 /*
  * @brief Detection is a class used for working with the camera in the world
  */
@@ -193,6 +194,7 @@ class Detection : public KukaKinematics {
     image_transport::Subscriber imageSubscriber;
     cv_bridge::CvImagePtr cv_ptr;
     const std::string OPENCV_WINDOW = "Image Window";
+    
     /*  
      *  
      *  

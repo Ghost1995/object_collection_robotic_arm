@@ -210,29 +210,30 @@ std::vector<KukaKinematics::States> Detection::colorThresholder(std::string& col
     std::vector<KukaKinematics::States> value;
     auto rightDisc = cv_ptr->image.at<cv::Vec3b>(51, 190);
     auto leftDisc =  cv_ptr->image.at<cv::Vec3b>(199, 188);
+    
     if (color== "red" ||color=="r" || color == "Red" || color == "R") {
-        if (rightDisc.val[2]>=leftDisc.val[2]){
+        if (rightDisc.val[2] >= 125) {
             value.push_back(RIGHT_DISK);
         }
-        else{
-         value.push_back(LEFT_DISK);   
+        if (leftDisc.val[2] >= 125) {
+            value.push_back(LEFT_DISK);
         }
     }
     if (color== "green" ||color=="g" || color == "Green" || color == "G") {
-        if (rightDisc.val[1]>=leftDisc.val[1]){
+        if (rightDisc.val[1] >= 125) {
             value.push_back(RIGHT_DISK);
         }
-        else{
-         value.push_back(LEFT_DISK);   
+        if (leftDisc.val[1] >= 125) {
+            value.push_back(LEFT_DISK);
         }
     }
 
     if (color== "blue" ||color=="b" || color == "Blue" || color == "B") {
-        if (rightDisc.val[0]>=leftDisc.val[0]){
+        if (rightDisc.val[0] >= 125) {
             value.push_back(RIGHT_DISK);
         }
-        else{
-         value.push_back(LEFT_DISK);   
+        if (leftDisc.val[0] >= 125) {
+            value.push_back(LEFT_DISK);
         }
     }
 
