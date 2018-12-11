@@ -179,58 +179,126 @@
 #include "Detection.hpp"
 
 int main(int argc, char **argv) {
+	// Initialize ROS node
     ros::init(argc, argv, "objSeg");
     ros::Time::init();
-    KukaKinematics ku;
-    KukaGripper grip;
-    Detection det;
+
+    // Initialize class objects
+    KukaKinematics kuka;
+    KukaGripper gripper;
+    Detection detect;
+
+    // Initialize the node handle
     ros::NodeHandle n;
 
-    // auto image_sub_ = n.subscribe("/camera/image_raw", 30,  &Detection::readImg, &det);
-    
+    // Made a vector of colors
+    std::vector<std::string> colors = {"blue", "red", "green"};
+		ros::Duration(10).sleep();
+
+    // Start the main function
     while (ros::ok()) {
-		ros::Duration(0.0011).sleep();
+    	// Start from the Home Position
+    	ROS_INFO_STREAM("Going to Home Position");
+		kuka.sendRobotToPos(kuka.HOME);
 
-		ROS_INFO_STREAM("Going to Home Position");
-		ku.sendRobotToPos(ku.HOME);
-		ROS_INFO_STREAM("Going to Disc 1");
-		ku.sendRobotToPos(ku.CENTER_DISK);
-		grip.gripperToggle(true);
-		ROS_INFO_STREAM("Going to Home Position");
-		ku.sendRobotToPos(ku.HOME);
-		ROS_INFO_STREAM("Going to Left Table");
-		ku.sendRobotToPos(ku.LEFT_TABLE_POS_1);
-		grip.gripperToggle(false);
-		ROS_INFO_STREAM("Going to Home Position");
-		ku.sendRobotToPos(ku.HOME);
-		ROS_INFO_STREAM("Going to Disc 2");
-		ku.sendRobotToPos(ku.RIGHT_DISK);
-		grip.gripperToggle(true);
-		ROS_INFO_STREAM("Going to Home Position");
-		ku.sendRobotToPos(ku.HOME);
-//		ros::spin();
-		ROS_INFO_STREAM("Going to Left Table");
-		ku.sendRobotToPos(ku.LEFT_TABLE_POS_2);
-		grip.gripperToggle(false);
-		ROS_INFO_STREAM("Going to Home Position");
-		ku.sendRobotToPos(ku.HOME);
-		ROS_INFO_STREAM("Going to Disc 3");
-		ku.sendRobotToPos(ku.LEFT_DISK);
-		grip.gripperToggle(true);
-		ROS_INFO_STREAM("Going to Home Position");
-		ku.sendRobotToPos(ku.HOME);
-		// ROS_INFO_STREAM("Going to Right Table");
-		// ku.sendRobotToPos(ku.RIGHT_TABLE_POS_1);
-		// grip.gripperToggle(false);
-		// ROS_INFO_STREAM("Going to Home Position");
-		// ku.sendRobotToPos(ku.HOME);
-		// ROS_INFO_STREAM("Going to Disc 3");
-		// ku.sendRobotToPos(ku.LEFT_DISK);
-		// grip.gripperToggle(true);
-		// ROS_INFO_STREAM("Going to Home Position");
-		// ku.sendRobotToPos(ku.HOME);
+        // Read blue colored objects
+        auto blue = detect.colorThresholder(colors.at(1));
+        if (blue.empty()) {
+        	ROS_INFO_STREAM("There is no Blue Disk in the Workspace");
+        } else if (blue.size() == 1) {
+        	ROS_WARN_STREAM(blue.at(1));
+        	ROS_INFO_STREAM("There is only one Blue Disk in the Workspace");
+			ROS_INFO_STREAM("Going to the Blue Disc");
+			kuka.sendRobotToPos(blue.at(1));
+			gripper.gripperToggle(true);
+			ROS_INFO_STREAM("Going to the Blue Table");
+			kuka.sendRobotToPos(kuka.RIGHT_TABLE_POS_1);
+			gripper.gripperToggle(false);
+			ROS_INFO_STREAM("Going to Home Position");
+			kuka.sendRobotToPos(kuka.HOME);
+        	ROS_INFO_STREAM("All Blue Disks have been Successfully Placed");
+        } else if (blue.size() == 2) {
+        	ROS_WARN_STREAM(blue.at(1));
+        	ROS_WARN_STREAM(blue.at(2));
+        	ROS_INFO_STREAM("There are two Blue Disks in the Workspace");
+			ROS_INFO_STREAM("Going to Blue Disc 1");
+			kuka.sendRobotToPos(blue.at(1));
+			gripper.gripperToggle(true);
+			ROS_INFO_STREAM("Going to the Blue Table");
+			kuka.sendRobotToPos(kuka.RIGHT_TABLE_POS_1);
+			gripper.gripperToggle(false);
+			ROS_INFO_STREAM("Going to Blue Disc 2");
+			kuka.sendRobotToPos(blue.at(2));
+			gripper.gripperToggle(true);
+			ROS_INFO_STREAM("Going to the Blue Table");
+			kuka.sendRobotToPos(kuka.RIGHT_TABLE_POS_2);
+			gripper.gripperToggle(false);
+			ROS_INFO_STREAM("Going to Home Position");
+			kuka.sendRobotToPos(kuka.HOME);
+        	ROS_INFO_STREAM("All Blue Disks have been Successfully Placed");
+        } else {
+        	ROS_INFO_STREAM("More than two disks have been identified as " <<
+        		            "Blue Disks. However, there are only two disks " <<
+        		            "in the workspace. Check the code.");
+        	return 0;
+        }
 
-		ros::spinOnce();
+        // Read red colored objects
+        auto red = detect.colorThresholder(colors.at(2));
+        if (red.empty()) {
+        	ROS_INFO_STREAM("There is no Red Disk in the Workspace");
+        } else if (red.size() == 1) {
+        	ROS_INFO_STREAM("There is only one Red Disk in the Workspace");
+			ROS_INFO_STREAM("Going to the Red Disc");
+			kuka.sendRobotToPos(red.at(1));
+			gripper.gripperToggle(true);
+			ROS_INFO_STREAM("Going to the Red Table");
+			kuka.sendRobotToPos(kuka.LEFT_TABLE_POS_1);
+			gripper.gripperToggle(false);
+			ROS_INFO_STREAM("Going to Home Position");
+			kuka.sendRobotToPos(kuka.HOME);
+        	ROS_INFO_STREAM("All Red Disks have been Successfully Placed");
+        } else if (red.size() == 2) {
+        	ROS_INFO_STREAM("There are two Red Disks in the Workspace");
+			ROS_INFO_STREAM("Going to Red Disc 1");
+			kuka.sendRobotToPos(red.at(1));
+			gripper.gripperToggle(true);
+			ROS_INFO_STREAM("Going to the Red Table");
+			kuka.sendRobotToPos(kuka.LEFT_TABLE_POS_1);
+			gripper.gripperToggle(false);
+			ROS_INFO_STREAM("Going to Red Disc 2");
+			kuka.sendRobotToPos(red.at(2));
+			gripper.gripperToggle(true);
+			ROS_INFO_STREAM("Going to the Red Table");
+			kuka.sendRobotToPos(kuka.LEFT_TABLE_POS_2);
+			gripper.gripperToggle(false);
+			ROS_INFO_STREAM("Going to Home Position");
+			kuka.sendRobotToPos(kuka.HOME);
+        	ROS_INFO_STREAM("All Red Disks have been Successfully Placed");
+        } else {
+        	ROS_INFO_STREAM("More than two disks have been identified as " <<
+        		            "Red Disks. However, there are only two disks " <<
+        		            "in the workspace. Check the code.");
+        	return 0;
+        }
+
+		// Read green colored objects
+        auto green = detect.colorThresholder(colors.at(3));
+        if (green.empty()) {
+        	ROS_INFO_STREAM("There is no Faulty Disk in the Workspace");
+        } else if (green.size() == 1) {
+        	ROS_INFO_STREAM("There is only one Faulty Disk in the Workspace");
+        } else if (red.size() == 2) {
+        	ROS_INFO_STREAM("There are two Faulty Disks in the Workspace");
+        } else {
+        	ROS_INFO_STREAM("More than two disks have been identified as " <<
+        		            "Faulty Disks. However, there are only two " <<
+        		            "disks in the workspace. Check the code.");
+        	return 0;
+        }
+
+        // Refresh all the topics before shutting down
+		ros::spin();
 		ros::Duration(0.5).sleep();
 		ros::shutdown();
 	}
