@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
 
     // Wait for all windows to open
     ROS_INFO_STREAM("Waiting for all Windows to Open");
-    ros::Duration(10).sleep();
+    ros::Duration(5).sleep();
 
     // Start the main function
     while (ros::ok()) {
