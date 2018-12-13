@@ -30,7 +30,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/*
  * @file KukaGripper.hpp
  * @brief This is the declaration of the KukaGripper class
  * @author Anirudh Topiwala [anirudhtopiwala] - driver
@@ -46,10 +46,8 @@
 #include <ros/ros.h>
 #include <iostream>
 
-/*
- * @brief KukaGripper is a class used for working with the Kuka robot
- *        vacuum gripper. It basically controls the state of the gripper.
- */
+// KukaGripper is a class used for working with the Kuka robot vacuum gripper.
+// It basically controls the state of the gripper.
 class KukaGripper {
  private:
     // ROS node handle
@@ -61,7 +59,7 @@ class KukaGripper {
     // Check the status of the gripper
     bool gripperState = false;
 
-    /**
+    /*
      * @brief This is a private method of this class. It is the gripper
      *        callback function which checks the current state of the gripper.
      *
@@ -75,7 +73,13 @@ class KukaGripper {
 
  public:
     /*
-     * @brief This is the constructor for the class
+     * @brief This is the constructor for the class.
+     *
+     * @param The constructor does not take any inputs. It creates a subscriber
+     *        and two service clients.
+     *
+     * @return The constructor does not return anything. All initializations
+     *         are done for the private variables.
      */
     KukaGripper();
 
@@ -102,7 +106,12 @@ class KukaGripper {
     bool getGripperState();
 
     /*
-     * @brief This is the destructor for the class
+     * @brief This is the destructor for the class.
+     *
+     * @param The desctructor does not take any inputs.
+     *
+     * @return The destructor does not return anything. It simply prints a
+     *         string stating that this class is now closed.
      */
     ~KukaGripper();
 };

@@ -30,7 +30,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/*
  * @file testKukaGripper.cpp
  * Copyright [2018] anirudhtopiwala [Anirudh Topiwala] - driver
  * Ghost1995 [Ashwin Goyal] - navigator

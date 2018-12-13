@@ -30,7 +30,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/*
  * @file KukaKinematics.hpp
  * @brief This is the declaration of the KukaKinematics class
  * @author Ashwin Goyal [Ghost1995] - driver
@@ -45,10 +45,7 @@
 #include <ros/ros.h>
 #include <iostream>
 
-/*
- * @brief KukaKinematics is a class used for working with the Kuka robot
- *        manipulation
- */
+// KukaKinematics is a class used for working with the Kuka robot manipulation.
 class KukaKinematics {
  private:
     // Final motion commads sent to the robot
@@ -64,12 +61,12 @@ class KukaKinematics {
     // ROS node handle
     ros::NodeHandle n;
 
-    /**
+    /*
      * @brief This is a private method of this class. It initializes all the
      *        attributes of the trajectory message.
      *
      * @param This method does not take any inputs. It simply initializes all
-     * the attributes to pre-defined values.
+     *        the attributes to pre-defined values.
      *
      * @return This method does not return any argument. All the
      *         initializations are done for a private variable.
@@ -82,7 +79,13 @@ class KukaKinematics {
                  LEFT_TABLE_POS_2, RIGHT_TABLE_POS_1, RIGHT_TABLE_POS_2};
 
     /*
-     * @brief This is the constructor for the class
+     * @brief This is the constructor for the class.
+     *
+     * @param The constructor does not take any inputs. It initializes the
+     *        trajectory message and creates a publishes for joint positions.
+     *
+     * @return The constructor does not return anything. All initializations
+     *         are done for the private variables.
      */
     KukaKinematics();
 
@@ -99,7 +102,12 @@ class KukaKinematics {
     void sendRobotToPos(const States);
 
     /*
-     * @brief This is the destructor for the class
+     * @brief This is the destructor for the class.
+     *
+     * @param The desctructor does not take any inputs.
+     *
+     * @return The destructor does not return anything. It simply prints a
+     *         string stating that this class is now closed.
      */
     ~KukaKinematics();
 };

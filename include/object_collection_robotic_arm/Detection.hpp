@@ -30,7 +30,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/*
  * @file Detection.hpp
  * @brief This is the declaration of the Detection class
  * @author Ashwin Goyal [Ghost1995] - driver
@@ -49,9 +49,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "KukaKinematics.hpp"
 
-/*
- * @brief Detection is a class used for working with the camera in the world
- */
+// Detection is a class used for working with the camera in the world
 class Detection {
  private:
     // ROS node handle
@@ -67,7 +65,7 @@ class Detection {
     // It is a KukaKinematics class object
     KukaKinematics & kuka;
 
-    /**
+    /*
      * @brief This is a private method of this class. It is the image callback
      *        function which reads the image captured by the camera sensor.
      *
@@ -81,7 +79,13 @@ class Detection {
 
  public:
     /*
-     * @brief This is the constructor for the class
+     * @brief This is the constructor for the class.
+     *
+     * @param The constructor does not take any inputs. It creates a subscriber
+     *        for the image data.
+     *
+     * @return The constructor does not return anything. All initializations
+     *         are done for the private variables.
      */
     explicit Detection(KukaKinematics &);
 
@@ -96,7 +100,12 @@ class Detection {
     std::vector<KukaKinematics::States> colorThresholder(const std::string &);
 
     /*
-     * @brief This is the destructor for the class
+     * @brief This is the destructor for the class.
+     *
+     * @param The desctructor does not take any inputs.
+     *
+     * @return The destructor does not return anything. It simply prints a
+     *         string stating that this class is now closed.
      */
     ~Detection();
 };

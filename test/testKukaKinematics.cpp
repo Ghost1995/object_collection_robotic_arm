@@ -30,7 +30,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/*
  * @file testKukaKinematics.cpp
  * Copyright [2018] Ghost1995 [Ashwin Goyal] - driver
  * anirudhtopiwala [Anirudh Topiwala] - navigator
@@ -48,10 +48,7 @@ void callback(const trajectory_msgs::JointTrajectory & pubCommand) {
     command = pubCommand;
 }
 
-/**
- * @brief This is the google test for the first method of the class.
- *        It is a dummy test for now.
- */
+// This is the google test for the first method of the class.
 TEST(KukaKinematicsTest, testSendRobotToPos) {
     // Initialize a KukaKinematics class object
     KukaKinematics test;

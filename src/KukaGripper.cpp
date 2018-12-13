@@ -30,7 +30,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/*
  * @file KukaGripper.cpp
  * @brief This is the implementation of the KukaGripper class
  * @author Ashwin Goyal [Ghost1995] - driver
