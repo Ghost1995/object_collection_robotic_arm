@@ -323,9 +323,7 @@ google-chrome index.html
 * Delaunay triangulation S-hull license: Copyright 2016 Dr David Sinclair
 * iiwa_stack license: Copyright (c) 2016-2017, Salvatore Virga - salvo.virga@tum.de
 
-## Disclaimer
-
-This software is released under the BSD 3-clause License.
+So, this software is released under the BSD 3-clause License.
 ```
  BSD 3-Clause License
 
@@ -356,10 +354,13 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
+
+## Disclaimer
 
 ```
-<!-- Past Performance may not be indicative of future results!
-```
+Past Performance may not be indicative of future results!
+
 This program is dependent on several third-party packages. Therefore, you should
 not assume that the future performance of the program will be equal to corresponding
 past performance levels. The usage decision you make should be determined with
@@ -374,4 +375,4 @@ without any warranties of any kind whatsoever, express or implied.
 None of the authors or contributors, or anyone else connected with GitHub, in any way
 whatsoever, can be responsible for your use of the information contained in or linked
 from this web page.
-``` -->
+```
