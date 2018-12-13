@@ -51,41 +51,34 @@ Detection::Detection(KukaKinematics & ku) : imgT(n), kuka(ku) {
 
 // This is the first method of the class. It detects the position of a
 // particularly colored object.
-std::vector<KukaKinematics::States> Detection::colorThresholder(
-                                                const std::string & color) {
-    std::vector<KukaKinematics::States> value;
-    auto rightDisc = cv_ptr->image.at<cv::Vec3b>(51, 190);
-    auto leftDisc = cv_ptr->image.at<cv::Vec3b>(199, 188);
+std::string Detection::colorThresholder(const KukaKinematics::States pos) {
+    int posInd = static_cast<int>(pos);
+    cv::Vec3b disc;
 
-    // Detect red colored discs
-    if (color == "red" ||color =="r" || color == "Red" || color == "R") {
-        if (rightDisc.val[2] >= 125) {
-            value.push_back(kuka.RIGHT_DISK);
-        }
-        if (leftDisc.val[2] >= 125) {
-            value.push_back(kuka.LEFT_DISK);
-        }
-    }
-    // Detect green colored discs
-    if (color == "green" ||color =="g" || color == "Green" || color == "G") {
-        if (rightDisc.val[1] >= 125) {
-            value.push_back(kuka.RIGHT_DISK);
-        }
-        if (leftDisc.val[1] >= 125) {
-            value.push_back(kuka.LEFT_DISK);
-        }
-    }
-    // Detect blue colored discs
-    if (color == "blue" ||color =="b" || color == "Blue" || color == "B") {
-        if (rightDisc.val[0] >= 125) {
-            value.push_back(kuka.RIGHT_DISK);
-        }
-        if (leftDisc.val[0] >= 125) {
-            value.push_back(kuka.LEFT_DISK);
-        }
+    // Define pixel for the corresponding disk
+    if (posInd == 1) {
+        disc = cv_ptr->image.at<cv::Vec3b>(199, 188);
+    } else if (posInd == 2) {
+        disc = cv_ptr->image.at<cv::Vec3b>(51, 190);
+    } else {
+        ROS_ERROR_STREAM("There is some error in the code. The position of " <<
+                    "the disc is read as: " << posInd << ". Check the code.");
+        return "";
     }
 
-    return value;
+    // Detect the color of the disk
+    if ((disc.val[0] >= 125) && (disc.val[1] < 125) && (disc.val[2] < 125)) {
+        return "blue";
+    } else if ((disc.val[0] < 125) && (disc.val[1] >= 125) &&
+                                                        (disc.val[2] < 125)) {
+        return "green";
+    } else if ((disc.val[0] < 125) && (disc.val[1] < 125) &&
+                                                        (disc.val[2] >= 125)) {
+        return "red";
+    } else {
+        ROS_ERROR_STREAM("The color of disc cannot be uniquely identified.");
+        return "";
+    }
 }
 
 // This is a private method of this class. It is the image callback function

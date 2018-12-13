@@ -97,7 +97,7 @@ class Detection {
      *
      * @result This function returns the positions for that object.
      */
-    std::vector<KukaKinematics::States> colorThresholder(const std::string &);
+    std::string colorThresholder(const KukaKinematics::States);
 
     /*
      * @brief This is the destructor for the class.
