@@ -1,26 +1,17 @@
 <?xml version="1.0"?>
 <launch>
-	
-	<arg name="record"  default="disable" />
-    <arg  name="Color"  default="RB"/>
+	<arg name="record" default="disable"/>
+    <arg name="gui" default="true"/>
+    <arg name="rviz" default="true"/>
+    <arg name="Color" default="RB"/>
 	
 	<include file="$(find iiwa_moveit)/launch/moveit_planning_execution.launch">	
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="rviz" value="$(arg rviz)"/>
         <arg name="Color" value= "$(arg Color)"/> 
 	</include>
 
-	<node
-        pkg="object_collection_robotic_arm"
-        name="objSeg"
-        type="objSeg"
-        output = "screen"
-        launch-prefix = "gnome-terminal -e"
-    />
+	<node pkg="object_collection_robotic_arm" name="objSeg" type="objSeg" output="screen" launch-prefix="gnome-terminal -e"/>
 
- 	<node
- 	 	name = "rosbag"
-        pkg="rosbag"
-        type="record"
-        args="-a -O $(find object_collection_robotic_arm)/results/kuka.bag"
-        if="$(eval record == 'enable')"
-    />
+ 	<node name="rosbag" pkg="rosbag" type="record" args="-a -O $(find object_collection_robotic_arm)/results/kuka.bag" if="$(eval record == 'enable')"/>
 </launch>
