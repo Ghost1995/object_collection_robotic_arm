@@ -138,10 +138,10 @@
       <pose frame=''>-0.046437 -0.060808 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>171 272000000</sim_time>
-      <real_time>9 385680620</real_time>
-      <wall_time>1544523623 670459959</wall_time>
-      <iterations>9340</iterations>
+      <sim_time>223 58000000</sim_time>
+      <real_time>51 928843509</real_time>
+      <wall_time>1544665764 365977845</wall_time>
+      <iterations>51786</iterations>
       <model name='camera'>
         <pose frame=''>-0.048584 0.550339 2.2216 0 1.57 0</pose>
         <scale>1 1 1</scale>
@@ -153,23 +153,23 @@
         </link>
       </model>
       <model name='disk_part_4_thin_collision'>
-        <pose frame=''>-0.361959 0.5 0.51105 0 0 -0.00499</pose>
+        <pose frame=''>-0.361959 0.5 0.51104 0 0 -0.00499</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.361959 0.5 0.51105 0 0 -0.00499</pose>
+          <pose frame=''>-0.361959 0.5 0.51104 0 0 -0.00499</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 19.6 -1e-06 0 0</acceleration>
-          <wrench>0 0 9.8 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -4.9 0 -0 0</wrench>
         </link>
       </model>
       <model name='disk_part_5_thin_collision_red'>
-        <pose frame=''>0.485511 0.507385 0.511056 2.8e-05 2.5e-05 -6.3e-05</pose>
+        <pose frame=''>0.485515 0.507388 0.511043 -1.5e-05 -1.1e-05 -6.2e-05</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.485511 0.507385 0.511056 2.8e-05 2.5e-05 -6.3e-05</pose>
+          <pose frame=''>0.485515 0.507388 0.511043 -1.5e-05 -1.1e-05 -6.2e-05</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -4.9 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -218,7 +218,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-0.894158 2.03699 2.45475 0 0.79182 -0.931662</pose>
+        <pose frame=''>-0.006223 4.24885 2.8138 0 0.415819 -1.56767</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
