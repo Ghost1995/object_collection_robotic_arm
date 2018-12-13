@@ -192,7 +192,8 @@ TEST(KukaGripperTest, testGripperToggle) {
 	KukaKinematics robot;
 
     // Move the robot to the center disk
-    robot.sendRobotToPos(robot.CENTER_DISK);
+    robot.sendRobotToPos(robot.HOME);
+    robot.sendRobotToPos(robot.RIGHT_DISK);
 
 	// Change the gripper state
 	test.gripperToggle(true);
