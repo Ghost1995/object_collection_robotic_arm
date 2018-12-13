@@ -53,10 +53,10 @@ void callback(const trajectory_msgs::JointTrajectory & pubCommand) {
  *        It is a dummy test for now.
  */
 TEST(KukaKinematicsTest, testSendRobotToPos) {
-	// Initialize a KukaKinematics class object
-	KukaKinematics test;
+    // Initialize a KukaKinematics class object
+    KukaKinematics test;
 
-	// Initialize the node handle
+    // Initialize the node handle
     ros::NodeHandle n;
 
     // Initialize the home position coordinates
@@ -65,17 +65,17 @@ TEST(KukaKinematicsTest, testSendRobotToPos) {
                           -0.028973511280637965, 1.9434842643815777,
                           -1.402031709125911};
 
-	// Create a subscriber
-	auto gripperSubscriber = n.subscribe(
-		"/iiwa/PositionJointInterface_trajectory_controller/command", .10,
+    // Create a subscriber
+    auto gripperSubscriber = n.subscribe(
+        "/iiwa/PositionJointInterface_trajectory_controller/command", .10,
                                                                     callback);
 
-	// Move the robot to a particular position
-	test.sendRobotToPos(test.HOME);
-	ros::spinOnce();
+    // Move the robot to a particular position
+    test.sendRobotToPos(test.HOME);
+    ros::spinOnce();
 
-	// Test if the command being sent is correct
-	EXPECT_EQ(0, command.header.seq);
-	for (auto i = 0; i < 7; i++)
-		EXPECT_EQ(posJoints[i], command.points[0].positions[i]);
+    // Test if the command being sent is correct
+    EXPECT_EQ(0, command.header.seq);
+    for (auto i = 0; i < 7; i++)
+        EXPECT_EQ(posJoints[i], command.points[0].positions[i]);
 }

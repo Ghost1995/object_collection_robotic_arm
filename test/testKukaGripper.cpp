@@ -42,33 +42,33 @@
 #include "KukaKinematics.hpp"
 #include "KukaGripper.hpp"
 
-//This is the google test for the second method of the class.
+// This is the google test for the second method of the class.
 TEST(KukaGripperTest, testGetGripperState) {
-	// Initialize the KukaGripper object
-	KukaGripper test;
+    // Initialize the KukaGripper object
+    KukaGripper test;
 
-	// Check if the gripper state is initialized to false
+    // Check if the gripper state is initialized to false
     EXPECT_FALSE(test.getGripperState());
 }
 
 // This is the google test for the first method of the class.
 TEST(KukaGripperTest, testGripperToggle) {
-	// Initialize the KukaGripper and KukaKinematics object
-	KukaGripper test;
-	KukaKinematics robot;
+    // Initialize the KukaGripper and KukaKinematics object
+    KukaGripper test;
+    KukaKinematics robot;
 
     // Move the robot to the center disk
     robot.sendRobotToPos(robot.HOME);
     robot.sendRobotToPos(robot.RIGHT_DISK);
 
-	// Change the gripper state
-	test.gripperToggle(true);
+    // Change the gripper state
+    test.gripperToggle(true);
 
-	//Check if the state of the gripper was changed
+    // Check if the state of the gripper was changed
     EXPECT_TRUE(test.getGripperState());
 
-	// Change the gripper state
-	test.gripperToggle(false);
+    // Change the gripper state
+    test.gripperToggle(false);
 
     // Move the robot to the home position
     robot.sendRobotToPos(robot.HOME);

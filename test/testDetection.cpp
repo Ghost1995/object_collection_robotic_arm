@@ -45,23 +45,23 @@
 // This is the google test for the first method of the class.
 TEST(DetectionTest, testColorThresholder) {
     // Initialize the Detection and KukaKinematics object
-	KukaKinematics robot;
-	Detection test(robot);
+    KukaKinematics robot;
+    Detection test(robot);
 
     // Make a vector of colors
     std::vector<std::string> colors = {"blue", "red", "green"};
-    
-    //Check if the number of blue disks detected is correct
+
+    // Check if the number of blue disks detected is correct
     auto color = test.colorThresholder(colors.at(0));
     EXPECT_EQ(1, color.size());
-	EXPECT_EQ(robot.RIGHT_DISK, color.at(0));
+    EXPECT_EQ(robot.RIGHT_DISK, color.at(0));
 
-    //Check if the number of red disks detected is correct
+    // Check if the number of red disks detected is correct
     color = test.colorThresholder(colors.at(1));
     EXPECT_EQ(1, color.size());
-	EXPECT_EQ(robot.LEFT_DISK, color.at(0));
+    EXPECT_EQ(robot.LEFT_DISK, color.at(0));
 
-    //Check if the number of green disks detected is correct
+    // Check if the number of green disks detected is correct
     color = test.colorThresholder(colors.at(2));
     EXPECT_TRUE(color.empty());
 }
