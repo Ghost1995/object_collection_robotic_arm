@@ -30,7 +30,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/*
  * @file main.cpp
  * @brief It is the main file for testing the ROS package
  *
@@ -40,9 +40,13 @@
 #include <gtest/gtest.h>
 #include <ros/ros.h>
 
-/**
-* @brief main function which runs all test results.
-*/
+/*
+ * @brief main function which runs all test results.
+ *
+ * @param This function takes the commandline arguments as input.
+ *
+ * @return This function returns a 0 just to avoid error.
+ */
 int main(int argc, char** argv) {
   // Initialize a ROS node
   ros::init(argc, argv, "allTests");
