@@ -2,7 +2,7 @@
 <launch>
 	<arg name="record" default="disable"/>
     <arg name="gui" default="true"/>
-    <arg name="rviz" default="true"/>
+    <arg name="rviz" default="false"/>
     <arg name="Color" default="RB"/>
 	
 	<include file="$(find iiwa_moveit)/launch/moveit_planning_execution.launch">	
