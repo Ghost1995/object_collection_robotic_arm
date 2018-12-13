@@ -5,7 +5,7 @@ project(object_collection_robotic_arm)
 add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs cv_bridge image_transport)
+find_package(catkin REQUIRED COMPONENTS roscpp std_msgs cv_bridge image_transport)
 find_package(gazebo REQUIRED)
 find_package(OpenCV REQUIRED)
 
@@ -61,7 +61,7 @@ find_package(OpenCV REQUIRED)
 # )
 
 ## The catkin_package macro generates cmake config files for your package
-catkin_package(INCLUDE_DIRS include/object_collection_robotic_arm CATKIN_DEPENDS roscpp rospy std_msgs)
+catkin_package(INCLUDE_DIRS include/object_collection_robotic_arm CATKIN_DEPENDS roscpp std_msgs)
 
 ## Build
 message(STATUS "OpenCV library status:")
