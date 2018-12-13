@@ -39,6 +39,7 @@ before_install:
   - source /opt/ros/$ROS_DISTRO/setup.bash
   - sudo rosdep init
   - rosdep update
+  - sudo apt-get install ruby-coveralls
 
 install:
   - mkdir -p ~/catkin_ws/src
