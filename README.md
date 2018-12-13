@@ -2,16 +2,16 @@
 
 [![Build Status](https://travis-ci.org/Ghost1995/object_collection_robotic_arm.svg?branch=master)](https://travis-ci.org/Ghost1995/object_collection_robotic_arm)
 [![Coverage Status](https://coveralls.io/repos/github/Ghost1995/object_collection_robotic_arm/badge.svg?branch=master)](https://coveralls.io/github/Ghost1995/object_collection_robotic_arm?branch=master)
-[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ---
 
 ## Overview
 
-This project is an implementation of a simulated robotic system capable of segregating objects based on their color. This project has been implemented on the Kuka robot using Gazebo, Rviz and ROS (and its various packages and libraries).
+In this project we develop an autonomous robotic segregation system for Acme Robotics. It is an implementation of a robotic manipulator capable of segregating objects based on their color. This project has been implemented on the Kuka robotic manipulator using Gazebo, Rviz and ROS (and its various packages and libraries).
 
 The developed system is capable of:
 * detecting the objects placed on a table,
-* picking up the objects using vacuum gripper and placing them into bins, and
+* picking up the objects using vacuum gripper and placing them at a desired position, and
 * segregating the objects based on their color.
 
 Few applications of the project include:
@@ -19,13 +19,40 @@ Few applications of the project include:
 * Transporting objects from one location to another.
 * Kit building operation in assembly lines. 
 
-This project has been programmed in the C++ programming language and uses C++ 11/14 features with emphasis given to Object Oriented Programming principles. The code follows the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) with cpplint validation. Cppcheck is also used for static code analysis. This project follows Test-driven Development to guide implementation and uses unit tests to test the code coverage written using Google Test framework. The code follows doxygen-formatted comments to aid doxygen documentation.
+This project has been programmed in the C++ programming language and uses C++ 11/14 features with emphasis given to Object Oriented Programming principles. The code follows the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) with cpplint validation. Cppcheck is also used for static code analysis. This project is done by implementing pair-programming and follows Test-driven Development to guide implementation and uses unit tests to test the code coverage written using Google Test framework. The code follows doxygen-formatted comments to aid doxygen documentation.
 
-The project will be completed in about three weeks time. This project is implemented by following the Solo Iterative Process (SIP). This included the creation of a product backlog using the requirements and ordering them in the order of their priority. Finally, the software was developed over three sprints which were one week long in duration. The first week focuses on the planning and design of the project including the initial UML diagrams. The second week involved the programming of the actual module. In the third week, the remainder of programming aspect of the project is completed and a video presentation will be  created.
+
+The project consists of 4 sprints spread across 4 weeks. The first week included the creation of a product backlog using the requirements and sorting them in the order of their priority. The second and third week consisted of class development and the final week was for refactoring and presentation video. In detail SIP planning can be found in the SIP sub heading.
+
+## Demonstration of the Project
+Here we show the object segregation of two differently colored disc configurations. The notion here is that the disc should be segregated onto a similar colored tables. For our project we have considered three colors, namely red, blue and green. The green colored disc is regarded as faulty and therefore is not picked up. (The reason is, that the table can very well be replaced by a moving conveyor and if the disc is faulty, the disc can be guided into a faulty part bin at the end of the conveyor)
+
+The Red Blue Disc configuration can be seen below:
+
+<p align="center">
+<img src="https://github.com/Ghost1995/object_collection_robotic_arm/blob/master/additional_files/RB.gif">
+</p>
+
+The reversed configuration:
+
+<p align="center">
+<img src="https://github.com/Ghost1995/object_collection_robotic_arm/blob/master/additional_files/BR.gif">
+</p>
+
+
+The Green Blue Configuration:
+
+<p align="center">
+<img src="https://github.com/Ghost1995/object_collection_robotic_arm/blob/master/additional_files/GB.gif">
+</p>
+
+We can see that the green disc is being detected as **Faulty** and therefore not picking it up.
+
+Note: The robot seems to be moving very fast, this is because we are publishing on joint coordinated and therefore it is planning in joint coordinate space. This is much faster than the Cartesian planner. Also Gifs are playing with a 4X speed.
 
 ## About the Developers
 
-This project has been developed by two people.
+This contributors for this project are:
 
 * Anirudh Topiwala 
 
@@ -58,72 +85,26 @@ To run this program you need to have the following installed on your system:
 
 * To install catkin, follow the installation steps in this [link](http://wiki.ros.org/catkin).
 
-<!-- #### openCV
-
-Install OpenCV 3.3.0 using the following commands:
-
-Install OpenCV Dependencies
-```
-sudo apt-get install build-essential checkinstall cmake pkg-config yasm gfortran git
-sudo apt-get install libjpeg8-dev libjasper-dev libpng12-dev
-sudo apt-get install libtiff5-dev
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev
-sudo apt-get install libxine2-dev libv4l-dev
-sudo apt-get install libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev
-sudo apt-get install libqt4-dev libgtk2.0-dev libtbb-dev
-sudo apt-get install libatlas-base-dev
-sudo apt-get install libfaac-dev libmp3lame-dev libtheora-dev
-sudo apt-get install libvorbis-dev libxvidcore-dev
-sudo apt-get install libopencore-amrnb-dev libopencore-amrwb-dev
-sudo apt-get install x264 v4l-utils
-```
-Download and Compile OpenCV
-```
-git clone https://github.com/opencv/opencv.git
-cd opencv 
-git checkout 3.3.0 
-cd ..
-git clone https://github.com/opencv/opencv_contrib.git
-cd opencv_contrib
-git checkout 3.3.0
-cd ..
-cd opencv
-mkdir build
-cd build
-cmake -D CMAKE_BUILD_TYPE=RELEASE \
-      -D CMAKE_INSTALL_PREFIX=/usr/local \
-      -D INSTALL_C_EXAMPLES=ON \
-      -D WITH_TBB=ON \
-      -D WITH_V4L=ON \
-      -D WITH_QT=ON \
-      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
-      -D BUILD_EXAMPLES=ON ..
-make -j4
-sudo make install
-sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
-sudo ldconfig
-```
- -->
 #### Ros Control Dependencies (REQUIRED)
 
-Make sure you have these packages installed in the environment:
+Please install the required dependencies by running:
+<!-- Make sure you have these packages installed in the environment:
 * ros-kinetic-velocity-controllers
 * ros-kinetic-ros-control
 * ros-kinetic-position-controllers
 * ros-kinetic-joint-state-controller
 * ros-kinetic-joint-trajectory-controller
-
-If not, type:
+ -->
+<!-- If not, type: -->
 ```
 sudo apt-get install ros-kinetic-velocity-controllers ros-kinetic-ros-control ros-kinetic-position-controllers ros-kinetic-joint-state-controller ros-kinetic-joint-trajectory-controller
 
 sudo apt-get install ros-kinetic-moveit
 
-sudo apt-get install ros-kinetic-trajectory* //not helpful
+<!-- sudo apt-get install ros-kinetic-trajectory* //not helpful -->
 
-sudo apt-get install ros-kinetic-moveit* //not helpful
 
-sudo apt-get install ros-kinetic-joints* //not helpful
+<!-- sudo apt-get install ros-kinetic-joints* //not helpful -->
 
 sudo apt install ros-kinetic-gazebo-ros-control
 
@@ -174,24 +155,43 @@ source devel/setup.bash
 
 ## Running the Demo using Launch File
 
-To run the demo, a launch file has been created. This launch file loads the Gazebo environment and runs the objSeg node to detect the objects on the table and segregate them into bins based on their color.
-
-**Note: This is an ongoing project and the following instructions may not run yet.** 
-
-
+To run the demo, a launch file has been created. This launch file loads the Gazebo environment and runs the objSeg node to detect the objects on the table and segregate them onto the matching colored tables.
+ 
 After following the build instructions, to run the demo, launch the code using the following commands:
 ```
 cd ~/catkin_ws/
 source devel/setup.bash
-roslaunch object_collection_robotic_arm kuka_fwd.launch
+roslaunch object_collection_robotic_arm kuka.launch
 ```
+To change the colored disc configuration, we can pass an argument **Color** to the launch file. The argument will take the the first initial of the color in capitals as its input. Therefore the possible color configurations would be:
+```
+roslaunch object_collection_robotic_arm kuka.launch Color:=RB
+roslaunch object_collection_robotic_arm kuka.launch Color:=BR
+roslaunch object_collection_robotic_arm kuka.launch Color:=RR
+roslaunch object_collection_robotic_arm kuka.launch Color:=BB
+roslaunch object_collection_robotic_arm kuka.launch Color:=GB
+```
+Note the default configuration is RB and if no Color argument is given it will open in the default Red Blue disc configuration.
+
 ## Record bag File
-
-
+A ros bag file records all the topic and messages being published in the terminal. The below code will record the bag file and save it in the results directory as kuka.bag .
+```
+roslaunch object_collection_robotic_arm kuka.launch Color:=RB record:=enable
+```
 #### Inspecting the bag File Generated
-
+To get more information about the generated rosbag file, open the results directory in terminal and run the following command:
+```
+rosbag info talker.bag
+```
 #### Playing the bag File Generated
-
+To play the bag file, run:
+```
+rosbag play talker.bag
+```
+To check if the topic are live, run:
+```
+rostopic list
+```
 ## Run Tests
 
 ### 1) Run the Tests while Compiling the Code
@@ -257,175 +257,39 @@ google-chrome index.html
 * Googletest license: Copyright 2008, Google Inc.
 * Delaunay triangulation S-hull license: Copyright 2016 Dr David Sinclair
 * iiwa_stack license: Copyright (c) 2016-2017, Salvatore Virga - salvo.virga@tum.de
-* kdl_ros license: Copyright (c) 2016-2017, Ruben Smits - ruben.smits@intermodalics.eu
 
 ## Disclaimer
 
-This software is released under the GNU Lesser General Public License v3.0.
+This software is released under the BSD 3-clause License.
 ```
-                   GNU LESSER GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
+ BSD 3-Clause License
 
- Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
+Copyright (c) 2018, Ashwin Goyal
+All rights reserved.
 
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-  This version of the GNU Lesser General Public License incorporates
-the terms and conditions of version 3 of the GNU General Public
-License, supplemented by the additional permissions listed below.
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
 
-  0. Additional Definitions.
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
 
-  As used herein, "this License" refers to version 3 of the GNU Lesser
-General Public License, and the "GNU GPL" refers to version 3 of the GNU
-General Public License.
+* Neither the name of the copyright holder nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
 
-  "The Library" refers to a covered work governed by this License,
-other than an Application or a Combined Work as defined below.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-  An "Application" is any work that makes use of an interface provided
-by the Library, but which is not otherwise based on the Library.
-Defining a subclass of a class defined by the Library is deemed a mode
-of using an interface provided by the Library.
-
-  A "Combined Work" is a work produced by combining or linking an
-Application with the Library.  The particular version of the Library
-with which the Combined Work was made is also called the "Linked
-Version".
-
-  The "Minimal Corresponding Source" for a Combined Work means the
-Corresponding Source for the Combined Work, excluding any source code
-for portions of the Combined Work that, considered in isolation, are
-based on the Application, and not on the Linked Version.
-
-  The "Corresponding Application Code" for a Combined Work means the
-object code and/or source code for the Application, including any data
-and utility programs needed for reproducing the Combined Work from the
-Application, but excluding the System Libraries of the Combined Work.
-
-  1. Exception to Section 3 of the GNU GPL.
-
-  You may convey a covered work under sections 3 and 4 of this License
-without being bound by section 3 of the GNU GPL.
-
-  2. Conveying Modified Versions.
-
-  If you modify a copy of the Library, and, in your modifications, a
-facility refers to a function or data to be supplied by an Application
-that uses the facility (other than as an argument passed when the
-facility is invoked), then you may convey a copy of the modified
-version:
-
-   a) under this License, provided that you make a good faith effort to
-   ensure that, in the event an Application does not supply the
-   function or data, the facility still operates, and performs
-   whatever part of its purpose remains meaningful, or
-
-   b) under the GNU GPL, with none of the additional permissions of
-   this License applicable to that copy.
-
-  3. Object Code Incorporating Material from Library Header Files.
-
-  The object code form of an Application may incorporate material from
-a header file that is part of the Library.  You may convey such object
-code under terms of your choice, provided that, if the incorporated
-material is not limited to numerical parameters, data structure
-layouts and accessors, or small macros, inline functions and templates
-(ten or fewer lines in length), you do both of the following:
-
-   a) Give prominent notice with each copy of the object code that the
-   Library is used in it and that the Library and its use are
-   covered by this License.
-
-   b) Accompany the object code with a copy of the GNU GPL and this license
-   document.
-
-  4. Combined Works.
-
-  You may convey a Combined Work under terms of your choice that,
-taken together, effectively do not restrict modification of the
-portions of the Library contained in the Combined Work and reverse
-engineering for debugging such modifications, if you also do each of
-the following:
-
-   a) Give prominent notice with each copy of the Combined Work that
-   the Library is used in it and that the Library and its use are
-   covered by this License.
-
-   b) Accompany the Combined Work with a copy of the GNU GPL and this license
-   document.
-
-   c) For a Combined Work that displays copyright notices during
-   execution, include the copyright notice for the Library among
-   these notices, as well as a reference directing the user to the
-   copies of the GNU GPL and this license document.
-
-   d) Do one of the following:
-
-       0) Convey the Minimal Corresponding Source under the terms of this
-       License, and the Corresponding Application Code in a form
-       suitable for, and under terms that permit, the user to
-       recombine or relink the Application with a modified version of
-       the Linked Version to produce a modified Combined Work, in the
-       manner specified by section 6 of the GNU GPL for conveying
-       Corresponding Source.
-
-       1) Use a suitable shared library mechanism for linking with the
-       Library.  A suitable mechanism is one that (a) uses at run time
-       a copy of the Library already present on the user's computer
-       system, and (b) will operate properly with a modified version
-       of the Library that is interface-compatible with the Linked
-       Version.
-
-   e) Provide Installation Information, but only if you would otherwise
-   be required to provide such information under section 6 of the
-   GNU GPL, and only to the extent that such information is
-   necessary to install and execute a modified version of the
-   Combined Work produced by recombining or relinking the
-   Application with a modified version of the Linked Version. (If
-   you use option 4d0, the Installation Information must accompany
-   the Minimal Corresponding Source and Corresponding Application
-   Code. If you use option 4d1, you must provide the Installation
-   Information in the manner specified by section 6 of the GNU GPL
-   for conveying Corresponding Source.)
-
-  5. Combined Libraries.
-
-  You may place library facilities that are a work based on the
-Library side by side in a single library together with other library
-facilities that are not Applications and are not covered by this
-License, and convey such a combined library under terms of your
-choice, if you do both of the following:
-
-   a) Accompany the combined library with a copy of the same work based
-   on the Library, uncombined with any other library facilities,
-   conveyed under the terms of this License.
-
-   b) Give prominent notice with the combined library that part of it
-   is a work based on the Library, and explaining where to find the
-   accompanying uncombined form of the same work.
-
-  6. Revised Versions of the GNU Lesser General Public License.
-
-  The Free Software Foundation may publish revised and/or new versions
-of the GNU Lesser General Public License from time to time. Such new
-versions will be similar in spirit to the present version, but may
-differ in detail to address new problems or concerns.
-
-  Each version is given a distinguishing version number. If the
-Library as you received it specifies that a certain numbered version
-of the GNU Lesser General Public License "or any later version"
-applies to it, you have the option of following the terms and
-conditions either of that published version or of any later version
-published by the Free Software Foundation. If the Library as you
-received it does not specify a version number of the GNU Lesser
-General Public License, you may choose any version of the GNU Lesser
-General Public License ever published by the Free Software Foundation.
-
-  If the Library as you received it specifies that a proxy can decide
-whether future versions of the GNU Lesser General Public License shall
-apply, that proxy's public statement of acceptance of any version is
-permanent authorization for you to choose that version for the
-Library.
 ```
