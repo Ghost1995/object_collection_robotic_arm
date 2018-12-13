@@ -13,5 +13,5 @@
 
 	<node pkg="object_collection_robotic_arm" name="objSeg" type="objSeg" output="screen" launch-prefix="gnome-terminal -e"/>
 
- 	<node name="rosbag" pkg="rosbag" type="record" args="-a -O $(find object_collection_robotic_arm)/results/kuka.bag" if="$(eval record == 'enable')"/>
+ 	<node name="rosbag" pkg="rosbag" type="record" args="-a -O $(find object_collection_robotic_arm)/results/kuka.bag -x /camera/(.*)" if="$(eval record == 'enable')"/>
 </launch>
