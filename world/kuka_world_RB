@@ -138,10 +138,10 @@
       <pose frame=''>-0.046437 -0.060808 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>161 932000000</sim_time>
-      <real_time>36 743125891</real_time>
-      <wall_time>1544522528 437820396</wall_time>
-      <iterations>36581</iterations>
+      <sim_time>229 330000000</sim_time>
+      <real_time>67 581320789</real_time>
+      <wall_time>1544665596 232748530</wall_time>
+      <iterations>67398</iterations>
       <model name='camera'>
         <pose frame=''>-0.048584 0.550339 2.2216 0 1.57 0</pose>
         <scale>1 1 1</scale>
@@ -158,18 +158,18 @@
         <link name='link'>
           <pose frame=''>-0.361959 0.5 0.51105 0 0 -0.00499</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <acceleration>0 0 19.6 -1e-06 0 0</acceleration>
+          <wrench>0 0 9.8 0 -0 0</wrench>
         </link>
       </model>
       <model name='disk_part_5_thin_collision_blue'>
-        <pose frame=''>0.485506 0.507385 0.511056 -2.9e-05 -2.7e-05 -6.3e-05</pose>
+        <pose frame=''>0.485512 0.507386 0.511054 -1.8e-05 -1.5e-05 -6.4e-05</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.485506 0.507385 0.511056 -2.9e-05 -2.7e-05 -6.3e-05</pose>
+          <pose frame=''>0.485512 0.507386 0.511054 -1.8e-05 -1.5e-05 -6.4e-05</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.808942 -0.906195 17.6158 0.852102 1.30051 -2.94389</acceleration>
-          <wrench>0.404471 -0.453098 8.80788 0 -0 0</wrench>
+          <acceleration>0.783352 -0.9289 14.9621 -1.24783 0.69549 0.168949</acceleration>
+          <wrench>0.391676 -0.46445 7.48104 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -218,7 +218,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-1.01264 1.30809 3.71278 0 1.25708 -1.22883</pose>
+        <pose frame=''>0.019672 5.09313 2.75621 0 0.39708 -1.60883</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

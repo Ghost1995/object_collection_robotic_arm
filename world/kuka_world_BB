@@ -138,10 +138,10 @@
       <pose frame=''>-0.046437 -0.060808 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>173 559000000</sim_time>
-      <real_time>11 683857614</real_time>
-      <wall_time>1544524050 990508445</wall_time>
-      <iterations>11627</iterations>
+      <sim_time>231 351000000</sim_time>
+      <real_time>57 954805128</real_time>
+      <wall_time>1544665839 143163924</wall_time>
+      <iterations>57792</iterations>
       <model name='camera'>
         <pose frame=''>-0.048584 0.550339 2.2216 0 1.57 0</pose>
         <scale>1 1 1</scale>
@@ -158,18 +158,18 @@
         <link name='link'>
           <pose frame=''>-0.361959 0.5 0.51105 0 0 -0.00499</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <acceleration>0 0 19.6 -1e-06 0 0</acceleration>
+          <wrench>0 0 9.8 0 -0 0</wrench>
         </link>
       </model>
       <model name='disk_part_5_thin_collision_blue'>
-        <pose frame=''>0.485512 0.507386 0.511054 -1.8e-05 -1.5e-05 -6.4e-05</pose>
+        <pose frame=''>0.485518 0.507387 0.511055 -2.1e-05 -2e-05 -7.3e-05</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.485512 0.507386 0.511054 -1.8e-05 -1.5e-05 -6.4e-05</pose>
+          <pose frame=''>0.485518 0.507387 0.511055 -2.1e-05 -2e-05 -7.3e-05</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.783352 -0.9289 14.9621 -1.24783 0.69549 0.168949</acceleration>
-          <wrench>0.391676 -0.46445 7.48104 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -4.9 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -218,7 +218,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-1.05379 0.839976 2.5532 -0 1.22617 -0.928593</pose>
+        <pose frame=''>0.013619 4.21206 3.04486 0 0.53817 -1.56459</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
