@@ -73,6 +73,7 @@ void KukaGripper::gripperToggle(const bool & state) {
             ros::spinOnce();
             ros::Duration(0.1).sleep();
         }
+        ros::Duration(2).sleep();
         ROS_INFO_STREAM("Gripper has been Switched OFF");
     }
 }
