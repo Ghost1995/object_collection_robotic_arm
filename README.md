@@ -28,16 +28,16 @@ The project consists of 4 sprints spread across 4 weeks. The first week included
 
 Here we show the object segregation of two differently colored disc configurations. The notion here is that the disc should be segregated onto a similar colored tables. For our project we have considered three colors, namely red, blue and green. The green colored disc is regarded as faulty and therefore is not picked up. (The reason is, that the table can very well be replaced by a moving conveyor and if the disc is faulty, the disc can be guided into a faulty part bin at the end of the conveyor)
 
-The Red Blue Disc configuration can be seen below:
-
-<p align="center">
-<img src="https://github.com/Ghost1995/object_collection_robotic_arm/blob/master/additional_files/RB.gif">
-</p>
-
-The reversed configuration:
+The Blue Red Disc configuration can be seen below:
 
 <p align="center">
 <img src="https://github.com/Ghost1995/object_collection_robotic_arm/blob/master/additional_files/BR.gif">
+</p>
+
+If both the discs are of same color, then the second disc will go to a different position. This can be seen in the Red Red Disc configuration below:
+
+<p align="center">
+<img src="https://github.com/Ghost1995/object_collection_robotic_arm/blob/master/additional_files/RR.gif">
 </p>
 
 
@@ -49,7 +49,7 @@ The Green Blue Configuration:
 
 We can see that the green disc is being detected as **Faulty** and therefore not picking it up.
 
-Note: The robot seems to be moving very fast, this is because we are publishing on joint coordinated and therefore it is planning in joint coordinate space. This is much faster than the Cartesian planner. Also, gifs are playing with a 4X speed.
+Note: The robot seems to be moving very fast, this is because we are publishing on joint coordinated and therefore it is planning in joint coordinate space. This is much faster than the Cartesian planner. Also Gifs are playing with a 1.5X speed.
 
 ## About the Developers
 
