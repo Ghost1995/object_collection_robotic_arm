@@ -43,6 +43,8 @@
 
 #include <trajectory_msgs/JointTrajectory.h>
 #include <ros/ros.h>
+#include <string>
+#include <vector>
 #include <iostream>
 
 // KukaKinematics is a class used for working with the Kuka robot manipulation.
