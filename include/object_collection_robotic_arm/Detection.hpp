@@ -64,6 +64,8 @@ class Detection {
     const std::string OPENCV_WINDOW = "Image Window";
     // It is a KukaKinematics class object
     KukaKinematics & kuka;
+    // A flag which states whether to display image or not
+    bool dispImg = false;
 
     /*
      * @brief This is a private method of this class. It is the image callback
@@ -87,7 +89,7 @@ class Detection {
      * @return The constructor does not return anything. All initializations
      *         are done for the private variables.
      */
-    explicit Detection(KukaKinematics &);
+    explicit Detection(KukaKinematics &, const bool);
 
     /*
      * @brief This is the first method of the class. It detects the position

@@ -41,12 +41,14 @@
 #include "Detection.hpp"
 
 // This is the constructor for the class
-Detection::Detection(KukaKinematics & ku) : imgT(n), kuka(ku) {
+Detection::Detection(KukaKinematics & ku, const bool display) : imgT(n),
+                                                kuka(ku), dispImg(display) {
     // Subscribe to input video feed
     imageSubscriber = imgT.subscribe("/camera/image_raw", 1,
                                                     &Detection::readImg, this);
-    // Display the image
-    cv::namedWindow(OPENCV_WINDOW);
+    // Display the image, if asked
+    if (dispImg)
+        cv::namedWindow(OPENCV_WINDOW);
 }
 
 // This is the first method of the class. It detects the position of a
@@ -92,12 +94,14 @@ void Detection::readImg(const sensor_msgs::ImageConstPtr & msg) {
         return;
     }
 
-    // Update GUI Window
-    cv::imshow(OPENCV_WINDOW, cv_ptr->image);
+    // Update GUI Window, if it exists
+    if (dispImg)
+        cv::imshow(OPENCV_WINDOW, cv_ptr->image);
 }
 
 // This is the destructor for the class
 Detection::~Detection() {
-    cv::destroyWindow(OPENCV_WINDOW);
+    if (dispImg)
+        cv::destroyWindow(OPENCV_WINDOW);
     ROS_WARN_STREAM("Image Capture Module has been Shut Down");
 }
