@@ -72,8 +72,8 @@ TEST(KukaKinematicsTest, testSendRobotToPos) {
     ros::spinOnce();
 
     // Test if the command being sent is correct
-    EXPECT_EQ(0, command.header.seq);
-    EXPECT_TRUE(command.header.frame_id == "Home");
+    ASSERT_EQ(0, command.header.seq);
+    ASSERT_EQ(0, command.header.frame_id.compare("Home"));
     for (auto i = 0; i < 7; i++)
-        EXPECT_EQ(posJoints[i], command.points[0].positions[i]);
+        ASSERT_EQ(posJoints[i], command.points[0].positions[i]);
 }

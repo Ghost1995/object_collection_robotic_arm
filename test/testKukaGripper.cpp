@@ -48,7 +48,7 @@ TEST(KukaGripperTest, testGetGripperState) {
     KukaGripper test;
 
     // Check if the gripper state is initialized to false
-    EXPECT_FALSE(test.getGripperState());
+    ASSERT_FALSE(test.getGripperState());
 }
 
 // This is the google test for the first method of the class.
@@ -65,7 +65,7 @@ TEST(KukaGripperTest, testGripperToggle) {
     test.gripperToggle(true);
 
     // Check if the state of the gripper was changed
-    EXPECT_TRUE(test.getGripperState());
+    ASSERT_TRUE(test.getGripperState());
 
     // Change the gripper state
     test.gripperToggle(false);
