@@ -73,13 +73,14 @@ void KukaKinematics::sendRobotToPos(const States state) {
     int num = static_cast<int>(state);
 
     // Define the jointCommands variable
+    jointCommands.header.stamp = ros::Time::now();
+    jointCommands.header.frame_id = statesStr.at(num);
     for (auto i = 0; i < numJoints; i++)
         jointCommands.points[0].positions[i] = posJoints[num][i];
-    jointCommands.header.frame_id = statesStr.at(num);
     // Publish the joint Commands
     jointPublisher.publish(jointCommands);
     ros::spinOnce();
-    ros::Duration(1).sleep();  // Stop the robot at each position for 5 secs
+    ros::Duration(3).sleep();  // Give the robot time to reach desired position
 }
 
 // This is a private method of this class. It initializes all the attributes of
@@ -93,7 +94,7 @@ void KukaKinematics::initializeTrajectoryPoint() {
     jointCommands.header.frame_id = "";
     jointCommands.points.resize(1);
     jointCommands.points[0].positions.resize(numJoints);
-    jointCommands.points[0].time_from_start = ros::Duration(1.0);
+    jointCommands.points[0].time_from_start = ros::Duration(3.0);
 }
 
 // This is the destructor for the class
