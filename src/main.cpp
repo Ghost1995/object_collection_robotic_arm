@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
     // Initialize class objects
     KukaKinematics kuka;
     KukaGripper gripper;
-    Detection detect(kuka);
+    Detection detect(kuka, true);
 
     // Initialize the node handle
     ros::NodeHandle n;
@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
     ros::Duration(5).sleep();
 
     // Start the main function
-    while (ros::ok()) {
+    if (ros::ok()) {
         // Start from the Home Position
         ROS_INFO_STREAM("Going to Home Position");
         kuka.sendRobotToPos(kuka.HOME);
@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
                     tablePos[1] -= 1;
                 } else {
                     ROS_ERROR_STREAM("There is a error in the code.");
-                    return 0;
+                    break;
                 }
                 gripper.gripperToggle(false);
                 ROS_INFO_STREAM("Going to Home Position");
@@ -118,8 +118,11 @@ int main(int argc, char **argv) {
                     ROS_INFO_STREAM("Right Disc is a Faulty Disc");
                 }
             } else {
-                ROS_ERROR_STREAM("There is a error in the code.");
-                return 0;
+                if (i == 0) {
+                    ROS_WARN_STREAM("The Color of the Left Disc is Unknown");
+                } else if (i == 1) {
+                    ROS_WARN_STREAM("The Color of the Right Disc is Unknown");
+                }
             }
         }
 
@@ -128,6 +131,8 @@ int main(int argc, char **argv) {
         ROS_WARN_STREAM("Closing all running systems");
         ros::Duration(5).sleep();
         ros::shutdown();
+    } else {
+        ROS_WARN_STREAM("ROS not running. Closing all systems.");
     }
     system("killall roscore & killall gzserver & killall gzclient");
     system("killall rosmaster");
