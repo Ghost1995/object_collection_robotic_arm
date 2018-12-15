@@ -48,18 +48,20 @@
 // KukaKinematics is a class used for working with the Kuka robot manipulation.
 class KukaKinematics {
  private:
+    // ROS node handle
+    ros::NodeHandle n;
+    // Publish robot joints to move the robot
+    ros::Publisher jointPublisher;
     // Final motion commads sent to the robot
     trajectory_msgs::JointTrajectory jointCommands;
     // Number of kinematic joints in the robot
     const unsigned int numJoints = 7;
-    // Total points that need to be traversed
-    const unsigned int totalPoints = 7;
     // Joint values to achieve each point
     double posJoints[7][7];
-    // Publish robot joints to move the robot
-    ros::Publisher jointPublisher;
-    // ROS node handle
-    ros::NodeHandle n;
+    // Define possible robot states as string
+    std::vector<std::string> statesStr =  {"Home", "Left Disc", "Right Disc",
+                                           "Left Table 1", "Left Table 2",
+                                           "Right Table 1", "Right Table 2"};
 
     /*
      * @brief This is a private method of this class. It initializes all the

@@ -73,6 +73,7 @@ TEST(KukaKinematicsTest, testSendRobotToPos) {
 
     // Test if the command being sent is correct
     EXPECT_EQ(0, command.header.seq);
+    EXPECT_TRUE(command.header.frame_id == "Home");
     for (auto i = 0; i < 7; i++)
         EXPECT_EQ(posJoints[i], command.points[0].positions[i]);
 }

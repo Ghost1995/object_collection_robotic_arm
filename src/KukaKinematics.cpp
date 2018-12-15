@@ -72,14 +72,10 @@ void KukaKinematics::sendRobotToPos(const States state) {
     // Define the position
     int num = static_cast<int>(state);
 
-    // Initialize the jointCommands variable
-    jointCommands.points[0].positions[0] = posJoints[num][0];
-    jointCommands.points[0].positions[1] = posJoints[num][1];
-    jointCommands.points[0].positions[2] = posJoints[num][2];
-    jointCommands.points[0].positions[3] = posJoints[num][3];
-    jointCommands.points[0].positions[4] = posJoints[num][4];
-    jointCommands.points[0].positions[5] = posJoints[num][5];
-    jointCommands.points[0].positions[6] = posJoints[num][6];
+    // Define the jointCommands variable
+    for (auto i = 0; i < numJoints; i++)
+        jointCommands.points[0].positions[i] = posJoints[num][i];
+    jointCommands.header.frame_id = statesStr.at(num);
     // Publish the joint Commands
     jointPublisher.publish(jointCommands);
     ros::spinOnce();
@@ -90,18 +86,13 @@ void KukaKinematics::sendRobotToPos(const States state) {
 // the trajectory message.
 void KukaKinematics::initializeTrajectoryPoint() {
     // Initailize the attributes of the trajectory message
-    jointCommands.joint_names.push_back("iiwa_joint_1");
-    jointCommands.joint_names.push_back("iiwa_joint_2");
-    jointCommands.joint_names.push_back("iiwa_joint_3");
-    jointCommands.joint_names.push_back("iiwa_joint_4");
-    jointCommands.joint_names.push_back("iiwa_joint_5");
-    jointCommands.joint_names.push_back("iiwa_joint_6");
-    jointCommands.joint_names.push_back("iiwa_joint_7");
+    for (auto i = 1; i <= numJoints; i++)
+        jointCommands.joint_names.push_back("iiwa_joint_" + std::to_string(i));
     jointCommands.header.seq = 0;
     jointCommands.header.stamp = ros::Time::now();
     jointCommands.header.frame_id = "";
     jointCommands.points.resize(1);
-    jointCommands.points[0].positions.resize(7);
+    jointCommands.points[0].positions.resize(numJoints);
     jointCommands.points[0].time_from_start = ros::Duration(1.0);
 }
 
