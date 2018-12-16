@@ -370,7 +370,6 @@ firefox index.html
 * OpenCV:  Copyright (C) 2015-2016, OpenCV Foundation, all rights reserved.
 * Doxygen license: Copyright © 1997-2016 by Dimitri van Heesch.
 * Google Test license: Copyright 2008, Google Inc.
-* Delaunay triangulation S-hull license: Copyright 2016 Dr David Sinclair
 * iiwa_stack license: Copyright (c) 2016-2017, Salvatore Virga - salvo.virga@tum.de
 
 So, this software is released under the BSD 3-clause License.
