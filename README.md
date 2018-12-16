@@ -40,7 +40,6 @@ If both the discs are of same color, then the second disc will go to a different
 <img src="https://github.com/Ghost1995/object_collection_robotic_arm/blob/master/additional_files/RR.gif">
 </p>
 
-
 The Green Blue Configuration:
 
 <p align="center">
@@ -49,7 +48,7 @@ The Green Blue Configuration:
 
 We can see that the green disc is being detected as **Faulty** and therefore not picking it up.
 
-Note: The robot seems to be moving very fast, this is because we are publishing on joint coordinated and therefore it is planning in joint coordinate space. This is much faster than the Cartesian planner. Also Gifs are playing with a 1.5X speed.
+Note: The robot seems to be moving very fast, this is because we are publishing on joint coordinated and therefore it is planning in joint coordinate space. This is much faster than the Cartesian planner. Also GIFs are playing with a 1.5X speed.
 
 ## About the Developers
 
@@ -63,6 +62,12 @@ I am currently pursing my masters in Robotics at the University of Maryland,Coll
 
 I am currently pursing my masters in Robotics at University of Maryland, College Park. I hold a Bachelors degree in Mechanical Engineering from Indian Institute of Technology Patna, India. I have worked for two automobile companies and a Robotics centered company in India. I have worked as a Technical Assistant for two courses at UMD. I wish to pursue a career in Robotics with a focus in Artificial Intelligence and Computer Vision. More about my projects can be found on [GitHub](https://github.com/Ghost1995/) and [LinkedIn](https://www.linkedin.com/in/ashwin-goyal/).
 
+## Solo Iterative Process
+
+Link to SIP Planning: [SIP Logs](https://docs.google.com/spreadsheets/d/1xqPFYUN3OQtDBTkjzTHtdPEkzV7B79HENrkyVhmQdCs/edit#gid=0)
+
+Link to Sprint Planning Notes: [Sprint Notes](https://docs.google.com/document/d/1bKvMWFakLjcAiFi2MnL_bBGUG79L-Hk_sQdlqZ0YWP8/edit?usp=sharing)
+
 ## Dependencies
 
 To run this program you need to have the following installed on your system:
@@ -75,19 +80,11 @@ To run this program you need to have the following installed on your system:
 
 * To install ROS Kinetic in Ubuntu 16.04, follow the steps in this [link](http://wiki.ros.org/kinetic/Installation/Ubuntu). Make sure to install the recommended version (Desktop-Full).
 
-* To install catkin, follow the installation steps in this [link](http://wiki.ros.org/catkin).
+* To install catkin, follow the installation steps for ROS kinetic in this [link](http://wiki.ros.org/catkin).
 
 #### Ros Control Dependencies (REQUIRED)
 
 Please install the required dependencies by running:
-<!-- Make sure you have these packages installed in the environment:
-* ros-kinetic-velocity-controllers
-* ros-kinetic-ros-control
-* ros-kinetic-position-controllers
-* ros-kinetic-joint-state-controller
-* ros-kinetic-joint-trajectory-controller
- -->
-<!-- If not, type: -->
 ```
 sudo apt-get install ros-kinetic-velocity-controllers ros-kinetic-ros-control
 sudo apt-get install ros-kinetic-position-controllers ros-kinetic-joint-state-controller
@@ -95,45 +92,27 @@ sudo apt-get install ros-kinetic-joint-trajectory-controller ros-kinetic-moveit
 sudo apt install ros-kinetic-gazebo-ros-control
 ```
 
-## Solo Iterative Process
+## Installation of Additional Packages (REQUIRED)
 
-Link to SIP Planning: [SIP Logs](https://docs.google.com/spreadsheets/d/1xqPFYUN3OQtDBTkjzTHtdPEkzV7B79HENrkyVhmQdCs/edit#gid=0)
-
-Link to Sprint Planning Notes: [Sprint Notes](https://docs.google.com/document/d/1bKvMWFakLjcAiFi2MnL_bBGUG79L-Hk_sQdlqZ0YWP8/edit?usp=sharing)
-
-## Video Demo
-
-Link to the video presentation uploaded on YouTube will be here shortly.
-
-## Build Instructions
-
-To build this code in a catkin workspace:
-```
-cd ~/catkin_ws/
-catkin_make
-source devel/setup.bash
-cd src/
-git clone https://github.com/Ghost1995/object_collection_robotic_arm.git
-cd ..
-catkin_make
-```
-Note, that if you do not have a catkin workspace, then to build this code use the following commands:
+If you do not have a catkin workspace directory, to create a new one, run the following commands:
 ```
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/
 catkin_make
 source devel/setup.bash
-cd src/
-git clone https://github.com/Ghost1995/object_collection_robotic_arm.git
-cd ..
-catkin_make
 ```
-## Installation of additional packages
-
-In your catkin workspace directory (or create a new one using the [above instructions](#build-instructions)), install the required additional package by running the following commands:
+Now, in your catkin workspace directory, install the required additional package by running the following commands:
 ```
 cd ~/catkin_ws/src/
 git clone https://github.com/anirudhtopiwala/iiwa_stack.git
+```
+
+## Build Instructions
+
+To build this code in your catkin workspace (or a new one created using the [above instructions](#installation-of-additional-packages)), run the following commands:
+```
+cd ~/catkin_ws/src/
+git clone https://github.com/Ghost1995/object_collection_robotic_arm.git
 cd ..
 catkin_make
 source devel/setup.bash
@@ -166,61 +145,98 @@ roslaunch object_collection_robotic_arm kuka.launch gui:=false
 ```
 Note that, by default, Rviz does not open (rviz is set as false) and Gazebo opens to show the movement of the Kuka robot (gui is set as true).
 
-Also, note that, these arguments need not neccessarily be given one at a time. Multiple arguments can be given when launching the program.
+Also, note that, these arguments need not necessarily be given one at a time. Multiple arguments can be given when launching the program.
+
+## Video Demo
+
+Link to the video presentation uploaded on YouTube will be here shortly.
 
 ## Record bag File
 
-A ros bag file records all the topic and messages being published in the terminal. The below code will record the bag file and save it in the results directory as kuka.bag .
+A ros bag file records all the topic and messages being published in the terminal. After following the [build instructions](#build-instructions), to record the bag file, run the following commands:
 ```
+cd ~/catkin_ws/
+source devel/setup.bash
 roslaunch object_collection_robotic_arm kuka.launch record:=enable
 ```
 The bag file, by default, is saved in the results directory as "[kuka.bag](https://github.com/Ghost1995/object_collection_robotic_arm/blob/master/results/kuka.bag)". Note that, the bag file does not contain any data published on the topic /camera/. This has been done to ensure that the bag file generated is not too big in size. Also, when playing the bag file, to observe the robot motion, the data published on the /camera/ topic is not required.
 
 #### Inspecting the bag File Generated
 
-To get more information about the generated rosbag file, open the results directory in terminal and run the following command:
+To get more information about the generated rosbag file, run the following commands:
 ```
+cd ~/catkin_ws/src/object_collection_robotic_arm/results/
 rosbag info kuka.bag
 ```
 
 #### Playing the bag File Generated
 
-To play the bag file, you need ROS master to be running. So, in a new terminal, run:
+To play the bag file, you need ROS master to be running. So, in a new terminal, run the following command:
 ```
 roscore
 ```
-Then, in a new terminal, run
+Then, in a new terminal, run the following commands:
 ```
+cd ~/catkin_ws/src/object_collection_robotic_arm/results/
 rosbag play kuka.bag
 ```
-To check if the topic are live, in a new terminal, run:
+To check if the topic are live, in a new terminal, run the following commands:
 ```
+source ~/catkin_ws/devel/setup.bash
 rostopic list
+```
+To see the data available on any of the topics, in the same terminal, run the following command:
+```
+rostopic echo <topic_name>
 ```
 
 #### Playing the bag File Generated to Observe Robot Motion
 
 As stated [above](#playing-the-bag-file-generated), you can simply play the bag file. But, to get the intuition of what is actually happening you might need to see the motion being generated by the robot. To do so, follow the steps below:
 
-After following the [build instructions](#build-instructions), launch the Gazebo world by running the following command:
+After following the [build instructions](#build-instructions), launch the Gazebo world by running the following commands:
 ```
+source ~/catkin_ws/devel/setup.bash
 roslaunch iiwa_moveit moveit_planning_execution.launch
 ```
 To only run Gazebo, and not Rviz, run
 ```
+source ~/catkin_ws/devel/setup.bash
 roslaunch iiwa_moveit moveit_planning_execution.launch rviz:=false
 ```
 You can also launch the worlds with different configurations of the discs as shown in "[Running the Demo using Launch File](#running-the-demo-using-launch-file)" section. Just remember that you would still be launching the launch file stated in this section.
 
 Now, once Gazebo and Rviz (if opened) are running, in a new terminal, run
 ```
+cd ~/catkin_ws/src/object_collection_robotic_arm/results/
 rosbag play kuka.bag
 ```
-Note that, this will only move the robot. As the services are not recorded in the bag file, the robot will not actually segregate the disks. To do so, you need to activate the services on your own. To learn how to do that refer to "[Services](#services)" section.
+Note that, this will only move the robot. As the services are not recorded in the bag file, the robot will not actually segregate the discs (interact with the discs). To do so, you need to activate the services on your own. To learn how to do that refer to "[Services](#services)" section.
+
+## Services
+
+The vacuum gripper used in the program has two services. These services are used to switch ON and switch OFF the gripper.
+
+To switch ON the gripper, call the service by running the following commands:
+```
+source ~/catkin_ws/devel/setup.bash
+rosservice call /robot/left_vacuum_gripper/on
+```
+Similarly, to switch OFF the gripper, call the service by running the following command:
+```
+source ~/catkin_ws/devel/setup.bash
+rosservice call /robot/left_vacuum_gripper/off
+```
+Note that, both these services are part of the iiwa_stack package. So, before calling either of the services, you need to build the package by following the [build instructions](#build-instructions) and launch the package by running the following commands:
+```
+source ~/catkin_ws/devel/setup.bash
+roslaunch iiwa_moveit moveit_planning_execution.launch
+```
+You can launch the package with different inputs as shown in "[Playing the bag File](#playing-the-bag-file-generated-to-observe-robot-motion)" section.
 
 ## Run Tests
 
-There are 4 integration tests written for the objSeg node and added in the test directory. The first test checks class Detection, the second test checks class KukaKinematics and the remaining two tests check class KukaGripper. There are no level 1 tests as all the methods of all the classes are highly dependent on ROS nodes generated by the third-party package. Note that, these tests have been created using rostest and gtest as base.
+There are 4 integration tests written for the objSeg node and added in the test directory. The first test checks class Detection, the second test checks class KukaKinematics and the remaining two tests check class KukaGripper. There are no level 1 tests as all the methods of all the classes are dependent on ROS nodes generated by the third-party package. Note that, these tests have been created using rostest.
 
 ### 1) Run the Tests while Compiling the Code
 
@@ -231,7 +247,7 @@ catkin_make run_tests_object_collection_robotic_arm
 
 ### 2) Run the Tests using Launch File
 
-After compiling the code by following the [build instructions](#build-instruction), to run the tests independently, use the following commands:
+After compiling the code by following the [above instructions](#run-the-tests-while-compiling-the-code) to generate the allTests node, to run the tests independently using the launch file, use the following commands:
 ```
 source ~/catkin_ws/devel/setup.bash
 rostest object_collection_robotic_arm allTests.test
@@ -239,7 +255,7 @@ rostest object_collection_robotic_arm allTests.test
 
 ### 3) Run the Tests using Test Node
 
-After compiling the code by following the [build instructions](#build-instruction), you can also run the tests using the test node. But, you first need to start all the topics. To do so, use the following commands:
+After compiling the code by following the [aforementioned instructions](#run-the-tests-while-compiling-the-code) to generate the allTests node, you can run the tests using this node. But, you first need to start all the topics. To do so, use the following commands:
 ```
 source ~/catkin_ws/devel/setup.bash
 roslaunch iiwa_moveit moveit_planning_execution.launch
@@ -252,46 +268,68 @@ source ~/catkin_ws/devel/setup.bash
 rosrun object_collection_robotic_arm allTests
 ```
 
-## Services
+## Code Coverage
 
-The vacuum gripper used in the program has two services. These services are used to switch ON and switch OFF the gripper.
+To run code coverage, you need lcov package. If this package is not installed, then to install the package, run the following command:
+```
+sudo apt-get install lcov
+```
+Now, code coverage report is generated by running the test node independently. So, first you need to generate the allTests node by compiling the code by following the [aforementioned instructions](#run-the-tests-while-compiling-the-code). As stated in "[Run the Tests using Test Node](#run-the-tests-using-test-node)" section, before running the node, you need to start all the topics. To do so, run the following commands:
+```
+source ~/catkin_ws/devel/setup.bash
+roslaunch iiwa_moveit moveit_planning_execution.launch
+```
+You can still give the arguments to this launch file as stated in the "[Playing the bag File](#playing-the-bag-file-generated-to-observe-robot-motion)" section.
 
-To switch ON the gripper, call the service by running the following command:
+Now, in a new terminal, to generate code coverage, run the following command:
 ```
-rosservice call /robot/left_vacuum_gripper/on
+catkin_make code_coverage
 ```
-Similarly, to switch OFF the gripper, call the service by running the following command:
+To view the code coverage report generated, run the following commands:
 ```
-rosservice call /robot/left_vacuum_gripper/off
+cd ~/catkin_ws/build/coverage/
+firefox index.html
 ```
 
 ## Plug-ins
 
 ##### CppChEclipse
 
+If cppcheck package is not installed, then to install the package, run the following command:
+```
+sudo apt-get install cppcheck
+```
 To run cppcheck in Terminal, run the following commands:
 ```
-cd <path to directory>
+cd ~/catkin_ws/src/object_collection_robotic_arm/
 cppcheck --std=c++11 -I include/ --suppress=missingIncludeSystem $(find . -name \*.cpp -or -name \*.hpp | grep -vE -e "^./docs/" -e "^./launch/" -e "^./results/" -e "^./UML/" -e "./world/")
 ```
+
 ##### Google C++ Style
 
+If cpplint package is not installed, then to install the package, run the following command:
+```
+sudo apt-get install python-pip
+pip install cpplint
+```
 To check Google C++ Style formatting in Terminal, run the following commands:
 ```
-cd <path to directory>
+cd ~/catkin_ws/src/object_collection_robotic_arm/
 cpplint $(find . -name \*.cpp -or -name \*.hpp | grep -vE -e "^./docs/" -e "^./launch/" -e "^./results/" -e "^./UML/" -e "./world/")
 ```
 
-## Known Issues/Bugs
+<!-- ## Known Issues/Bugs
 
 All the issues and bugs can be seen in the project report on GitHub at this [link](https://github.com/Ghost1995/object_collection_robotic_arm/projects/1).
-
+ -->
 ## Generating Doxygen Documentation
 
-To install doxygen run the following commands:
+To install doxygen run the following command:
 ```
 sudo apt install doxygen
-cd <path to repository>
+```
+<!-- ```
+cd ~/catkin_ws/src/object_collection_robotic_arm/
 mkdir docs
 doxygen -g config
 ```
@@ -304,22 +342,23 @@ Open the Doxygen configuration file "config" and update the following parameters
 * OUTPUT_DIRECTORY = docs
 
 Then, rename the "config" file to "doxconfig".
-
-Now, to generate doxygen documentation, run the following command:
+ -->
+Now, to generate doxygen documentation, run the following commands:
 ```
+cd ~/catkin_ws/src/object_collection_robotic_arm/
 doxygen doxconfig
 ```
 Doxygen files will be generated to /docs folder. To view them in a browser, run the following commands:
 ```
 cd docs/html
-google-chrome index.html
+firefox index.html
 ```
 
 ## License 
 
 * OpenCV:  Copyright (C) 2015-2016, OpenCV Foundation, all rights reserved.
 * Doxygen license: Copyright © 1997-2016 by Dimitri van Heesch.
-* Googletest license: Copyright 2008, Google Inc.
+* Google Test license: Copyright 2008, Google Inc.
 * Delaunay triangulation S-hull license: Copyright 2016 Dr David Sinclair
 * iiwa_stack license: Copyright (c) 2016-2017, Salvatore Virga - salvo.virga@tum.de
 
