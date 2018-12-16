@@ -149,7 +149,7 @@ Also, note that, these arguments need not necessarily be given one at a time. Mu
 
 ## Video Demo
 
-Link to the video presentation uploaded on YouTube will be here shortly.
+Link to the video presentation can be found [here]() and the Presentation can be foud [here](https://docs.google.com/presentation/d/1WPi6UF4ckUZiQmtq6udYDlnllftlWRCZfq5lSSFoss8/edit?usp=sharing).
 
 ## Record bag File
 
