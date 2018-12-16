@@ -276,9 +276,9 @@ rosrun object_collection_robotic_arm allTests
 
 Since there is currently some issue with coveralls picking up the build from travis and checking for code coverage, provided below is a screen shot of the coverage report generated using lcov, locally.
 For the First Coverage Tag:
-![code_coverage](additional_files/lcov_coverage1.png)
+![code_coverage](additional_files/lcov_coverage_1.png)
 For the Second Coverage Tag:
-![code_coverage](additional_files/lcov_coverage2.png)
+![code_coverage](additional_files/lcov_coverage_2.png)
 
 To run code coverage, you need lcov package. If this package is not installed, then to install the package, run the following command:
 ```
