@@ -4,61 +4,32 @@ project(object_collection_robotic_arm)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
+# Add project cmake modules to path.
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
+
+# We probably don't want this to run on every build.
+option(COVERAGE "Generate Coverage Data" ON)
+
+if (COVERAGE)
+    include(CodeCoverage)
+    setup_target_for_coverage(code_coverage ../devel/lib/object_collection_robotic_arm/allTests coverage)
+    set(COVERAGE_SRCS app/main.cpp include/Detection.hpp include/KukaKinematics.hpp include/KukaGripper.hpp)
+
+    SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage ${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
+    SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage ${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
+    SET(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage ${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
+else()
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -g ${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
+endif()
+
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED COMPONENTS roscpp std_msgs cv_bridge image_transport)
 find_package(gazebo REQUIRED)
 find_package(OpenCV REQUIRED)
 
-################################################
-## Declare ROS messages, services and actions ##
-################################################
-
-## To declare and build messages, services or actions from within this
-## package, follow these steps:
-## * Let MSG_DEP_SET be the set of packages whose message types you use in
-##   your messages/services/actions (e.g. std_msgs, actionlib_msgs, ...).
-## * In the file package.xml:
-##   * add a build_depend tag for "message_generation"
-##   * add a build_depend and a exec_depend tag for each package in MSG_DEP_SET
-##   * If MSG_DEP_SET isn't empty the following dependency has been pulled in
-##     but can be declared for certainty nonetheless:
-##     * add a exec_depend tag for "message_runtime"
-## * In this file (CMakeLists.txt):
-##   * add "message_generation" and every package in MSG_DEP_SET to
-##     find_package(catkin REQUIRED COMPONENTS ...)
-##   * add "message_runtime" and every package in MSG_DEP_SET to
-##     catkin_package(CATKIN_DEPENDS ...)
-##   * uncomment the add_*_files sections below as needed
-##     and list every .msg/.srv/.action file to be processed
-##   * uncomment the generate_messages entry below
-##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
-
-## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
-
-## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
-
-## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
-#   Action1.action
-#   Action2.action
-# )
-
-## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   geometry_msgs#   move_base_msgs#   sensor_msgs#   std_msgs
-# )
+include(CMakeToolsHelpers OPTIONAL)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 14)
 
 ## The catkin_package macro generates cmake config files for your package
 catkin_package(INCLUDE_DIRS include/object_collection_robotic_arm CATKIN_DEPENDS roscpp std_msgs)
@@ -73,8 +44,6 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 ## Specify additional locations of header files
 include_directories(include/object_collection_robotic_arm ${OpenCV_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
-
 ## Declare a C++ executable
 add_executable(objSeg src/main.cpp src/KukaKinematics.cpp src/KukaGripper.cpp src/Detection.cpp)
 
@@ -84,7 +53,7 @@ target_link_libraries(objSeg ${OpenCV_LIBS} ${catkin_LIBRARIES})
 ## Testing
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
-  add_rostest_gtest(allTests test/allTests.test test/main.cpp test/testKukaKinematics.cpp test/testKukaGripper.cpp src/Detection.cpp src/KukaKinematics.cpp src/KukaGripper.cpp)
+  add_rostest_gtest(allTests test/allTests.test test/main.cpp test/testDetection.cpp test/testKukaKinematics.cpp test/testKukaGripper.cpp src/Detection.cpp src/KukaKinematics.cpp src/KukaGripper.cpp)
   target_link_libraries(allTests ${OpenCV_LIBS} ${catkin_LIBRARIES})
 endif()
 
