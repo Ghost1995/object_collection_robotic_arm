@@ -149,7 +149,23 @@ Also, note that, these arguments need not necessarily be given one at a time. Mu
 
 ## Video Demo
 
-Link to the video presentation can be found [here]() and the Presentation can be foud [here](https://docs.google.com/presentation/d/1WPi6UF4ckUZiQmtq6udYDlnllftlWRCZfq5lSSFoss8/edit?usp=sharing).
+Link to the video presentation can be found [here](https://youtu.be/EBXnpds9feM) and the Presentation can be foud [here](https://docs.google.com/presentation/d/1WPi6UF4ckUZiQmtq6udYDlnllftlWRCZfq5lSSFoss8/edit?usp=sharing).
+
+The total length of the video presentation is approximately 20 minutes. To see a specific section of the video follow the respective links:
+
+* To learn about the motivation and overview of the project: [![Link 1](https://img.shields.io/badge/Link-1-blue.svg)](https://youtu.be/EBXnpds9feM?t=20)
+
+* To learn about the authors: [![Link 2](https://img.shields.io/badge/Link-2-blue.svg)](https://youtu.be/EBXnpds9feM?t=100)
+
+* To learn about the system architecture: [![Link 3](https://img.shields.io/badge/Link-3-blue.svg)](https://youtu.be/EBXnpds9feM?t=147)
+
+* To learn about the project through UML Diagrams: [![Link 4](https://img.shields.io/badge/Link-4-blue.svg)](https://youtu.be/EBXnpds9feM?t=187)
+
+* To learn about the algorithm step-by-step: [![Link 5](https://img.shields.io/badge/Link-5-blue.svg)](https://youtu.be/EBXnpds9feM?t=401)
+
+* To learn about running the tests: [![Link 6](https://img.shields.io/badge/Link-6-blue.svg)](https://youtu.be/EBXnpds9feM?t=919)
+
+* To learn about the potential future work: [![Link 7](https://img.shields.io/badge/Link-7-blue.svg)](https://youtu.be/EBXnpds9feM?t=1069)
 
 ## Record bag File
 
@@ -328,10 +344,9 @@ cd ~/catkin_ws/src/object_collection_robotic_arm/
 cpplint $(find . -name \*.cpp -or -name \*.hpp | grep -vE -e "^./docs/" -e "^./launch/" -e "^./results/" -e "^./UML/" -e "./world/")
 ```
 
-<!-- ## Known Issues/Bugs
+## Known Issues/Bugs
 
 All the issues and bugs can be seen in the project report on GitHub at this [link](https://github.com/Ghost1995/object_collection_robotic_arm/projects/1).
- -->
 
 ## Generating Doxygen Documentation
 
