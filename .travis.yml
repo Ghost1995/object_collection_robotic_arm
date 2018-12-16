@@ -67,8 +67,8 @@ script:
   - catkin_make $( [ -f $CATKIN_OPTIONS ] && cat $CATKIN_OPTIONS )
   - source devel/setup.bash
   - catkin_make run_tests_object_collection_robotic_arm
-  - roslaunch iiwa_moveit moveit_planning_execution.launch gui:=false rviz:=false &
-  - catkin_make code_coverage
+  # - roslaunch iiwa_moveit moveit_planning_execution.launch gui:=false rviz:=false &
+  # - catkin_make code_coverage
 
 after_success:
 - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cc.*"
