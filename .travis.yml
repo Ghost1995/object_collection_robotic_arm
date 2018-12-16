@@ -26,6 +26,7 @@ env:
     - ROS_CI_DESKTOP="`lsb_release -cs`"
     - CI_SOURCE_PATH=$(pwd)
     - ROSINSTALL_FILE=$CI_SOURCE_PATH/dependencies.rosinstall
+    - CATKIN_OPTIONS=$CI_SOURCE_PATH/catkin.options
     - ROS_PARALLEL_JOBS='-j8 -l6'
     - PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/dist-packages:/usr/local/lib/python2.7/dist-packages
 
@@ -38,6 +39,7 @@ before_install:
   - source /opt/ros/$ROS_DISTRO/setup.bash
   - sudo rosdep init
   - rosdep update
+  - sudo apt-get install ruby-coveralls
   - pip install --user cpp-coveralls
 
 install:
@@ -62,7 +64,7 @@ before_script:
 script:
   - source /opt/ros/$ROS_DISTRO/setup.bash
   - cd ~/catkin_ws
-  - catkin_make -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../
+  - catkin_make $( [ -f $CATKIN_OPTIONS ] && cat $CATKIN_OPTIONS )
   - source devel/setup.bash
   - catkin_make run_tests_object_collection_robotic_arm
   - roslaunch iiwa_moveit moveit_planning_execution.launch gui:=false rviz:=false &
