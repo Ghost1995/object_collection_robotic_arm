@@ -41,7 +41,7 @@
 #include "Detection.hpp"
 
 // This is the constructor for the class
-Detection::Detection(KukaKinematics & ku, const bool display) : imgT(n),
+Detection::Detection(KukaKinematics & ku, const bool & display) : imgT(n),
                                                 kuka(ku), dispImg(display) {
     // Subscribe to input video feed
     imageSubscriber = imgT.subscribe("/camera/image_raw", 1,
@@ -53,8 +53,8 @@ Detection::Detection(KukaKinematics & ku, const bool display) : imgT(n),
 
 // This is the first method of the class. It detects the position of a
 // particularly colored object.
-std::string Detection::colorThresholder(const KukaKinematics::States pos) {
-    int posInd = static_cast<int>(pos);
+std::string Detection::colorThresholder(const KukaKinematics::States & pos) {
+    auto posInd = static_cast<int>(pos);
     cv::Vec3b disc;
 
     // Define pixel for the corresponding disk

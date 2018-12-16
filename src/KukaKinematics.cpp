@@ -68,9 +68,9 @@ KukaKinematics::KukaKinematics() : posJoints{{2.918232931819958,
 
 // This is the first method of the class. It moves the robot from its current
 // position to the desired position.
-void KukaKinematics::sendRobotToPos(const States state) {
+void KukaKinematics::sendRobotToPos(const States & state) {
     // Define the position
-    int num = static_cast<int>(state);
+    auto num = static_cast<int>(state);
 
     // Define the jointCommands variable
     jointCommands.header.stamp = ros::Time::now();

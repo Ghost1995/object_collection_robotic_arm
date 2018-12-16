@@ -89,7 +89,7 @@ class Detection {
      * @return The constructor does not return anything. All initializations
      *         are done for the private variables.
      */
-    explicit Detection(KukaKinematics &, const bool);
+    explicit Detection(KukaKinematics &, const bool &);
 
     /*
      * @brief This is the first method of the class. It detects the position
@@ -99,7 +99,7 @@ class Detection {
      *
      * @result This function returns the positions for that object.
      */
-    std::string colorThresholder(const KukaKinematics::States);
+    std::string colorThresholder(const KukaKinematics::States &);
 
     /*
      * @brief This is the destructor for the class.
