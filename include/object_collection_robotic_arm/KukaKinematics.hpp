@@ -103,7 +103,7 @@ class KukaKinematics {
      *         from one point to another and then publishes the joint
      *         trajectory to the robot.
      */
-    void sendRobotToPos(const States);
+    void sendRobotToPos(const States &);
 
     /*
      * @brief This is the destructor for the class.
