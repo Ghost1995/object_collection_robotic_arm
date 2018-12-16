@@ -269,6 +269,16 @@ rosrun object_collection_robotic_arm allTests
 ```
 
 ## Code Coverage
+![Code coverage](https://img.shields.io/badge/coverage-71.7%25-red.svg)
+![Code coverage](https://img.shields.io/badge/coverage-100%25-green.svg)
+
+(NOTE: THESE ARE SELF GENERATED TAGS, not to be confused with the automatic generated tag from coveralls. The first tag is with the Detection Class whereas the second one is without the Detection Class. We have put in two tags as the test for class Detection are currently not running.)
+
+Since there is currently some issue with coveralls picking up the build from travis and checking for code coverage, provided below is a screen shot of the coverage report generated using lcov, locally.
+For the First Coverage Tag:
+![code_coverage](additional_files/lcov_coverage1.png)
+For the Second Coverage Tag:
+![code_coverage](additional_files/lcov_coverage2.png)
 
 To run code coverage, you need lcov package. If this package is not installed, then to install the package, run the following command:
 ```
@@ -322,6 +332,7 @@ cpplint $(find . -name \*.cpp -or -name \*.hpp | grep -vE -e "^./docs/" -e "^./l
 
 All the issues and bugs can be seen in the project report on GitHub at this [link](https://github.com/Ghost1995/object_collection_robotic_arm/projects/1).
  -->
+
 ## Generating Doxygen Documentation
 
 To install doxygen run the following command:
