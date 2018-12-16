@@ -85,6 +85,8 @@ class Detection {
      *
      * @param The constructor does not take any inputs. It creates a subscriber
      *        for the image data.
+     * @param The constructor also takes a flag to display the image. If it is
+     *        true then the image is displayed otherwise it is not displayed.
      *
      * @return The constructor does not return anything. All initializations
      *         are done for the private variables.
