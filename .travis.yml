@@ -41,7 +41,6 @@ before_install:
   - rosdep update
   - sudo apt-get install -y lcov
   - gem install coveralls-lcov
-  - sudo apt-get install ruby-coveralls
 
 install:
   - mkdir -p ~/catkin_ws/src
@@ -66,10 +65,7 @@ script:
   - cd ~/catkin_ws
   - catkin_make $( [ -f $CATKIN_OPTIONS ] && cat $CATKIN_OPTIONS )
   - source devel/setup.bash
-  # - catkin_make run_tests && catkin_test_results
   - catkin_make run_tests_object_collection_robotic_arm
-  # - roslaunch iiwa_moveit moveit_planning_execution.launch gui:=false rviz:=false &
-  # - catkin_make code_coverage
 
 after_success:
   - cd ~/catkin_ws/build
@@ -77,4 +73,3 @@ after_success:
   - lcov --remove coverage.info '/opt/*' '/usr/*' '*/devel/*' '*test_*' '*_test*' --output-file coverage.info
   - lcov --list coverage.info
   - coveralls-lcov coverage.info
-  # - coveralls-lcov --repo-token ${token} coverage.info # uploads to coveralls
