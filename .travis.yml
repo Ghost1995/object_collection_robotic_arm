@@ -73,9 +73,10 @@ script:
   # - catkin_make code_coverage
 
 after_success:
+  - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cc.*"
   - cd ~/catkin_ws/build
   - lcov --directory . --capture --output-file coverage.info
   - lcov --remove coverage.info '/opt/*' '/usr/*' '*/devel/*' '*test_*' '*_test*' --output-file coverage.info
   - lcov --list coverage.info
-  - coveralls-lcov coverage.info
-  # - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cc.*"
+  # - coveralls-lcov coverage.info
+  - coveralls-lcov --repo-token ${token} coverage.info # uploads to coveralls
