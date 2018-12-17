@@ -50,23 +50,31 @@ We can see that the green disc is being detected as **Faulty** and therefore not
 
 Note: The robot seems to be moving very fast, this is because we are publishing on joint coordinated and therefore it is planning in joint coordinate space. This is much faster than the Cartesian planner. Also GIFs are playing with a 1.5X speed.
 
-## About the Developers
-
-This contributors for this project are:
-
-* Anirudh Topiwala 
-
-I am currently pursing my masters in Robotics at the University of Maryland,College Park. I hold a Bachelors degree in Mechanical Engineering from Institute of Technology, Nirma University, India. I wish to pursue a career in Robotics with a focus in Computer Vision. My resume and more about my projects can be found on [GitHub](https://github.com/anirudhtopiwala) and [LinkedIn](https://www.linkedin.com/in/anirudhtopiwala/).
-
-* Ashwin Goyal
-
-I am currently pursing my masters in Robotics at University of Maryland, College Park. I hold a Bachelors degree in Mechanical Engineering from Indian Institute of Technology Patna, India. I have worked for two automobile companies and a Robotics centered company in India. I have worked as a Technical Assistant for two courses at UMD. I wish to pursue a career in Robotics with a focus in Artificial Intelligence and Computer Vision. More about my projects can be found on [GitHub](https://github.com/Ghost1995/) and [LinkedIn](https://www.linkedin.com/in/ashwin-goyal/).
-
 ## Solo Iterative Process
 
 Link to SIP Planning: [SIP Logs](https://docs.google.com/spreadsheets/d/1xqPFYUN3OQtDBTkjzTHtdPEkzV7B79HENrkyVhmQdCs/edit#gid=0)
 
 Link to Sprint Planning Notes: [Sprint Notes](https://docs.google.com/document/d/1bKvMWFakLjcAiFi2MnL_bBGUG79L-Hk_sQdlqZ0YWP8/edit?usp=sharing)
+
+## Video Demo
+
+Link to the video presentation can be found [here](https://youtu.be/EBXnpds9feM) and the Presentation can be foud [here](https://docs.google.com/presentation/d/1WPi6UF4ckUZiQmtq6udYDlnllftlWRCZfq5lSSFoss8/edit?usp=sharing).
+
+The total length of the video presentation is approximately 20 minutes. To see a specific section of the video follow the respective links:
+
+* To learn about the motivation and overview of the project: [![Link 1](https://img.shields.io/badge/Link-1-blue.svg)](https://youtu.be/EBXnpds9feM?t=20)
+
+* To learn about the authors: [![Link 2](https://img.shields.io/badge/Link-2-blue.svg)](https://youtu.be/EBXnpds9feM?t=100)
+
+* To learn about the system architecture: [![Link 3](https://img.shields.io/badge/Link-3-blue.svg)](https://youtu.be/EBXnpds9feM?t=147)
+
+* To learn about the project through UML Diagrams: [![Link 4](https://img.shields.io/badge/Link-4-blue.svg)](https://youtu.be/EBXnpds9feM?t=187)
+
+* To learn about the algorithm step-by-step: [![Link 5](https://img.shields.io/badge/Link-5-blue.svg)](https://youtu.be/EBXnpds9feM?t=401)
+
+* To learn about running the tests: [![Link 6](https://img.shields.io/badge/Link-6-blue.svg)](https://youtu.be/EBXnpds9feM?t=919)
+
+* To learn about the potential future work: [![Link 7](https://img.shields.io/badge/Link-7-blue.svg)](https://youtu.be/EBXnpds9feM?t=1069)
 
 ## Dependencies
 
@@ -146,26 +154,6 @@ roslaunch object_collection_robotic_arm kuka.launch gui:=false
 Note that, by default, Rviz does not open (rviz is set as false) and Gazebo opens to show the movement of the Kuka robot (gui is set as true).
 
 Also, note that, these arguments need not necessarily be given one at a time. Multiple arguments can be given when launching the program.
-
-## Video Demo
-
-Link to the video presentation can be found [here](https://youtu.be/EBXnpds9feM) and the Presentation can be foud [here](https://docs.google.com/presentation/d/1WPi6UF4ckUZiQmtq6udYDlnllftlWRCZfq5lSSFoss8/edit?usp=sharing).
-
-The total length of the video presentation is approximately 20 minutes. To see a specific section of the video follow the respective links:
-
-* To learn about the motivation and overview of the project: [![Link 1](https://img.shields.io/badge/Link-1-blue.svg)](https://youtu.be/EBXnpds9feM?t=20)
-
-* To learn about the authors: [![Link 2](https://img.shields.io/badge/Link-2-blue.svg)](https://youtu.be/EBXnpds9feM?t=100)
-
-* To learn about the system architecture: [![Link 3](https://img.shields.io/badge/Link-3-blue.svg)](https://youtu.be/EBXnpds9feM?t=147)
-
-* To learn about the project through UML Diagrams: [![Link 4](https://img.shields.io/badge/Link-4-blue.svg)](https://youtu.be/EBXnpds9feM?t=187)
-
-* To learn about the algorithm step-by-step: [![Link 5](https://img.shields.io/badge/Link-5-blue.svg)](https://youtu.be/EBXnpds9feM?t=401)
-
-* To learn about running the tests: [![Link 6](https://img.shields.io/badge/Link-6-blue.svg)](https://youtu.be/EBXnpds9feM?t=919)
-
-* To learn about the potential future work: [![Link 7](https://img.shields.io/badge/Link-7-blue.svg)](https://youtu.be/EBXnpds9feM?t=1069)
 
 ## Record bag File
 
@@ -346,7 +334,13 @@ cpplint $(find . -name \*.cpp -or -name \*.hpp | grep -vE -e "^./docs/" -e "^./l
 
 ## Known Issues/Bugs
 
-All the issues and bugs can be seen in the project report on GitHub at this [link](https://github.com/Ghost1995/object_collection_robotic_arm/projects/1).
+There are majorly two issues with the algorithm:
+
+* The code coverage is not being generated by coveralls. We have worked on this issue for more than 2 days now, but could not figure out why the code coverage is not being generated. The code coverage is running in my local repository but it is giving an error on travis. If possible, we will work on it further.
+
+* The trajectory currently being followed by the robot is not an optimal trajectory. This trajectory is only optimal in cartesian space but not in joint space. This is because the issue with the KDL library could not be resolved. So, to generate an optimal trajectory, an inverse kinematic planner is required.
+
+All these issues can be seen in the project report on GitHub at this [link](https://github.com/Ghost1995/object_collection_robotic_arm/projects/1).
 
 ## Generating Doxygen Documentation
 
@@ -440,3 +434,15 @@ None of the authors or contributors, or anyone else connected with GitHub, in an
 whatsoever, can be responsible for your use of the information contained in or linked
 from this web page.
 ```
+
+## About the Developers
+
+This contributors for this project are:
+
+* Anirudh Topiwala 
+
+I am currently pursing my masters in Robotics at the University of Maryland,College Park. I hold a Bachelors degree in Mechanical Engineering from Institute of Technology, Nirma University, India. I wish to pursue a career in Robotics with a focus in Computer Vision. My resume and more about my projects can be found on [GitHub](https://github.com/anirudhtopiwala) and [LinkedIn](https://www.linkedin.com/in/anirudhtopiwala/).
+
+* Ashwin Goyal
+
+I am currently pursing my masters in Robotics at University of Maryland, College Park. I hold a Bachelors degree in Mechanical Engineering from Indian Institute of Technology Patna, India. I have worked for two automobile companies and a Robotics centered company in India. I have worked as a Technical Assistant for two courses at UMD. I wish to pursue a career in Robotics with a focus in Artificial Intelligence and Computer Vision. More about my projects can be found on [GitHub](https://github.com/Ghost1995/) and [LinkedIn](https://www.linkedin.com/in/ashwin-goyal/).
