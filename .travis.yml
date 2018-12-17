@@ -67,8 +67,8 @@ script:
   - cd ~/catkin_ws
   - catkin_make $( [ -f $CATKIN_OPTIONS ] && cat $CATKIN_OPTIONS )
   - source devel/setup.bash
-  - catkin_make run_tests && catkin_test_results
-  # - catkin_make run_tests_object_collection_robotic_arm
+  # - catkin_make run_tests && catkin_test_results
+  - catkin_make run_tests_object_collection_robotic_arm && catkin_test_results
   # - roslaunch iiwa_moveit moveit_planning_execution.launch gui:=false rviz:=false &
   # - catkin_make code_coverage
 
