@@ -1,12 +1,11 @@
+Done processing ./src/main.cpp
+Done processing ./src/KukaKinematics.cpp
+Done processing ./src/KukaGripper.cpp
+Done processing ./src/Detection.cpp
 Done processing ./include/object_collection_robotic_arm/KukaGripper.hpp
 Done processing ./include/object_collection_robotic_arm/KukaKinematics.hpp
 Done processing ./include/object_collection_robotic_arm/Detection.hpp
-Done processing ./src/main.cpp
-Done processing ./src/Detection.cpp
-Done processing ./src/KukaGripper.cpp
-Done processing ./src/KukaKinematics.cpp
-Done processing ./test/testDetection.cpp
-Done processing ./test/main.cpp
 Done processing ./test/testKukaGripper.cpp
+Done processing ./test/main.cpp
 Done processing ./test/testKukaKinematics.cpp
-
+Done processing ./test/testDetection.cpp
