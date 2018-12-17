@@ -105,7 +105,12 @@ int main(int argc, char **argv) {
                     }
                     tablePos[1] -= 1;
                 } else {
-                    ROS_ERROR_STREAM("There is a error in the code.");
+                    ROS_ERROR_STREAM("At this instant, the code should have" <<
+                                     " read the color of the disc as either" <<
+                                     " 'red' or 'blue'. But, instead, the " <<
+                                     "color of the disk is read as " <<
+                                     color.at(i) << ". Check the algorithm " <<
+                                     "for the mistake. [Line 113 - main.cpp]");
                     break;
                 }
                 gripper.gripperToggle(false);
