@@ -60,10 +60,6 @@ class KukaKinematics {
     const unsigned int numJoints = 7;
     // Joint values to achieve each point
     double posJoints[7][7];
-    // Define possible robot states as string
-    std::vector<std::string> statesStr =  {"Home", "Left Disc", "Right Disc",
-                                           "Left Table 1", "Left Table 2",
-                                           "Right Table 1", "Right Table 2"};
 
     /*
      * @brief This is a private method of this class. It initializes all the
@@ -81,6 +77,10 @@ class KukaKinematics {
     // Define the various states of the robot
     enum States {HOME, LEFT_DISK, RIGHT_DISK, LEFT_TABLE_POS_1,
                  LEFT_TABLE_POS_2, RIGHT_TABLE_POS_1, RIGHT_TABLE_POS_2};
+    // Define possible robot states as string
+    std::vector<std::string> statesStr =  {"Home", "Left Disc", "Right Disc",
+                                           "Left Table 1", "Left Table 2",
+                                           "Right Table 1", "Right Table 2"};
 
     /*
      * @brief This is the constructor for the class.
