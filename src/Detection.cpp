@@ -63,8 +63,9 @@ std::string Detection::colorThresholder(const KukaKinematics::States & pos) {
     } else if (posInd == 2) {
         disc = cv_ptr->image.at<cv::Vec3b>(51, 190);
     } else {
-        ROS_ERROR_STREAM("There is some error in the code. The position of " <<
-                    "the disc is read as: " << posInd << ". Check the code.");
+        ROS_WARN_STREAM("The input to this method is incorrect. Instead of " <<
+                        "position of the disc, the position of '" <<
+                        kuka.statesStr.at(posInd) << "'' has been provided.");
         return "";
     }
 
@@ -78,12 +79,12 @@ std::string Detection::colorThresholder(const KukaKinematics::States & pos) {
                                                         (disc.val[2] >= 125)) {
         return "red";
     } else {
-        ROS_ERROR_STREAM("The color of disc cannot be uniquely identified.");
+        ROS_WARN_STREAM("The color of disc cannot be uniquely identified.");
         return "";
     }
 }
 
-// This is a private method of this class. It is the image callback function
+// This is the second method of this class. It is the image callback function
 // which reads the image captured by the camera sensor.
 void Detection::readImg(const sensor_msgs::ImageConstPtr & msg) {
     // Read the image

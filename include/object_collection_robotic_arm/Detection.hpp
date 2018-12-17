@@ -67,18 +67,6 @@ class Detection {
     // A flag which states whether to display image or not
     bool dispImg = false;
 
-    /*
-     * @brief This is a private method of this class. It is the image callback
-     *        function which reads the image captured by the camera sensor.
-     *
-     * @param This method takes the message being published to the 'camera_raw'
-     *        topic as input.
-     *
-     * @return This method does not return any argument. It simply reads the
-     *         image and assigns the value to the respective variable.
-     */
-    void readImg(const sensor_msgs::ImageConstPtr &);
-
  public:
     /*
      * @brief This is the constructor for the class.
@@ -102,6 +90,18 @@ class Detection {
      * @result This function returns the positions for that object.
      */
     std::string colorThresholder(const KukaKinematics::States &);
+
+    /*
+     * @brief This is the second method of this class. It is the image callback
+     *        function which reads the image captured by the camera sensor.
+     *
+     * @param This method takes the message being published to the 'camera_raw'
+     *        topic as input.
+     *
+     * @return This method does not return any argument. It simply reads the
+     *         image and assigns the value to the respective variable.
+     */
+    void readImg(const sensor_msgs::ImageConstPtr &);
 
     /*
      * @brief This is the destructor for the class.

@@ -48,15 +48,26 @@ TEST(DetectionTest, testColorThresholder) {
     KukaKinematics robot;
     Detection test(robot, false);
 
-    std::vector<std::string> color;
-    color.push_back("red");
-    color.push_back("blue");
-    
+    // Initialize node handle
+    ros::NodeHandle n;
+
+    // Initialize image subscriber
+    image_transport::ImageTransport imgT(n);
+    auto imageSubscriber_ = imgT.subscribe("/camera/image_raw", 1,
+                                                &Detection::readImg, &test);
+    ros::Duration(1).sleep();
+    ros::spinOnce();
+    ros::Duration(1).sleep();
+
     // Check if the left disc is red colored
-    // color.push_back(test.colorThresholder(robot.LEFT_DISK));
-    EXPECT_TRUE(color.at(0) == "red");
+    auto color = test.colorThresholder(robot.LEFT_DISK);
+    EXPECT_FALSE(color.compare("red"));
 
     // Check if the right disc is blue colored
-   // color.push_back(test.colorThresholder(robot.RIGHT_DISK));
-    EXPECT_TRUE(color.at(1) == "blue");
+    color = test.colorThresholder(robot.RIGHT_DISK);
+    EXPECT_FALSE(color.compare("blue"));
+
+    // Check if the any other disc is read
+    color = test.colorThresholder(robot.HOME);
+    EXPECT_TRUE(color.empty());
 }
