@@ -53,6 +53,9 @@ target_link_libraries(objSeg ${OpenCV_LIBS} ${catkin_LIBRARIES})
 ## Testing
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
+
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 --coverage")
+
   add_rostest_gtest(allTests test/allTests.test test/main.cpp test/testDetection.cpp test/testKukaKinematics.cpp test/testKukaGripper.cpp src/Detection.cpp src/KukaKinematics.cpp src/KukaGripper.cpp)
   target_link_libraries(allTests ${OpenCV_LIBS} ${catkin_LIBRARIES})
 endif()
